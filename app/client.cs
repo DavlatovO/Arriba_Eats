@@ -67,7 +67,7 @@ namespace Arriba_Eats
             AddressCoordinates = new Location(x, y);
             IsLoggedin = false;
 
-            Console.WriteLine("Sign-up successful.\n");
+           
         }
 
         public enum CuisineType

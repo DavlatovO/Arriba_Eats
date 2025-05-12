@@ -9,11 +9,13 @@ namespace Arriba_Eats
             const int CUSTOMER_INDEX = 1;
             const int DELIVERER_INDEX = 2;
             const int CLIENT_INDEX = 3;
+            const int BACK_INDEX = 3;
 
-            Console.WriteLine("Please select one of the following to sign up to Arriba Eats.");
-            Console.WriteLine("1. Customer.");
-            Console.WriteLine("2. Deliverer.");
-            Console.WriteLine("3. Client.");
+            Console.WriteLine("Which type of user would you like to register as?");
+            Console.WriteLine("1: Customer");
+            Console.WriteLine("2: Deliverer");
+            Console.WriteLine("3: Client");
+            Console.WriteLine("4: Return to previous menu");
 
             int role;
             if (!int.TryParse(Console.ReadLine(), out role))
@@ -50,6 +52,7 @@ namespace Arriba_Eats
             {
                 users.Add(newUser);
                 Console.WriteLine($"{newUser.GetType().Name} signed up successfully!");
+                Console.WriteLine("===========================");
             }
         }
 
