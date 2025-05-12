@@ -4,10 +4,13 @@ namespace Arriba_Eats
     public class Customer: User
     {
         public Location AddressCoordinates {get; set;}
-        public Customer(string name, int age, string email, string mobile_number, string password, bool isloggedin, Location addressCoordinates): base(name, age, email, mobile_number, password, isloggedin)
+
+        public Customer(): base("", 0, "", "", "", false)
         {
-            AddressCoordinates = addressCoordinates;
+            AddressCoordinates = new Location(0, 0);
         }
+
+      
 
         public override void SignUp()
         {
@@ -21,6 +24,7 @@ namespace Arriba_Eats
 
             Console.Write("Enter your email: ");
             string Email = Console.ReadLine();
+            
 
             Console.Write("Enter your mobile number: ");
             string MobileNumber = Console.ReadLine();
@@ -36,8 +40,6 @@ namespace Arriba_Eats
 
             AddressCoordinates = new Location(x, y);
             IsLoggedin = false;
-
-        Console.WriteLine("Customer signed up successfully.");
 
             Console.WriteLine("Sign-up successful.\n");
 }

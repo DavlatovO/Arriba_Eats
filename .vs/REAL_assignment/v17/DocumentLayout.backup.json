@@ -1,0 +1,85 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\n12201791\\source\\repos\\Arriba_Eats\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{6C0F928A-B28D-D207-D239-598F22CCD0B7}|app\\app.csproj|c:\\users\\n12201791\\source\\repos\\arriba_eats\\app\\deliverer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6C0F928A-B28D-D207-D239-598F22CCD0B7}|app\\app.csproj|solutionrelative:app\\deliverer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6C0F928A-B28D-D207-D239-598F22CCD0B7}|app\\app.csproj|c:\\users\\n12201791\\source\\repos\\arriba_eats\\app\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6C0F928A-B28D-D207-D239-598F22CCD0B7}|app\\app.csproj|solutionrelative:app\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6C0F928A-B28D-D207-D239-598F22CCD0B7}|app\\app.csproj|c:\\users\\n12201791\\source\\repos\\arriba_eats\\app\\customer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6C0F928A-B28D-D207-D239-598F22CCD0B7}|app\\app.csproj|solutionrelative:app\\customer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6C0F928A-B28D-D207-D239-598F22CCD0B7}|app\\app.csproj|c:\\users\\n12201791\\source\\repos\\arriba_eats\\app\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6C0F928A-B28D-D207-D239-598F22CCD0B7}|app\\app.csproj|solutionrelative:app\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "deliverer.cs",
+              "DocumentMoniker": "C:\\Users\\n12201791\\source\\repos\\Arriba_Eats\\app\\deliverer.cs",
+              "RelativeDocumentMoniker": "app\\deliverer.cs",
+              "ToolTip": "C:\\Users\\n12201791\\source\\repos\\Arriba_Eats\\app\\deliverer.cs",
+              "RelativeToolTip": "app\\deliverer.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAqwBsAAAAuAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-12T01:49:00.478Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "User.cs",
+              "DocumentMoniker": "C:\\Users\\n12201791\\source\\repos\\Arriba_Eats\\app\\User.cs",
+              "RelativeDocumentMoniker": "app\\User.cs",
+              "ToolTip": "C:\\Users\\n12201791\\source\\repos\\Arriba_Eats\\app\\User.cs",
+              "RelativeToolTip": "app\\User.cs",
+              "ViewState": "AgIAADYAAAAAAAAAAAAQwE4AAAAmAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-12T01:41:39.764Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "customer.cs",
+              "DocumentMoniker": "C:\\Users\\n12201791\\source\\repos\\Arriba_Eats\\app\\customer.cs",
+              "RelativeDocumentMoniker": "app\\customer.cs",
+              "ToolTip": "C:\\Users\\n12201791\\source\\repos\\Arriba_Eats\\app\\customer.cs",
+              "RelativeToolTip": "app\\customer.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAA5AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-12T01:41:32.072Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\n12201791\\source\\repos\\Arriba_Eats\\app\\Program.cs",
+              "RelativeDocumentMoniker": "app\\Program.cs",
+              "ToolTip": "C:\\Users\\n12201791\\source\\repos\\Arriba_Eats\\app\\Program.cs",
+              "RelativeToolTip": "app\\Program.cs",
+              "ViewState": "AgIAAFsAAAAAAAAAAAAgwGQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-12T01:40:32.66Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
