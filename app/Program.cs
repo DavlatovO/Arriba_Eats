@@ -16,8 +16,12 @@ namespace Arriba_Eats
             const int LOGOUT_INDEX = 3;
             const int EXIT_INDEX = 4;
 
+            
+
+
             while (true)
             {
+               
                 Console.WriteLine("\n=== MENU ===");
                 Console.WriteLine("Select one of the following:");
                 Console.WriteLine("1. Sign up");
@@ -25,46 +29,23 @@ namespace Arriba_Eats
                 Console.WriteLine("3. Log Out");
                 Console.WriteLine("4. Exit");
 
-                int choice = Int32.Parse(Console.ReadLine());
+                int choice;
+                if (!int.TryParse(Console.ReadLine(), out choice))
+                {
+                    Console.WriteLine("Please enter a valid number.");
+                    continue;
+                }
 
                 switch (choice)
                 {
                     case SIGNUP_INDEX:
-                        static void SignUp()
-                        {
-                            Console.Write("Sign up as Customer or Deliverer? (c/d): ");
-                            string role = Console.ReadLine().ToLower();
-
-                            User newUser = role switch
-                            {
-                                "c" => new Customer(),
-                                "d" => new Deliverer(),
-                                _ => null
-                            };
-
-                            if (newUser == null)
-                            {
-                                Console.WriteLine("❌ Invalid role selection.");
-                                return;
-                            }
-
-                            newUser.SignUp();
-
-                            if (users.Exists(u => u.Email == newUser.Email))
-                            {
-                                Console.WriteLine("❌ Error: A user with this email already exists.");
-                                return;
-                            }
-
-                            users.Add(newUser);
-                            Console.WriteLine("✅ Sign-up successful!");
-                        }
-
+                        SignUpHandler.SignUp(users);
                         break; 
 
                     case LOGIN_INDEX:
-                        foreach (Customer s in users)
-                            Console.WriteLine(s);
+                        foreach (User s in users)
+                            Console.WriteLine(s.Details());
+
                         if (loggedinUser != null)
                         {
                             Console.WriteLine($"User '{loggedinUser.Email}' already logged in.");
@@ -93,10 +74,22 @@ namespace Arriba_Eats
                     break;
 
                     case LOGOUT_INDEX:
-
+                        if (loggedinUser == null)
+                        {
+                            Console.WriteLine("No user is currently logged in.");
+                        }
+                        else
+                        {
+                            loggedinUser.Logout();
+                            Console.WriteLine("Logged out successfully.");
+                            loggedinUser = null;
+                        }
                         break;
 
                     case EXIT_INDEX:
+                        Console.WriteLine("Exiting program...");
+                        return;
+
 
 
 
@@ -105,14 +98,15 @@ namespace Arriba_Eats
                         break;
                 }
 
-
+                
+               
             }
-        
 
 
 
 
-            
+
+
 
 
 

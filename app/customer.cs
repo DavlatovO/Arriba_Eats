@@ -17,20 +17,20 @@ namespace Arriba_Eats
             Console.WriteLine("=== Customer Sign Up ===");
 
             Console.Write("Enter your name: ");
-            string name1 = Console.ReadLine();
+            Name = Console.ReadLine();
 
             Console.Write("Enter your age: ");
-            int Age = int.Parse(Console.ReadLine());
+            Age = int.Parse(Console.ReadLine());
 
             Console.Write("Enter your email: ");
-            string Email = Console.ReadLine();
+            Email = Console.ReadLine();
             
 
             Console.Write("Enter your mobile number: ");
-            string MobileNumber = Console.ReadLine();
+            Mobile_Number = Console.ReadLine();
 
             Console.Write("Enter your password: ");
-            string Password = Console.ReadLine();
+            Password = Console.ReadLine();
 
             Console.Write("Enter your X coordinate: ");
             double x = double.Parse(Console.ReadLine());

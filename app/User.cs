@@ -12,7 +12,7 @@ namespace Arriba_Eats
         private string password;
         private bool isloggedin;
 
-        public User(string name, int age, string email, string moble_number, string password, bool isloggedin)
+        public User(string name, int age, string email, string mobile_number, string password, bool isloggedin)
         {
             this.name = name;
             this.age = age;
@@ -22,9 +22,23 @@ namespace Arriba_Eats
             this.isloggedin = isloggedin;
         }
 
+        public string Mobile_Number
+        {
+            get { return this.mobile_number; }
+            set { this.mobile_number = value; }
+        }
+
+
+        public int Age
+        {
+            get { return age; }
+            set { age = value; }
+        }
+
         public string Name
         {
             get {return name;}
+            set { name = value;}
         }
 
         public string Password 
@@ -40,6 +54,7 @@ namespace Arriba_Eats
         public string Email
         {
             get {return email;}
+            set {email = value;}
         }
 
         public bool IsLoggedin
@@ -74,6 +89,14 @@ namespace Arriba_Eats
             {
                 Console.WriteLine("Please log in the system first.");
             }
+        }
+
+        public virtual string Details()
+        {
+            return $"Name - {Name}\n" +
+                $"Age - {Age}\n" +
+                $"Email - {Email}\n" +
+                $"Mobil number - {Mobile_Number}";
         }
 
         public abstract void SignUp();

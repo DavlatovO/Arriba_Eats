@@ -6,10 +6,10 @@ namespace Arriba_Eats
         public Location AddressCoordinates { get; set; }
         private string licence_plate;
 
-        public Deliverer(string licence_plate) : base("", 0, "", "", "", false)
+        public Deliverer() : base("", 0, "", "", "", false)
         {
             AddressCoordinates = new Location(0, 0);
-            this.licence_plate = licence_plate;
+            licence_plate = "";
         }
 
         public string Licence_plate
@@ -22,23 +22,23 @@ namespace Arriba_Eats
             Console.WriteLine("=== Customer Sign Up ===");
 
             Console.Write("Enter your licence plate: ");
-            string licence_plate = Console.ReadLine();
+            licence_plate = Console.ReadLine();
 
             Console.Write("Enter your name: ");
-            string name1 = Console.ReadLine();
+            Name = Console.ReadLine();
 
             Console.Write("Enter your age: ");
-            int Age = int.Parse(Console.ReadLine());
+            Age = int.Parse(Console.ReadLine());
 
             Console.Write("Enter your email: ");
-            string Email = Console.ReadLine();
+            Email = Console.ReadLine();
 
 
             Console.Write("Enter your mobile number: ");
-            string MobileNumber = Console.ReadLine();
+            Mobile_Number = Console.ReadLine();
 
             Console.Write("Enter your password: ");
-            string Password = Console.ReadLine();
+            Password = Console.ReadLine();
 
             Console.Write("Enter your X coordinate: ");
             double x = double.Parse(Console.ReadLine());
