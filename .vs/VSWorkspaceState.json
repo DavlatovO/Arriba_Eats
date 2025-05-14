@@ -1,7 +1,9 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\app",
+    "\\app\\Menus"
   ],
-  "SelectedNode": "\\REAL_assignment.sln",
+  "SelectedNode": "\\app\\Menus\\ClientMenu.cs",
   "PreviewInSolutionExplorer": false
 }

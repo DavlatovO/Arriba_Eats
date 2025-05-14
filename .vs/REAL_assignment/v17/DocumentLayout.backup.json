@@ -1,34 +1,62 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\n12201791\\source\\repos\\Arriba_Eats\\",
+  "WorkspaceRootPath": "C:\\Users\\n12201791\\source\\repos\\heslearning\\Arriba_Eats\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{6C0F928A-B28D-D207-D239-598F22CCD0B7}|app\\app.csproj|c:\\users\\n12201791\\source\\repos\\arriba_eats\\app\\.gitinore||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{6C0F928A-B28D-D207-D239-598F22CCD0B7}|app\\app.csproj|solutionrelative:app\\.gitinore||{8B382828-6202-11D1-8870-0000F87579D2}"
+      "AbsoluteMoniker": "D:0:0:{6C0F928A-B28D-D207-D239-598F22CCD0B7}|app\\app.csproj|c:\\users\\n12201791\\source\\repos\\heslearning\\arriba_eats\\app\\menus\\customermenus\\sorting.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6C0F928A-B28D-D207-D239-598F22CCD0B7}|app\\app.csproj|solutionrelative:app\\menus\\customermenus\\sorting.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{6C0F928A-B28D-D207-D239-598F22CCD0B7}|app\\app.csproj|c:\\users\\n12201791\\source\\repos\\arriba_eats\\app\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{6C0F928A-B28D-D207-D239-598F22CCD0B7}|app\\app.csproj|c:\\users\\n12201791\\source\\repos\\heslearning\\arriba_eats\\app\\menus\\customermenus\\customermenu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6C0F928A-B28D-D207-D239-598F22CCD0B7}|app\\app.csproj|solutionrelative:app\\menus\\customermenus\\customermenu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6C0F928A-B28D-D207-D239-598F22CCD0B7}|app\\app.csproj|c:\\users\\n12201791\\source\\repos\\heslearning\\arriba_eats\\app\\restaurant\\restaurant.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6C0F928A-B28D-D207-D239-598F22CCD0B7}|app\\app.csproj|solutionrelative:app\\restaurant\\restaurant.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6C0F928A-B28D-D207-D239-598F22CCD0B7}|app\\app.csproj|c:\\users\\n12201791\\source\\repos\\heslearning\\arriba_eats\\app\\menus\\clientmenu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6C0F928A-B28D-D207-D239-598F22CCD0B7}|app\\app.csproj|solutionrelative:app\\menus\\clientmenu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6C0F928A-B28D-D207-D239-598F22CCD0B7}|app\\app.csproj|c:\\users\\n12201791\\source\\repos\\heslearning\\arriba_eats\\app\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{6C0F928A-B28D-D207-D239-598F22CCD0B7}|app\\app.csproj|solutionrelative:app\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{6C0F928A-B28D-D207-D239-598F22CCD0B7}|app\\app.csproj|c:\\users\\n12201791\\source\\repos\\arriba_eats\\app\\deliverer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6C0F928A-B28D-D207-D239-598F22CCD0B7}|app\\app.csproj|solutionrelative:app\\deliverer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{6C0F928A-B28D-D207-D239-598F22CCD0B7}|app\\app.csproj|c:\\users\\n12201791\\source\\repos\\heslearning\\arriba_eats\\app\\users\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6C0F928A-B28D-D207-D239-598F22CCD0B7}|app\\app.csproj|solutionrelative:app\\users\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{6C0F928A-B28D-D207-D239-598F22CCD0B7}|app\\app.csproj|c:\\users\\n12201791\\source\\repos\\arriba_eats\\app\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6C0F928A-B28D-D207-D239-598F22CCD0B7}|app\\app.csproj|solutionrelative:app\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{6C0F928A-B28D-D207-D239-598F22CCD0B7}|app\\app.csproj|c:\\users\\n12201791\\source\\repos\\heslearning\\arriba_eats\\app\\menus\\deliverermenu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6C0F928A-B28D-D207-D239-598F22CCD0B7}|app\\app.csproj|solutionrelative:app\\menus\\deliverermenu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{6C0F928A-B28D-D207-D239-598F22CCD0B7}|app\\app.csproj|c:\\users\\n12201791\\source\\repos\\arriba_eats\\app\\signup.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6C0F928A-B28D-D207-D239-598F22CCD0B7}|app\\app.csproj|solutionrelative:app\\signup.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{6C0F928A-B28D-D207-D239-598F22CCD0B7}|app\\app.csproj|c:\\users\\n12201791\\source\\repos\\heslearning\\arriba_eats\\app\\menus\\signupmenu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6C0F928A-B28D-D207-D239-598F22CCD0B7}|app\\app.csproj|solutionrelative:app\\menus\\signupmenu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{6C0F928A-B28D-D207-D239-598F22CCD0B7}|app\\app.csproj|c:\\users\\n12201791\\source\\repos\\arriba_eats\\app\\client.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6C0F928A-B28D-D207-D239-598F22CCD0B7}|app\\app.csproj|solutionrelative:app\\client.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{6C0F928A-B28D-D207-D239-598F22CCD0B7}|app\\app.csproj|c:\\users\\n12201791\\source\\repos\\heslearning\\arriba_eats\\app\\users\\deliverer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6C0F928A-B28D-D207-D239-598F22CCD0B7}|app\\app.csproj|solutionrelative:app\\users\\deliverer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{6C0F928A-B28D-D207-D239-598F22CCD0B7}|app\\app.csproj|c:\\users\\n12201791\\source\\repos\\arriba_eats\\app\\customer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6C0F928A-B28D-D207-D239-598F22CCD0B7}|app\\app.csproj|solutionrelative:app\\customer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{6C0F928A-B28D-D207-D239-598F22CCD0B7}|app\\app.csproj|c:\\users\\n12201791\\source\\repos\\heslearning\\arriba_eats\\app\\users\\customer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6C0F928A-B28D-D207-D239-598F22CCD0B7}|app\\app.csproj|solutionrelative:app\\users\\customer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6C0F928A-B28D-D207-D239-598F22CCD0B7}|app\\app.csproj|c:\\users\\n12201791\\source\\repos\\heslearning\\arriba_eats\\app\\users\\client.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6C0F928A-B28D-D207-D239-598F22CCD0B7}|app\\app.csproj|solutionrelative:app\\users\\client.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6C0F928A-B28D-D207-D239-598F22CCD0B7}|app\\app.csproj|c:\\users\\n12201791\\source\\repos\\heslearning\\arriba_eats\\app\\datas\\user_database.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6C0F928A-B28D-D207-D239-598F22CCD0B7}|app\\app.csproj|solutionrelative:app\\datas\\user_database.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6C0F928A-B28D-D207-D239-598F22CCD0B7}|app\\app.csproj|c:\\users\\n12201791\\source\\repos\\heslearning\\arriba_eats\\app\\datas\\restaurants_database.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6C0F928A-B28D-D207-D239-598F22CCD0B7}|app\\app.csproj|solutionrelative:app\\datas\\restaurants_database.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6C0F928A-B28D-D207-D239-598F22CCD0B7}|app\\app.csproj|c:\\users\\n12201791\\source\\repos\\heslearning\\arriba_eats\\app\\restaurant\\menuitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6C0F928A-B28D-D207-D239-598F22CCD0B7}|app\\app.csproj|solutionrelative:app\\restaurant\\menuitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -38,92 +66,188 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 5,
           "Children": [
             {
               "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "User.cs",
+              "DocumentMoniker": "C:\\Users\\n12201791\\source\\repos\\heslearning\\Arriba_Eats\\app\\Users\\User.cs",
+              "RelativeDocumentMoniker": "app\\Users\\User.cs",
+              "ToolTip": "C:\\Users\\n12201791\\source\\repos\\heslearning\\Arriba_Eats\\app\\Users\\User.cs",
+              "RelativeToolTip": "app\\Users\\User.cs",
+              "ViewState": "AgIAADEAAAAAAAAAAAAcwGAAAAAlAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-14T05:26:00.255Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "DelivererMenu.cs",
+              "DocumentMoniker": "C:\\Users\\n12201791\\source\\repos\\heslearning\\Arriba_Eats\\app\\Menus\\DelivererMenu.cs",
+              "RelativeDocumentMoniker": "app\\Menus\\DelivererMenu.cs",
+              "ToolTip": "C:\\Users\\n12201791\\source\\repos\\heslearning\\Arriba_Eats\\app\\Menus\\DelivererMenu.cs",
+              "RelativeToolTip": "app\\Menus\\DelivererMenu.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-14T05:10:56.66Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "customer.cs",
+              "DocumentMoniker": "C:\\Users\\n12201791\\source\\repos\\heslearning\\Arriba_Eats\\app\\Users\\customer.cs",
+              "RelativeDocumentMoniker": "app\\Users\\customer.cs",
+              "ToolTip": "C:\\Users\\n12201791\\source\\repos\\heslearning\\Arriba_Eats\\app\\Users\\customer.cs",
+              "RelativeToolTip": "app\\Users\\customer.cs",
+              "ViewState": "AgIAABcAAAAAAAAAAAAwwC8AAAAgAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-14T04:37:39.704Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "User_Database.cs",
+              "DocumentMoniker": "C:\\Users\\n12201791\\source\\repos\\heslearning\\Arriba_Eats\\app\\Datas\\User_Database.cs",
+              "RelativeDocumentMoniker": "app\\Datas\\User_Database.cs",
+              "ToolTip": "C:\\Users\\n12201791\\source\\repos\\heslearning\\Arriba_Eats\\app\\Datas\\User_Database.cs",
+              "RelativeToolTip": "app\\Datas\\User_Database.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAuAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-14T04:24:08.332Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "Restaurants_Database.cs",
+              "DocumentMoniker": "C:\\Users\\n12201791\\source\\repos\\heslearning\\Arriba_Eats\\app\\Datas\\Restaurants_Database.cs",
+              "RelativeDocumentMoniker": "app\\Datas\\Restaurants_Database.cs",
+              "ToolTip": "C:\\Users\\n12201791\\source\\repos\\heslearning\\Arriba_Eats\\app\\Datas\\Restaurants_Database.cs",
+              "RelativeToolTip": "app\\Datas\\Restaurants_Database.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-14T03:33:17.702Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 0,
-              "Title": ".gitinore",
-              "DocumentMoniker": "C:\\Users\\n12201791\\source\\repos\\Arriba_Eats\\app\\.gitinore",
-              "RelativeDocumentMoniker": "app\\.gitinore",
-              "ToolTip": "C:\\Users\\n12201791\\source\\repos\\Arriba_Eats\\app\\.gitinore",
-              "RelativeToolTip": "app\\.gitinore",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2025-05-12T09:44:03.205Z",
+              "Title": "Sorting.cs",
+              "DocumentMoniker": "C:\\Users\\n12201791\\source\\repos\\heslearning\\Arriba_Eats\\app\\Menus\\CustomerMenus\\Sorting.cs",
+              "RelativeDocumentMoniker": "app\\Menus\\CustomerMenus\\Sorting.cs",
+              "ToolTip": "C:\\Users\\n12201791\\source\\repos\\heslearning\\Arriba_Eats\\app\\Menus\\CustomerMenus\\Sorting.cs",
+              "RelativeToolTip": "app\\Menus\\CustomerMenus\\Sorting.cs",
+              "ViewState": "AgIAACkAAAAAAAAAAAAQwDgAAAAvAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-14T03:19:44.84Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "CustomerMenu.cs",
+              "DocumentMoniker": "C:\\Users\\n12201791\\source\\repos\\heslearning\\Arriba_Eats\\app\\Menus\\CustomerMenus\\CustomerMenu.cs",
+              "RelativeDocumentMoniker": "app\\Menus\\CustomerMenus\\CustomerMenu.cs",
+              "ToolTip": "C:\\Users\\n12201791\\source\\repos\\heslearning\\Arriba_Eats\\app\\Menus\\CustomerMenus\\CustomerMenu.cs",
+              "RelativeToolTip": "app\\Menus\\CustomerMenus\\CustomerMenu.cs",
+              "ViewState": "AgIAABYAAAAAAAAAAAAgwCwAAAAoAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-14T01:23:25.477Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 4,
-              "Title": "SignUp.cs",
-              "DocumentMoniker": "C:\\Users\\n12201791\\source\\repos\\Arriba_Eats\\app\\SignUp.cs",
-              "RelativeDocumentMoniker": "app\\SignUp.cs",
-              "ToolTip": "C:\\Users\\n12201791\\source\\repos\\Arriba_Eats\\app\\SignUp.cs",
-              "RelativeToolTip": "app\\SignUp.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAPAAAAAAAAAA==",
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\n12201791\\source\\repos\\heslearning\\Arriba_Eats\\app\\Program.cs",
+              "RelativeDocumentMoniker": "app\\Program.cs",
+              "ToolTip": "C:\\Users\\n12201791\\source\\repos\\heslearning\\Arriba_Eats\\app\\Program.cs",
+              "RelativeToolTip": "app\\Program.cs",
+              "ViewState": "AgIAABMAAAAAAAAAAAAgwAgAAAAoAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-12T09:15:18.04Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "client.cs",
-              "DocumentMoniker": "C:\\Users\\n12201791\\source\\repos\\Arriba_Eats\\app\\client.cs",
-              "RelativeDocumentMoniker": "app\\client.cs",
-              "ToolTip": "C:\\Users\\n12201791\\source\\repos\\Arriba_Eats\\app\\client.cs",
-              "RelativeToolTip": "app\\client.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAEQAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-12T08:02:44.257Z"
+              "WhenOpened": "2025-05-12T01:40:32.66Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "deliverer.cs",
-              "DocumentMoniker": "C:\\Users\\n12201791\\source\\repos\\Arriba_Eats\\app\\deliverer.cs",
-              "RelativeDocumentMoniker": "app\\deliverer.cs",
-              "ToolTip": "C:\\Users\\n12201791\\source\\repos\\Arriba_Eats\\app\\deliverer.cs",
-              "RelativeToolTip": "app\\deliverer.cs",
-              "ViewState": "AgIAABYAAAAAAAAAAAAiwCsAAAA4AAAAAAAAAA==",
+              "Title": "Restaurant.cs",
+              "DocumentMoniker": "C:\\Users\\n12201791\\source\\repos\\heslearning\\Arriba_Eats\\app\\Restaurant\\Restaurant.cs",
+              "RelativeDocumentMoniker": "app\\Restaurant\\Restaurant.cs",
+              "ToolTip": "C:\\Users\\n12201791\\source\\repos\\heslearning\\Arriba_Eats\\app\\Restaurant\\Restaurant.cs",
+              "RelativeToolTip": "app\\Restaurant\\Restaurant.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-12T01:49:00.478Z"
+              "WhenOpened": "2025-05-13T23:55:38.269Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "MenuItem.cs",
+              "DocumentMoniker": "C:\\Users\\n12201791\\source\\repos\\heslearning\\Arriba_Eats\\app\\Restaurant\\MenuItem.cs",
+              "RelativeDocumentMoniker": "app\\Restaurant\\MenuItem.cs",
+              "ToolTip": "C:\\Users\\n12201791\\source\\repos\\heslearning\\Arriba_Eats\\app\\Restaurant\\MenuItem.cs",
+              "RelativeToolTip": "app\\Restaurant\\MenuItem.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-13T22:56:57.901Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "User.cs",
-              "DocumentMoniker": "C:\\Users\\n12201791\\source\\repos\\Arriba_Eats\\app\\User.cs",
-              "RelativeDocumentMoniker": "app\\User.cs",
-              "ToolTip": "C:\\Users\\n12201791\\source\\repos\\Arriba_Eats\\app\\User.cs",
-              "RelativeToolTip": "app\\User.cs",
-              "ViewState": "AgIAABYAAAAAAAAAAAAcwF0AAAAnAAAAAAAAAA==",
+              "Title": "ClientMenu.cs",
+              "DocumentMoniker": "C:\\Users\\n12201791\\source\\repos\\heslearning\\Arriba_Eats\\app\\Menus\\ClientMenu.cs",
+              "RelativeDocumentMoniker": "app\\Menus\\ClientMenu.cs",
+              "ToolTip": "C:\\Users\\n12201791\\source\\repos\\heslearning\\Arriba_Eats\\app\\Menus\\ClientMenu.cs",
+              "RelativeToolTip": "app\\Menus\\ClientMenu.cs",
+              "ViewState": "AgIAADQAAAAAAAAAAAAgwFUAAAAkAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-12T01:41:39.764Z"
+              "WhenOpened": "2025-05-13T22:45:50.579Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "customer.cs",
-              "DocumentMoniker": "C:\\Users\\n12201791\\source\\repos\\Arriba_Eats\\app\\customer.cs",
-              "RelativeDocumentMoniker": "app\\customer.cs",
-              "ToolTip": "C:\\Users\\n12201791\\source\\repos\\Arriba_Eats\\app\\customer.cs",
-              "RelativeToolTip": "app\\customer.cs",
-              "ViewState": "AgIAAAwAAAAAAAAAAAAowBsAAAAAAAAAAAAAAA==",
+              "DocumentIndex": 7,
+              "Title": "SignUpMenu.cs",
+              "DocumentMoniker": "C:\\Users\\n12201791\\source\\repos\\heslearning\\Arriba_Eats\\app\\Menus\\SignUpMenu.cs",
+              "RelativeDocumentMoniker": "app\\Menus\\SignUpMenu.cs",
+              "ToolTip": "C:\\Users\\n12201791\\source\\repos\\heslearning\\Arriba_Eats\\app\\Menus\\SignUpMenu.cs",
+              "RelativeToolTip": "app\\Menus\\SignUpMenu.cs",
+              "ViewState": "AgIAABYAAAAAAAAAAAAgwDIAAAAzAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-12T01:41:32.072Z"
+              "WhenOpened": "2025-05-12T09:15:18.04Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\n12201791\\source\\repos\\Arriba_Eats\\app\\Program.cs",
-              "RelativeDocumentMoniker": "app\\Program.cs",
-              "ToolTip": "C:\\Users\\n12201791\\source\\repos\\Arriba_Eats\\app\\Program.cs",
-              "RelativeToolTip": "app\\Program.cs",
-              "ViewState": "AgIAACoAAAAAAAAAAAAAACoAAAAfAAAAAAAAAA==",
+              "DocumentIndex": 10,
+              "Title": "client.cs",
+              "DocumentMoniker": "C:\\Users\\n12201791\\source\\repos\\heslearning\\Arriba_Eats\\app\\Users\\client.cs",
+              "RelativeDocumentMoniker": "app\\Users\\client.cs",
+              "ToolTip": "C:\\Users\\n12201791\\source\\repos\\heslearning\\Arriba_Eats\\app\\Users\\client.cs",
+              "RelativeToolTip": "app\\Users\\client.cs",
+              "ViewState": "AgIAADEAAAAAAAAAAAAiwE0AAAAMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-12T01:40:32.66Z",
+              "WhenOpened": "2025-05-12T08:02:44.257Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "deliverer.cs",
+              "DocumentMoniker": "C:\\Users\\n12201791\\source\\repos\\heslearning\\Arriba_Eats\\app\\Users\\deliverer.cs",
+              "RelativeDocumentMoniker": "app\\Users\\deliverer.cs",
+              "ToolTip": "C:\\Users\\n12201791\\source\\repos\\heslearning\\Arriba_Eats\\app\\Users\\deliverer.cs",
+              "RelativeToolTip": "app\\Users\\deliverer.cs",
+              "ViewState": "AgIAAB0AAAAAAAAAAAAiwDcAAAAgAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-12T01:49:00.478Z",
               "EditorCaption": ""
             }
           ]

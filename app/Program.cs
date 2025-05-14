@@ -8,7 +8,6 @@ namespace Arriba_Eats
     {
         static void Main (string[] args)
         {
-            List<User> users = new List<User>();
             User? loggedinUser = null;
 
             const int LOGIN_INDEX = 1;
@@ -21,12 +20,13 @@ namespace Arriba_Eats
 
             while (true)
             {
-               
-                Console.WriteLine("Welcome to Arriba Eats!");
+                Console.WriteLine();
                 Console.WriteLine("Please make a choice from the menu below:");
+                Console.WriteLine("Welcome to Arriba Eats!");
                 Console.WriteLine("1: Login as a registered user");
                 Console.WriteLine("2: Register as a new user");
                 Console.WriteLine("3: Exit");
+                Console.WriteLine("Please enter a choice between 1 and 3:");
                 
 
                 int choice;
@@ -39,21 +39,22 @@ namespace Arriba_Eats
                 switch (choice)
                 {
                     case SIGNUP_INDEX:
-                        SignUpHandler.SignUp(users);
+                        SignUpHandler.SignUp();
                         break; 
 
                     case LOGIN_INDEX:
+                        var users = Save_User.GetAllUsers();
                         foreach (User s in users)
                             Console.WriteLine(s.Details());
 
-                        if (loggedinUser != null)
+                        if (loggedinUser != null && loggedinUser.IsLoggedin)
                         {
                             Console.WriteLine($"User '{loggedinUser.Email}' already logged in.");
                             break;
                         }
-                            Console.WriteLine("Please enter your email.");
+                            Console.WriteLine("Email:");
                         string email1 = Console.ReadLine();
-                        Console.WriteLine("Please enter your password: ");
+                        Console.WriteLine("Password:");
                         string password = Console.ReadLine();
 
                         User foundUser = users.Find(u => u.Email == email1);
@@ -65,6 +66,10 @@ namespace Arriba_Eats
                             {
                                 ClientMenus.ClientMenu(client);
                             }
+                            else if (loggedinUser is Customer customer)
+                            {
+                                CustomerMenus.CustomerMenu(customer);
+                            }
                         }
                         else if (foundUser == null)
                         {
@@ -72,7 +77,7 @@ namespace Arriba_Eats
                         }
                         else
                         {
-                            Console.WriteLine("The email or password is incorrect. Try again");
+                            Console.WriteLine("Invalid email or password.");
                         }
 
                     break;
@@ -91,14 +96,14 @@ namespace Arriba_Eats
                         break;
 
                     case EXIT_INDEX:
-                        Console.WriteLine("Exiting program...");
+                        Console.WriteLine("Thank you for using Arriba Eats!");
                         return;
 
 
 
 
                     default:
-                        Console.WriteLine("Invalid option. Please choose between 1-4.");
+                        Console.WriteLine("Invalid choice.");
                         break;
                 }
 

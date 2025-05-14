@@ -4,12 +4,12 @@ namespace Arriba_Eats
 {
     public static class SignUpHandler
     {
-        public static void SignUp(List<User> users)
+        public static void SignUp()
         {
             const int CUSTOMER_INDEX = 1;
             const int DELIVERER_INDEX = 2;
             const int CLIENT_INDEX = 3;
-            const int BACK_INDEX = 3;
+            const int BACK_INDEX = 4;
 
             Console.WriteLine("Which type of user would you like to register as?");
             Console.WriteLine("1: Customer");
@@ -37,23 +37,22 @@ namespace Arriba_Eats
                 case CLIENT_INDEX:
                     newUser = new Client();
                     break;
+                case BACK_INDEX:
+                    return;
                 default:
                     Console.WriteLine("Invalid role selected.");
                     return;
             }
-
-            newUser.SignUp();
-
-            if (users.Exists(u => u.Email == newUser.Email))
+            if (newUser == null)
             {
-                Console.WriteLine("A user with that email already exists.");
+                return;
             }
-            else
-            {
-                users.Add(newUser);
-                Console.WriteLine($"{newUser.GetType().Name} signed up successfully!");
-                Console.WriteLine("===========================");
-            }
+
+            newUser.SignUp(); // collect user input
+            
+
+
+
         }
 
 

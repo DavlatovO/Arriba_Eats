@@ -44,7 +44,7 @@ namespace Arriba_Eats
         public string Password 
         {
             get {return password;}
-            set {if (value.Length<=8)
+            set {if (value.Length>=8)
                     {password = value;}
                 else 
                  {throw new Exception("Must be at least 8 characters long");}
@@ -68,7 +68,6 @@ namespace Arriba_Eats
             if (Email == email && Password == password)
             {
                 isloggedin = true;
-                Console.WriteLine($"{email} logged in successfully");
                 return true;
             } 
             else
@@ -84,19 +83,21 @@ namespace Arriba_Eats
             {
                 isloggedin = false;
                 Console.WriteLine($"{email} logged out.");
+                
             }
             else 
             {
                 Console.WriteLine("Please log in the system first.");
+                
             }
         }
 
         public virtual string Details()
         {
-            return $"Name - {Name}\n" +
-                $"Age - {Age}\n" +
-                $"Email - {Email}\n" +
-                $"Mobil number - {Mobile_Number}";
+            return $"Name: {Name}\n" +
+                $"Age: {Age}\n" +
+                $"Email: {Email}\n" +
+                $"Mobil: {Mobile_Number}";
         }
 
         public abstract void SignUp();

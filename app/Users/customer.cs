@@ -1,28 +1,21 @@
+
 using System;
 namespace Arriba_Eats
 {
-    public class Deliverer : User
+    public class Customer: User
     {
-        public Location AddressCoordinates { get; set; }
-        private string licence_plate;
+        public Location AddressCoordinates {get; set;}
 
-        public Deliverer() : base("", 0, "", "", "", false)
+        public Customer(): base("", 0, "", "", "", false)
         {
             AddressCoordinates = new Location(0, 0);
-            licence_plate = "";
         }
 
-        public string Licence_plate
-        {
-            get { return this.licence_plate; }
-        }
+      
 
         public override void SignUp()
         {
             Console.WriteLine("=== Customer Sign Up ===");
-
-            Console.Write("Enter your licence plate: ");
-            licence_plate = Console.ReadLine();
 
             Console.Write("Enter your name: ");
             Name = Console.ReadLine();
@@ -32,7 +25,7 @@ namespace Arriba_Eats
 
             Console.Write("Enter your email: ");
             Email = Console.ReadLine();
-
+            
 
             Console.Write("Enter your mobile number: ");
             Mobile_Number = Console.ReadLine();
@@ -47,9 +40,12 @@ namespace Arriba_Eats
             double y = double.Parse(Console.ReadLine());
 
             AddressCoordinates = new Location(x, y);
+            // Add the user into the list database
+            Save_User.Register(this);
             IsLoggedin = false;
 
             Console.WriteLine("Sign-up successful.\n");
+            Console.WriteLine();
         }
 
 
