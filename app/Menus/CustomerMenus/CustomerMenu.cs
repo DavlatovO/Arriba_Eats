@@ -18,7 +18,7 @@ namespace Arriba_Eats
                 const int LOGOUT_INDEX = 5;
                 const int NUMBER_OPTIONS = 5;
 
-
+                Console.WriteLine();
 
                 Console.WriteLine($"Welcome back, {customer.Name}!");
                 Console.WriteLine($"1: Display your user information");
@@ -42,7 +42,7 @@ namespace Arriba_Eats
                             Console.WriteLine(customer.Details());
                             break;
                         case RESTAURANTS_INDEX:
-                            Sorting.Sort(customer);
+                            SortMenu.Sort(customer);
                             break;
                         case ORDERSTATUS_INDEX:
                             break;

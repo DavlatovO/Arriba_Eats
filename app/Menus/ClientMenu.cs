@@ -21,6 +21,7 @@ namespace Arriba_Eats
             const int NUMBER_OPTIONS = 7;
 
 
+            Console.WriteLine();
 
             Console.WriteLine($"Welcome back, {client.Name}!");
             Console.WriteLine($"1: Display your user information");

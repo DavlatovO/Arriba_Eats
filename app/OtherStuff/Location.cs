@@ -12,6 +12,13 @@ namespace Arriba_Eats
             this.Y = Y;
         }
 
+        public double DistanceTo(Location other)
+        {
+            double dx = this.X - other.X;
+            double dy = this.Y - other.Y;
+            return Math.Abs(dx) + Math.Abs(dy);
+        }
+
 
     }
 

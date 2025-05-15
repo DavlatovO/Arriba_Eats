@@ -7,16 +7,16 @@ namespace Arriba_Eats
         private string name;
         private Location location;
         private CuisineType cuisineStyle;
-        private double rating;
+        
         public List<MenuItem> Menu { get; private set; }
-
-        public Restaurant(string name, Location location, CuisineType cuisineStyle, double rating)
+        private List<Rating> ratings;
+        public Restaurant(string name, Location location, CuisineType cuisineStyle)
         {
             this.name = name;
             this.location = location;
             this.cuisineStyle = cuisineStyle;
-            this.rating = rating;
             Menu = new List<MenuItem>();
+            ratings = new List<Rating>();
 
         }
 
@@ -28,10 +28,13 @@ namespace Arriba_Eats
 
         public double Restaurant_Rating
         {
-            get { return rating; }
-            set { rating = value; }
+            get
+            {
+                if (ratings.Count == 0) return 0;
+                return ratings.Average(r => (int)r.Score);
+            }
         }
-    
+
         public CuisineType CuisineStyle
         {
             get { return cuisineStyle; }

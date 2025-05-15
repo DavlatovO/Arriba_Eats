@@ -41,11 +41,17 @@ namespace Arriba_Eats
             Console.Write("Enter your password: ");
             Password = Console.ReadLine();
 
-            Console.Write("Enter your X coordinate: ");
-            double x = double.Parse(Console.ReadLine());
+            Console.Write("Enter restaurant location (X,Y): ");
+            string input = Console.ReadLine().Trim('(', ')').Replace(" ", "");
+            string[] parts = input.Split(',');
 
-            Console.Write("Enter your Y coordinate: ");
-            double y = double.Parse(Console.ReadLine());
+            if (parts.Length != 2 ||
+                !int.TryParse(parts[0], out int x) ||
+                !int.TryParse(parts[1], out int y))
+            {
+                Console.WriteLine("Invalid location.");
+                return;
+            }
 
             AddressCoordinates = new Location(x, y);
             // Add the user into the list database
