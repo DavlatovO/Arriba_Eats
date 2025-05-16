@@ -25,7 +25,7 @@ namespace Arriba_Eats
         private OrderStatus status;
         private double totalPrice;
         private int number;
-        private Rating rating;  
+        private Rating rating;
         private DateTime date;
 
 
@@ -39,6 +39,7 @@ namespace Arriba_Eats
             totalPrice = CalculateTotalPrice();
             number = nextOrderNumber++;
             date = DateTime.Now;
+            rating = null;
         }
 
         public int Number
@@ -95,6 +96,11 @@ namespace Arriba_Eats
             get { return assignedDriver; }
         }
 
+        public Rating Ratings
+        {
+                get { return rating; }
+            set { rating = value; }
+        }
 
     }
 

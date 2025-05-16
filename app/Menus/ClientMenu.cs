@@ -64,6 +64,23 @@ namespace Arriba_Eats
                             }
                         break;
                     case CURRENTORDER_INDEX:
+                            var Allorders = Order_Register.GetRealOrders();
+                            foreach(var order in Allorders)
+                            {
+                                if (order.FromRestaurant.Owner == client)
+                                {
+                                    Console.WriteLine($"Order #{order.Number} for {order.GetOwner.Name}: {order.Status}");
+                                    foreach (var items in order.Items)
+                                    {
+                                        Console.WriteLine($"{items.Quantity} x {items.Item.Name}");
+                                    }
+                                    Console.WriteLine();
+                                }
+                                else
+                                {
+                                    Console.WriteLine("Your restaurant has no current orders.");
+                                }
+                            }
                         break;
                     case STARTCOOKING_INDEX:
                         break;

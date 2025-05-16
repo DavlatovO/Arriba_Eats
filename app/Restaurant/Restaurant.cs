@@ -7,28 +7,31 @@ namespace Arriba_Eats
         private string name;
         private Location location;
         private CuisineType cuisineStyle;
+        private Client owner;
         
         public List<MenuItem> Menu { get; private set; }
-        private List<Rating> ratings;
-        public Restaurant(string name, Location location, CuisineType cuisineStyle)
+        
+        public Restaurant(string name, Location location, CuisineType cuisineStyle, Client owner)
         {
             this.name = name;
             this.location = location;
             this.cuisineStyle = cuisineStyle;
+            this.owner = owner;
             Menu = new List<MenuItem>();
-            ratings = new List<Rating>();
 
+        }
+
+
+
+        public Client Owner
+        {
+            get { return owner; }
         }
 
         public string Restaurant_Name
         {
             get { return name; } 
             set { name = value; }
-        }
-
-        internal List<Rating> Restaurant_Rating()
-        {
-            return ratings;
         }
 
         public CuisineType CuisineStyle
@@ -43,6 +46,10 @@ namespace Arriba_Eats
             set { location = value; }
         }
 
+        //public void Restaurant_Rating
+        //{
+        //    var AllOrders = 
+        //}
         
     
     

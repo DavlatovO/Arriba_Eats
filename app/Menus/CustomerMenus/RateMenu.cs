@@ -7,74 +7,74 @@ namespace Arriba_Eats
     {
         public static void Rate(Customer customer)
         {
-
             while (true)
             {
-                const int LASTORDER_INDEX = 1;
-                const int BACK_INDEX = 2;
-                const int NUMBER_OPTIONS = 2;
-
-                var Allorders = Order_Register.GetAllOrders();
-
-
                 Console.WriteLine();
                 Console.WriteLine($"Select a previous order to rate the restaurant it came from:");
 
-                foreach (var order in Allorders)
+                // Step 1: Get all eligible orders for this customer
+                var allOrders = Order_Register.GetAllOrders();
+                var eligibleOrders = allOrders.Where(o => o.GetOwner == customer && o.Status == OrderStatus.Delivered && o.Ratings == null).ToList();
+
+                if (eligibleOrders.Count == 0)
                 {
-                    if (order.GetOwner != customer)
-                    {
-                        Console.WriteLine();
-                        return;
-                    }
-                    if (order.GetOwner == customer && order.Status == OrderStatus.Delivered && order.)
-                    {
-                        Console.WriteLine($": Order #{order.Number} from {order.FromRestaurant}: {order.Status}");
-                        Console.WriteLine();
-                        if (order.Status == Arriba_Eats.OrderStatus.Delivered)
-                        {
-                            Console.WriteLine($"This order was delivered by {order.Driver.Name} (licence plate: {order.Driver.Licence_plate})");
-                            foreach (var items in order.Items)
-                            {
-                                Console.WriteLine($"{items.Quantity} x {items.Item}");
-                            }
-                        }
-                    }
+                    return;
                 }
 
-                    Console.WriteLine($"1: Order #ORDER_NO from RESTAURANT_NAME");
-                Console.WriteLine($"2: Return to the previous menu");
-                Console.WriteLine($"Please enter a choice between 1 and 2:");
+                // Step 2: Show the list
+                for (int i = 0; i < eligibleOrders.Count; i++)
+                {
+                    var order = eligibleOrders[i];
+                    Console.WriteLine($"{i + 1}: Order #{order.Number} from {order.FromRestaurant.Restaurant_Name}:");
+                }
+                Console.WriteLine($"{eligibleOrders.Count + 1}: Return to previous menu");
 
-                int choice;
-                if (!int.TryParse(Console.ReadLine(), out choice))
+                // Step 3: Get user choice
+                Console.Write($"Please enter a choice (1 - {eligibleOrders.Count + 1}): ");
+                if (!int.TryParse(Console.ReadLine(), out int selection) || selection < 1 || selection > eligibleOrders.Count + 1)
                 {
                     Console.WriteLine("Invalid choice.");
                     continue;
                 }
-                if ((choice > 0) && (choice <= NUMBER_OPTIONS))
+
+                // Step 4: Handle return option
+                if (selection == eligibleOrders.Count + 1)
                 {
-                    switch (choice)
-                    {
-                        case LASTORDER_INDEX:
-                           
-                            break;
-                     
-                        default:
-                            Console.WriteLine("Invalid choice.");
-                            break;
-
-
-                    }
+                    return;
                 }
+
+                // Step 5: Get selected order
+                var selectedOrder = eligibleOrders[selection - 1];
+                Console.WriteLine($"You are rating order #{selectedOrder.Number} from {selectedOrder.FromRestaurant.Restaurant_Name}:");
+                foreach (var items in selectedOrder.Items)
+                {
+                    Console.WriteLine($"{items.Quantity} x {items.Item.Name}");
+                }
+                // Step 6: Prompt for rating
+                Console.Write("Please enter a rating for this restaurant (1-5, 0 to cancel): ");
+                if (!int.TryParse(Console.ReadLine(), out int ratingValue) || ratingValue <= 0 || ratingValue > 5)
+                {
+                    Console.WriteLine("Invalid rating.");
+                    continue;
+                }
+                Console.WriteLine("Please enter a comment to accompany this rating:");
+
+                string comment = Console.ReadLine() ?? "";
+
+                // Step 7: Create and attach rating
+                var rating = new Rating(customer, ratingValue, comment); // or prompt for comment too
+                selectedOrder.Ratings = rating;
+
+                Console.WriteLine($"Thank you for rating {selectedOrder.FromRestaurant.Restaurant_Name}.");
             }
         }
+
     }
 
-//    var rating = new Rating(customer, Ratings.Four);
-//restaurant.AddRating(rating);
+    //    var rating = new Rating(customer, Ratings.Four);
+    //restaurant.AddRating(rating);
 
-//Console.WriteLine($"Average rating: {restaurant.Restaurant_Rating:F1}");
+    //Console.WriteLine($"Average rating: {restaurant.Restaurant_Rating:F1}");
 
 
 

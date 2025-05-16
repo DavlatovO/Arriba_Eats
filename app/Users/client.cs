@@ -62,7 +62,7 @@ namespace Arriba_Eats
             Location location = new Location(x, y);
 
             // Create the restaurant
-            OwnedRestaurant = new Restaurant(restaurant_name, location, cuisineStyle);
+            OwnedRestaurant = new Restaurant(restaurant_name, location, cuisineStyle, this);
             // Add the restaurant into the list database
             Restaurant_Register.Register(OwnedRestaurant);
             // Add the user into the list database

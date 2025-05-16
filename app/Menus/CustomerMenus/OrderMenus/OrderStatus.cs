@@ -26,7 +26,7 @@ namespace Arriba_Eats
                             Console.WriteLine($"This order was delivered by {order.Driver.Name} (licence plate: {order.Driver.Licence_plate})");
                             foreach (var items in order.Items)
                             {
-                                Console.WriteLine($"{items.Quantity} x {items.Item}");
+                                Console.WriteLine($"{items.Quantity} x {items.Item.Name}");
                             }
                         }
                     }
