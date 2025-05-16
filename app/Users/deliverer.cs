@@ -52,6 +52,7 @@ namespace Arriba_Eats
                 Console.WriteLine("Invalid location.");
                 return;
             }
+            
 
             AddressCoordinates = new Location(x, y);
             // Add the user into the list database

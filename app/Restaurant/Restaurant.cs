@@ -26,13 +26,9 @@ namespace Arriba_Eats
             set { name = value; }
         }
 
-        public double Restaurant_Rating
+        internal List<Rating> Restaurant_Rating()
         {
-            get
-            {
-                if (ratings.Count == 0) return 0;
-                return ratings.Average(r => (int)r.Score);
-            }
+            return ratings;
         }
 
         public CuisineType CuisineStyle
@@ -46,6 +42,8 @@ namespace Arriba_Eats
             get{ return location; }
             set { location = value; }
         }
+
+        
     
     
     }

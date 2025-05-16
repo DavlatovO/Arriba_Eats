@@ -5,9 +5,6 @@ namespace Arriba_Eats
 
     class RateMenu
     {
-
-
-
         public static void Rate(Customer customer)
         {
 
@@ -17,15 +14,35 @@ namespace Arriba_Eats
                 const int BACK_INDEX = 2;
                 const int NUMBER_OPTIONS = 2;
 
-                List<Restaurant> allRestaurant = Restaurant_Register.GetAllRestaurants();
-
-                var sortedByDistance = allRestaurant.OrderBy(r => r.Restaurant_Location.DistanceTo(customer.AddressCoordinates)).ToList();
-
+                var Allorders = Order_Register.GetAllOrders();
 
 
                 Console.WriteLine();
                 Console.WriteLine($"Select a previous order to rate the restaurant it came from:");
-                Console.WriteLine($"1: Order #ORDER_NO from RESTAURANT_NAME");
+
+                foreach (var order in Allorders)
+                {
+                    if (order.GetOwner != customer)
+                    {
+                        Console.WriteLine();
+                        return;
+                    }
+                    if (order.GetOwner == customer && order.Status == OrderStatus.Delivered && order.)
+                    {
+                        Console.WriteLine($": Order #{order.Number} from {order.FromRestaurant}: {order.Status}");
+                        Console.WriteLine();
+                        if (order.Status == Arriba_Eats.OrderStatus.Delivered)
+                        {
+                            Console.WriteLine($"This order was delivered by {order.Driver.Name} (licence plate: {order.Driver.Licence_plate})");
+                            foreach (var items in order.Items)
+                            {
+                                Console.WriteLine($"{items.Quantity} x {items.Item}");
+                            }
+                        }
+                    }
+                }
+
+                    Console.WriteLine($"1: Order #ORDER_NO from RESTAURANT_NAME");
                 Console.WriteLine($"2: Return to the previous menu");
                 Console.WriteLine($"Please enter a choice between 1 and 2:");
 

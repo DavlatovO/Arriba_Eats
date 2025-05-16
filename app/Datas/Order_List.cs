@@ -14,11 +14,11 @@ namespace Arriba_Eats
                 orders.Add(order);
         }
 
-        public static List<Order> GetAllRestaurants()
+        public static List<Order> GetAllOrders()
         {
             return new List<Order>(orders);
         }
-        public static List<Order> GetRealRestaurants()
+        public static List<Order> GetRealOrders()
         {
             return orders;
         }

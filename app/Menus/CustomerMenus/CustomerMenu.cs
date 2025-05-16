@@ -45,8 +45,10 @@ namespace Arriba_Eats
                             SortMenu.Sort(customer);
                             break;
                         case ORDERSTATUS_INDEX:
+                            OrderStatusMenu.OrderStatus(customer);
                             break;
                         case RATE_INDEX:
+                            RateMenu.Rate(customer);
                             break;
                         case LOGOUT_INDEX:
                             customer.Logout();
@@ -61,7 +63,7 @@ namespace Arriba_Eats
                     Console.WriteLine("Invalid choice.");
                 }
 
-                Console.WriteLine("===========================");
+                Console.WriteLine();
 
             }
         }

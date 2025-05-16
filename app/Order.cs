@@ -16,26 +16,48 @@ namespace Arriba_Eats
 
     class Order
     {
+        private static int nextOrderNumber = 1; // static counter shared by all instances
+
         private Customer orderedOwner;
         private Restaurant fromRestaurant;
         private Deliverer assignedDriver;
-        private List<MenuItem> items;
+        private List<OrderItem> items;
         private OrderStatus status;
         private double totalPrice;
+        private int number;
+        private Rating rating;  
+        private DateTime date;
 
 
-        public Order(Customer customer, Restaurant restaurant, List<MenuItem> items, Deliverer driver)
+
+        public Order(Customer customer, Restaurant restaurant, List<OrderItem> items)
         {
             this.orderedOwner = customer;
             fromRestaurant = restaurant;
             this.items = items;
-            assignedDriver = driver;
+            assignedDriver = null;
             totalPrice = CalculateTotalPrice();
+            number = nextOrderNumber++;
+            date = DateTime.Now;
+        }
+
+        public int Number
+        {
+            get { return number; }
+        }
+         public List<OrderItem> Items
+        {
+            get { return items; }
+        }
+
+        public DateTime Date
+        {
+            get { return date; }
         }
 
         private double CalculateTotalPrice()
         {
-            return items.Sum(item => item.Price);
+            return items.Sum(item => item.Subtotal);
         }
 
         public void AssignDeliverer(Deliverer deliverer)
@@ -44,9 +66,9 @@ namespace Arriba_Eats
             status = OrderStatus.BeingDelivered;
         }
 
-        public void SetOrderStatus(Order order, OrderStatus status)
+        public void SetOrderStatus(OrderStatus Status)
         {
-            order.status = status;
+            status = Status;
         }
 
         public double TotalPrice

@@ -1,21 +1,21 @@
-﻿//using System;
-//namespace Arriba_Eats
-//{
-//    class OrderItem
-//    {
-//        public MenuItem item;
-//        public int quantity; 
+﻿namespace Arriba_Eats
+{
+    public class OrderItem
+    {
+        public MenuItem Item { get; set; }
+        public int Quantity { get; set; }
 
-//        public OrderItem(MenuItem item, int quantity)
-//        {
-//            item = item;
-//            quantity = quantity;
-//        }
+        public OrderItem(MenuItem item, int quantity)
+        {
+            Item = item;
+            Quantity = quantity;
+        }
 
-        
-//    }
+        public double Subtotal => Item.Price * Quantity;
 
-
-
-//}
-
+        public override string ToString()
+        {
+            return $"{Quantity} x {Item.Name} - ${Subtotal:F2}";
+        }
+    }
+}

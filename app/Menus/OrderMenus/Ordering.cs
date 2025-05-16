@@ -1,75 +1,115 @@
 ﻿using System;
+using System.Collections.Generic;
+
 namespace Arriba_Eats
 {
-
-    class OrderMenu
+    class OrderingMenus
     {
-
-        public static void Ordering(Customer customer, Restaurant restaurant)
+        public static void OrderMenu2(Customer customer, Restaurant restaurant)
         {
-
             while (true)
             {
                 const int MENU_INDEX = 1;
-                const int NUMBER_OPTIONS = 3;
-                
-                Console.WriteLine($"Placing order from {restaurant.Restaurant_Name}");
-              
+                const int REVIEWS_INDEX = 2;
+                const int BACK_INDEX = 3;
 
-                int choice;
-                if (!int.TryParse(Console.ReadLine(), out choice))
+                Console.WriteLine();
+                Console.WriteLine($"Placing order from {restaurant.Restaurant_Name}");
+                Console.WriteLine("1: See this restaurant's menu and place an order");
+                Console.WriteLine("2: See reviews for this restaurant");
+                Console.WriteLine("3: Return to main menu");
+                Console.Write("Please enter a choice: ");
+
+                if (!int.TryParse(Console.ReadLine(), out int choice))
                 {
-                    Console.WriteLine("Invalid choice.");
+                    Console.WriteLine("Invalid input.");
                     continue;
                 }
-                if ((choice > 0) && (choice <= NUMBER_OPTIONS))
+
+                switch (choice)
                 {
-                    switch (choice)
-                    {
-                        case MENU_INDEX:
-                            Console.WriteLine($"Current order total: $TotalPrice");
-                            int i = 0;
-                            foreach (var menu in restaurant.Menu)
+                    case MENU_INDEX:
+                        List<OrderItem> orderItems = new List<OrderItem>();
+                        decimal totalPrice = 0;
+                        while (true)
+                        {
+                            Console.WriteLine($"Current order total: ${totalPrice}");
+                            for (int i = 0; i < restaurant.Menu.Count; i++)
                             {
-                                i++;
-                                Console.WriteLine($"{i}:   ${menu.Price}  {menu.Name}");
+                                var item = restaurant.Menu[i];
+                                Console.WriteLine($"{i + 1}: {item.Name}  ${item.Price}");
                             }
-                            int COMPLETE_INDEX = i + 1;
-                            int CANCEL_INDEX = i + 2;
-                            Console.WriteLine($"{COMPLETE_INDEX}: Complete order");
 
-                            Console.WriteLine($"{CANCEL_INDEX}: Cancel order");
+                            int completeIndex = restaurant.Menu.Count + 1;
+                            int cancelIndex = restaurant.Menu.Count + 2;
 
+                            Console.WriteLine($"{completeIndex}: Complete Order");
+                            Console.WriteLine($"{cancelIndex}: Cancel Order");
+                            Console.Write("Choose an item number (or complete/cancel): ");
 
-
-                            int choice2;
-                            if (!int.TryParse(Console.ReadLine(), out choice2))
+                            if (!int.TryParse(Console.ReadLine(), out int selection) || selection < 1 || selection > cancelIndex)
                             {
                                 Console.WriteLine("Invalid choice.");
                                 continue;
                             }
-                             
-                            break;
-                        case REVIEWS_INDEX:
-                            Console.WriteLine();
-                            break;
-                        case BACK_INDEX:
-                            return;
-                        default:
-                            Console.WriteLine("Invalid choice.");
-                            break;
 
+                            if (selection == completeIndex)
+                            {
+                                if (orderItems.Count == 0)
+                                {
+                                    Console.WriteLine("Cannot complete an empty order.");
+                                    continue;
+                                }  
+                            }
+                            else if (selection == cancelIndex)
+                            {
+                                Console.WriteLine("Order cancelled.");
+                                return;
+                            }
+                            else
+                            {
+                                var selectedItem = restaurant.Menu[selection - 1];
+                                Console.Write($"Please enter quantity (0 to cancel): ");
+                                if (!int.TryParse(Console.ReadLine(), out int quantity) || quantity < 1)
+                                {
+                                    Console.WriteLine("Invalid quantity.");
+                                    continue;
+                                }
+                                if (quantity == 0)
+                                {
+                                    return;
+                                }
+                               
 
-                    }
+                                orderItems.Add(new OrderItem(selectedItem, quantity));
+                                totalPrice += (decimal)selectedItem.Price * quantity;
+                                Console.WriteLine($"Added {quantity} x {selectedItem.Name} added to order.");
+                            }
+                        }
+
+                    case REVIEWS_INDEX:
+                        var AllRatings = restaurant.Restaurant_Rating();
+                        if (AllRatings.Count == 0)
+                        {
+                            Console.WriteLine("No reviews have been left for this restaurant.");
+                            break;
+                        }
+                        foreach(var rating in AllRatings)
+                        {
+                            Console.WriteLine($"Reviewer: {rating.Customer}");
+                            Console.WriteLine($"Rating: {rating.Score}");
+                            Console.WriteLine($"Comment: {rating.Comment}");
+                        }
+                        break;
+
+                    case BACK_INDEX:
+                        return;
+
+                    default:
+                        Console.WriteLine("Invalid choice.");
+                        break;
                 }
             }
         }
-
     }
-
-
-    
-
-
-
 }

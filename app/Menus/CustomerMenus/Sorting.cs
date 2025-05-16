@@ -64,7 +64,7 @@ namespace Arriba_Eats
                             }
                             if ((number > 0) && (number < ALLRESTAURANTSPLUS_INDEX))
                                 {
-                                    OrderingMenu.Order(customer, sortedByName[number-1]);
+                                    OrderingMenus.OrderMenu2(customer, sortedByName[number-1]);
                                 }
                             else if (number == ALLRESTAURANTSPLUS_INDEX)
                                 {
@@ -94,7 +94,7 @@ namespace Arriba_Eats
                             }
                             if ((number2 > 0) && (number2 < ALLRESTAURANTSPLUS_INDEX))
                             {
-                                OrderingMenu.Order(customer, sortedByDistance[number2 - 1]);
+                                OrderingMenus.OrderMenu2(customer, sortedByDistance[number2 - 1]);
                             }
                             else if (number2 == ALLRESTAURANTSPLUS_INDEX)
                             {
@@ -124,7 +124,7 @@ namespace Arriba_Eats
                             }
                             if ((number3 > 0) && (number3 < ALLRESTAURANTSPLUS_INDEX))
                             {
-                                OrderingMenu.OrderMenu(customer, sortedByCuisine[number3 - 1]);
+                                OrderingMenus.OrderMenu2(customer, sortedByCuisine[number3 - 1]);
                             }
                             else if (number3 == ALLRESTAURANTSPLUS_INDEX)
                             {
