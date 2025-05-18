@@ -71,8 +71,7 @@ namespace Arriba_Eats
             IsLoggedin = false;
 
 
-            Console.WriteLine($"Restaurant '{OwnedRestaurant.Restaurant_Name}' successfully registered!");
-            Console.WriteLine();
+            Console.WriteLine($"You have been successfully registered as a client, {Name}!");
         }
     }
 }

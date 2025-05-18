@@ -59,18 +59,19 @@ namespace Arriba_Eats
                                 {
                                     Console.WriteLine("Cannot complete an empty order.");
                                     continue;
-                                }  
+                                }
                             }
                             else if (selection == cancelIndex)
                             {
                                 Console.WriteLine("Order cancelled.");
+                                orderItems.Clear();
                                 return;
                             }
                             else
                             {
                                 var selectedItem = restaurant.Menu[selection - 1];
                                 Console.Write($"Please enter quantity (0 to cancel): ");
-                                if (!int.TryParse(Console.ReadLine(), out int quantity) || quantity < 1)
+                                if (!int.TryParse(Console.ReadLine(), out int quantity) || quantity < 0)
                                 {
                                     Console.WriteLine("Invalid quantity.");
                                     continue;
@@ -79,22 +80,26 @@ namespace Arriba_Eats
                                 {
                                     return;
                                 }
-                               
+
 
                                 orderItems.Add(new OrderItem(selectedItem, quantity));
                                 totalPrice += (decimal)selectedItem.Price * quantity;
-                                Console.WriteLine($"Added {quantity} x {selectedItem.Name} added to order.");
+                                Console.WriteLine($"Added {quantity} x {selectedItem.Name} to order.");
+                                Order newOrder = new Order(customer, restaurant, orderItems);
+                                Console.WriteLine($"Your order has been placed. Your order number is {newOrder.Number}");
+                                newOrder.SetOrderStatus(OrderStatus.Ordered);
+                                return;
                             }
                         }
 
                     case REVIEWS_INDEX:
-                        var AllRatings = restaurant.Restaurant_Rating();
-                        if (AllRatings.Count == 0)
+                        var allRatings = Rating_List.GetRealRatings();
+                        if (allRatings.Count == 0)
                         {
                             Console.WriteLine("No reviews have been left for this restaurant.");
                             break;
                         }
-                        foreach(var rating in AllRatings)
+                        foreach(var rating in allRatings)
                         {
                             Console.WriteLine($"Reviewer: {rating.Customer}");
                             Console.WriteLine($"Rating: {rating.Score}");

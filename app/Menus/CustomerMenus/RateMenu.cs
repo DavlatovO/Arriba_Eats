@@ -62,10 +62,11 @@ namespace Arriba_Eats
                 string comment = Console.ReadLine() ?? "";
 
                 // Step 7: Create and attach rating
-                var rating = new Rating(customer, ratingValue, comment); // or prompt for comment too
+                var rating = new Rating(customer, ratingValue, comment, selectedOrder.FromRestaurant); // or prompt for comment too
                 selectedOrder.Ratings = rating;
 
                 Console.WriteLine($"Thank you for rating {selectedOrder.FromRestaurant.Restaurant_Name}.");
+                Rating_List.Register(rating);
             }
         }
 

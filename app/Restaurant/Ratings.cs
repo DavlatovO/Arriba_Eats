@@ -8,13 +8,15 @@ namespace Arriba_Eats
         private Customer customer_rated;
         private double score;
         private string comment;
+        private Restaurant forThisRestaurant;
 
 
-        public Rating(Customer customer, double rating, string commment)
+        public Rating(Customer customer, double rating, string comment, Restaurant forthisrestaurant)
         {
             this.customer_rated = customer;
             this.score = rating;
-            this.comment = commment;
+            this.comment = comment;
+            forThisRestaurant = forthisrestaurant;
         }
 
         public double Score
@@ -23,11 +25,15 @@ namespace Arriba_Eats
             set { score = value; }
         }
         public string Comment
-            { get { return comment; } } 
+        { get { return comment; } }
 
         public Customer Customer
-            { get { return customer_rated; } }
+        { get { return customer_rated; } }
 
+        public Restaurant forthisrestaurant
+        {
+            get { return forThisRestaurant; }
+        }
        
 
 

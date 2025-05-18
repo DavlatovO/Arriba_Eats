@@ -64,7 +64,6 @@ namespace Arriba_Eats
         public void AssignDeliverer(Deliverer deliverer)
         {
             assignedDriver = deliverer;
-            status = OrderStatus.BeingDelivered;
         }
 
         public void SetOrderStatus(OrderStatus Status)

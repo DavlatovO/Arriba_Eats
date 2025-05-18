@@ -25,7 +25,7 @@ namespace Arriba_Eats
 
 
                 Console.WriteLine();
-                Console.WriteLine($"1: How would you like the list of restaurants ordered?");
+                Console.WriteLine($"How would you like the list of restaurants ordered?");
                 Console.WriteLine($"1: Sorted alphabetically by name");
                 Console.WriteLine($"2: Sorted by distance");
                 Console.WriteLine($"3: Sorted by style");

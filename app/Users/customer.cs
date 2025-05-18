@@ -13,6 +13,11 @@ namespace Arriba_Eats
             currentOrder = null;
         }
 
+        public Location location
+        {
+            get { return AddressCoordinates; }
+        }
+
         internal Order CurrentOrder
         {
             get { return currentOrder; }
@@ -56,9 +61,7 @@ namespace Arriba_Eats
             // Add the user into the list database
             Save_User.Register(this);
             IsLoggedin = false;
-
-            Console.WriteLine("Sign-up successful.\n");
-            Console.WriteLine();
+            Console.WriteLine($"You have been successfully registered as a customer, {Name}!");
         }
 
 

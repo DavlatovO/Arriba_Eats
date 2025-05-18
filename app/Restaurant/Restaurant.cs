@@ -8,9 +8,9 @@ namespace Arriba_Eats
         private Location location;
         private CuisineType cuisineStyle;
         private Client owner;
-        
+
         public List<MenuItem> Menu { get; private set; }
-        
+
         public Restaurant(string name, Location location, CuisineType cuisineStyle, Client owner)
         {
             this.name = name;
@@ -30,7 +30,7 @@ namespace Arriba_Eats
 
         public string Restaurant_Name
         {
-            get { return name; } 
+            get { return name; }
             set { name = value; }
         }
 
@@ -42,17 +42,29 @@ namespace Arriba_Eats
 
         public Location Restaurant_Location
         {
-            get{ return location; }
+            get { return location; }
             set { location = value; }
         }
 
-        //public void Restaurant_Rating
-        //{
-        //    var AllOrders = 
-        //}
-        
-    
-    
+        public double Restaurant_Rating()
+        {
+                var AllRatings = Rating_List.GetAllRatings();
+                var myRatings = AllRatings.Where(rating => rating.forthisrestaurant.Restaurant_Name == this.Restaurant_Name);
+
+                //If there are no orders return 0
+                if (!myRatings.Any())
+                    return 0.0;
+
+                //Calculate and return average rating
+                return myRatings.Average(rating => rating.Score);
+        }
+
+        internal List<Rating> GetAllRatings()
+        {
+            var AllOrders = Order_Register.GetAllOrders();
+            var ratings = AllOrders.Where(order => order.FromRestaurant.Restaurant_Name == this.Restaurant_Name).Select(order => order.Ratings).ToList();
+            return ratings;
+        }    
     }
 
 
