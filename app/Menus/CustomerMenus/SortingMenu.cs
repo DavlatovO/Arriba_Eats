@@ -143,6 +143,23 @@ namespace Arriba_Eats
                                 Console.WriteLine($"{i,2}: {restaurant.Restaurant_Name,-20} ({restaurant.Restaurant_Location.X,2},{restaurant.Restaurant_Location.Y,2})  {distance,6:F2}  {restaurant.CuisineStyle,-10} {restaurant.Restaurant_Rating(),6:F1}");
                                 Console.WriteLine();
                             }
+                            Console.WriteLine($"{ALLRESTAURANTSPLUS_INDEX}: Return to the previous menu");
+                            Console.WriteLine($"Please enter a choice between 1 and {ALLRESTAURANTSPLUS_INDEX}:");
+                            int number4;
+                            if (!int.TryParse(Console.ReadLine(), out number4))
+                            {
+                                Console.WriteLine("Please enter a valid number.");
+                                continue;
+                            }
+                            if ((number4 > 0) && (number4 < ALLRESTAURANTSPLUS_INDEX))
+                            {
+                                OrderingMenus.OrderMenu2(customer, sortedByRating[number4 - 1]);
+                            }
+                            else if (number4 == ALLRESTAURANTSPLUS_INDEX)
+                            {
+                                break;
+                            }
+                            else { Console.WriteLine("Invalid choice."); }
                             break;
                         case BACK_INDEX:
                             return;
