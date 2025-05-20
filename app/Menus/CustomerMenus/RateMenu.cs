@@ -9,11 +9,10 @@ namespace Arriba_Eats
         {
             while (true)
             {
-                Console.WriteLine();
                 Console.WriteLine($"Select a previous order to rate the restaurant it came from:");
 
                 // Step 1: Get all eligible orders for this customer
-                var allOrders = Order_Register.GetAllOrders();
+                var allOrders = Order_List.GetAllOrders();
                 var eligibleOrders = allOrders.Where(o => o.GetOwner == customer && o.Status == OrderStatus.Delivered && o.Ratings == null).ToList();
 
                 if (eligibleOrders.Count == 0)
@@ -52,10 +51,14 @@ namespace Arriba_Eats
                 }
                 // Step 6: Prompt for rating
                 Console.Write("Please enter a rating for this restaurant (1-5, 0 to cancel): ");
-                if (!int.TryParse(Console.ReadLine(), out int ratingValue) || ratingValue <= 0 || ratingValue > 5)
+                if (!int.TryParse(Console.ReadLine(), out int ratingValue) || ratingValue < 0 || ratingValue > 5)
                 {
                     Console.WriteLine("Invalid rating.");
                     continue;
+                }
+                if (ratingValue == 0)
+                {
+                    return;
                 }
                 Console.WriteLine("Please enter a comment to accompany this rating:");
 

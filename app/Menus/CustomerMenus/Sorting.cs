@@ -46,12 +46,12 @@ namespace Arriba_Eats
                         case ALPHABETIC_INDEX:
                             var sortedByName = allRestaurant.OrderBy(r => r.Restaurant_Name).ToList();
                             int i = 0;
-                            Console.WriteLine("   Restaurant Name       Loc    Dist  Style       Rating");
+                            Console.WriteLine("   Restaurant Name        Loc       Dist   Style       Rating");
                             foreach (var restaurant in sortedByName)
                             {
                                 i++;
                                 double distance = restaurant.Restaurant_Location.DistanceTo(customer.AddressCoordinates);
-                                Console.WriteLine($"{i}: {restaurant.Restaurant_Name,-20} {distance,6:F2} {restaurant.CuisineStyle,-10} {restaurant.Restaurant_Rating:F1}");
+                                Console.WriteLine($"{i,2}: {restaurant.Restaurant_Name,-20} ({restaurant.Restaurant_Location.X,2},{restaurant.Restaurant_Location.Y,2})  {distance,6:F2}  {restaurant.CuisineStyle,-10} {restaurant.Restaurant_Rating(),6:F1}");
                                 Console.WriteLine();
                             }
                             Console.WriteLine($"{ALLRESTAURANTSPLUS_INDEX}: Return to the previous menu");
@@ -68,7 +68,7 @@ namespace Arriba_Eats
                                 }
                             else if (number == ALLRESTAURANTSPLUS_INDEX)
                                 {
-                                    return;
+                                    break;
                                 }
                             else { Console.WriteLine("Invalid choice."); }
                                 break;
@@ -81,7 +81,7 @@ namespace Arriba_Eats
                             {
                                 b++;
                                 double distance = restaurant.Restaurant_Location.DistanceTo(customer.AddressCoordinates);
-                                Console.WriteLine($"{b}: {restaurant.Restaurant_Name,-20} {distance,6:F2} {restaurant.CuisineStyle,-11} {restaurant.Restaurant_Rating:F1}");
+                                Console.WriteLine($"{i,2}: {restaurant.Restaurant_Name,-20} ({restaurant.Restaurant_Location.X,2},{restaurant.Restaurant_Location.Y,2})  {distance,6:F2}  {restaurant.CuisineStyle,-10} {restaurant.Restaurant_Rating(),6:F1}");
                                 Console.WriteLine();
                             }
                             Console.WriteLine($"{ALLRESTAURANTSPLUS_INDEX}: Return to the previous menu");
@@ -98,7 +98,7 @@ namespace Arriba_Eats
                             }
                             else if (number2 == ALLRESTAURANTSPLUS_INDEX)
                             {
-                                return;
+                                break;
                             }
                             else { Console.WriteLine("Invalid choice."); }
                             break;
@@ -111,7 +111,7 @@ namespace Arriba_Eats
                             {
                                 a++;
                                 double distance = restaurant.Restaurant_Location.DistanceTo(customer.AddressCoordinates);
-                                Console.WriteLine($"{a}: {restaurant.Restaurant_Name,-20} {distance,6:F2} {restaurant.CuisineStyle,-10} {restaurant.Restaurant_Rating:F1}");
+                                Console.WriteLine($"{i,2}: {restaurant.Restaurant_Name,-20} ({restaurant.Restaurant_Location.X,2},{restaurant.Restaurant_Location.Y,2})  {distance,6:F2}  {restaurant.CuisineStyle,-10} {restaurant.Restaurant_Rating(),6:F1}");
                                 Console.WriteLine();
                             }
                             Console.WriteLine($"{ALLRESTAURANTSPLUS_INDEX}: Return to the previous menu");
@@ -128,17 +128,24 @@ namespace Arriba_Eats
                             }
                             else if (number3 == ALLRESTAURANTSPLUS_INDEX)
                             {
-                                return;
+                                break;
                             }
                             else { Console.WriteLine("Invalid choice."); }
                             break;
-
-                            break;
                         case RATING_INDEX:
-                            //var sortedByRating = allRestaurant.OrderByDescending(r => r.Restaurant_Rating).ToList();
+                            var sortedByRating = Restaurant_Register.GetAllRestaurants().OrderBy(r => r.Restaurant_Rating()).ToList();
+                            int c = 0;
+                            Console.WriteLine("   Restaurant Name       Loc    Dist  Style       Rating");
+                            foreach (var restaurant in sortedByRating)
+                            {
+                                c++;
+                                double distance = restaurant.Restaurant_Location.DistanceTo(customer.AddressCoordinates);
+                                Console.WriteLine($"{i,2}: {restaurant.Restaurant_Name,-20} ({restaurant.Restaurant_Location.X,2},{restaurant.Restaurant_Location.Y,2})  {distance,6:F2}  {restaurant.CuisineStyle,-10} {restaurant.Restaurant_Rating(),6:F1}");
+                                Console.WriteLine();
+                            }
                             break;
                         case BACK_INDEX:
-                            break;
+                            return;
                         default:
                             Console.WriteLine("Invalid choice.");
                             break;

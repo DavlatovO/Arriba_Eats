@@ -3,7 +3,7 @@
 namespace Arriba_Eats
 {
 
-    class Order_Register
+    class Order_List
     {
         private static List<Order> orders = new List<Order>();
 

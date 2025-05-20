@@ -61,7 +61,7 @@ namespace Arriba_Eats
 
         internal List<Rating> GetAllRatings()
         {
-            var AllOrders = Order_Register.GetAllOrders();
+            var AllOrders = Order_List.GetAllOrders();
             var ratings = AllOrders.Where(order => order.FromRestaurant.Restaurant_Name == this.Restaurant_Name).Select(order => order.Ratings).ToList();
             return ratings;
         }    

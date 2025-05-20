@@ -21,8 +21,8 @@ namespace Arriba_Eats
             while (true)
             {
                 Console.WriteLine();
-                Console.WriteLine("Please make a choice from the menu below:");
                 Console.WriteLine("Welcome to Arriba Eats!");
+                Console.WriteLine("Please make a choice from the menu below:");
                 Console.WriteLine("1: Login as a registered user");
                 Console.WriteLine("2: Register as a new user");
                 Console.WriteLine("3: Exit");
@@ -44,9 +44,6 @@ namespace Arriba_Eats
 
                     case LOGIN_INDEX:
                         var users = Save_User.GetAllUsers();
-                        foreach (User s in users)
-                            Console.WriteLine(s.Details());
-
                         if (loggedinUser != null && loggedinUser.IsLoggedin)
                         {
                             Console.WriteLine($"User '{loggedinUser.Email}' already logged in.");
@@ -76,10 +73,6 @@ namespace Arriba_Eats
                             }
 
                         }
-                        else if (foundUser == null)
-                        {
-                            Console.WriteLine("No such a user. Please sign up.");
-                        }
                         else
                         {
                             Console.WriteLine("Invalid email or password.");
@@ -95,7 +88,7 @@ namespace Arriba_Eats
                         else
                         {
                             loggedinUser.Logout();
-                            Console.WriteLine("Logged out successfully.");
+                            Console.WriteLine("You are now logged out");
                             loggedinUser = null;
                         }
                         break;

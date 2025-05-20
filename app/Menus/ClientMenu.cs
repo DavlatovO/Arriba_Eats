@@ -22,8 +22,6 @@ namespace Arriba_Eats
 
 
             Console.WriteLine();
-
-            
             Console.WriteLine($"1: Display your user information");
             Console.WriteLine($"2: Add items to restaurant menu");
             Console.WriteLine($"3: See current orders");
@@ -39,8 +37,8 @@ namespace Arriba_Eats
                         Console.WriteLine("Invalid choice.");
                         continue;
                     }
-            if ((choice > 0) && (choice <= NUMBER_OPTIONS))
-            {
+                if ((choice > 0) && (choice <= NUMBER_OPTIONS))
+                {
                     switch (choice)
                     {
                         case DISPLAY_INDEX:
@@ -64,12 +62,13 @@ namespace Arriba_Eats
                             }
                             break;
                         case CURRENTORDER_INDEX:
-                            var Allorders = Order_Register.GetRealOrders();
+                            var Allorders = Order_List.GetRealOrders();
                             Allorders = Allorders.Where(order => order.FromRestaurant.Owner == client && order.Status == OrderStatus.Ordered).ToList();
-                            foreach (var order in Allorders)
+                            if (Allorders.Count != 0)
                             {
-                                if (Allorders.Count == 0)
+                                foreach (var order in Allorders)
                                 {
+
                                     Console.WriteLine($"Order #{order.Number} for {order.GetOwner.Name}: {order.Status}");
                                     foreach (var items in order.Items)
                                     {
@@ -77,14 +76,15 @@ namespace Arriba_Eats
                                     }
                                     Console.WriteLine();
                                 }
-                                else
-                                {
-                                    Console.WriteLine("Your restaurant has no current orders.");
-                                }
                             }
+                            else
+                            {
+                                Console.WriteLine("Your restaurant has no current orders.");
+                            }
+                            
                             break;
                         case STARTCOOKING_INDEX:
-                            var allorders = Order_Register.GetAllOrders();
+                            var allorders = Order_List.GetAllOrders();
                             allorders = allorders.Where(order => order.FromRestaurant.Owner == client && order.Status == OrderStatus.Ordered).ToList();
                             if (allorders.Count > 0)
                             {
@@ -128,11 +128,11 @@ namespace Arriba_Eats
                             else
                             {
                                 Console.WriteLine("Your restaurant has no current orders.");
-                            }    
+                            }
 
-                        break;
-                    case FINISHCOOKING_INDEX:
-                    var AllOrders = Order_Register.GetAllOrders();
+                            break;
+                        case FINISHCOOKING_INDEX:
+                            var AllOrders = Order_List.GetAllOrders();
                             AllOrders = AllOrders.Where(order => order.FromRestaurant.Owner == client && order.Status == OrderStatus.Cooking).ToList();
                             if (AllOrders.Count > 0)
                             {
@@ -165,7 +165,7 @@ namespace Arriba_Eats
                                         else
                                         {
                                             Console.WriteLine($"The deliverer with licence plate {selectedOrder.Driver.Licence_plate} will be arriving soon to collect it.");
-                                        }    
+                                        }
                                     }
                                     else if (input2 == AllOrders.Count + 1)
                                     {
@@ -186,10 +186,10 @@ namespace Arriba_Eats
                                 Console.WriteLine("Your restaurant has no current orders.");
                             }
 
-                        break;
-                    case HANDLEDELIVERERS_INDEX:
-                            var orders = Order_Register.GetAllOrders();
-                            orders = orders.Where(order =>order.FromRestaurant.Owner == client &&
+                            break;
+                        case HANDLEDELIVERERS_INDEX:
+                            var orders = Order_List.GetAllOrders();
+                            orders = orders.Where(order => order.FromRestaurant.Owner == client &&
                                                     (order.Status == OrderStatus.Cooked ||
                                                     order.Status == OrderStatus.Cooking) &&
                                                     order.Driver != null &&
@@ -202,11 +202,11 @@ namespace Arriba_Eats
                                 c++;
                                 Console.WriteLine($"{c}: Order #{order.Number} for {order.GetOwner.Name} (Deliverer licence plate: {order.Driver.Name}) (Order status: {order.Status})");
                             }
-                            Console.WriteLine($"{c+1}: Return to the previous menu");
-                            Console.WriteLine($"Please enter a choice between 1 and {c+1}:");
-                             int input3;
-                                if (int.TryParse(Console.ReadLine(), out input3))
-                                {
+                            Console.WriteLine($"{c + 1}: Return to the previous menu");
+                            Console.WriteLine($"Please enter a choice between 1 and {c + 1}:");
+                            int input3;
+                            if (int.TryParse(Console.ReadLine(), out input3))
+                            {
                                 if (input3 >= 1 && input3 <= orders.Count)
                                 {
                                     var SelectedOrder = orders[input3 - 1];
@@ -218,9 +218,9 @@ namespace Arriba_Eats
                                     {
                                         SelectedOrder.SetOrderStatus(OrderStatus.BeingDelivered);
                                         Console.WriteLine($"Order {SelectedOrder.Number} is now marked as being delivered.");
-                                        }
-                                    
                                     }
+
+                                }
                                 else if (input3 == orders.Count + 1)
                                 {
                                     break;
@@ -229,28 +229,25 @@ namespace Arriba_Eats
                                 {
                                     Console.WriteLine("Invalid choice.");
                                 }
-                                }
-                                else
-                                {
-                                    Console.WriteLine("Invalid input.");
-                                }
+                            }
+                            else
+                            {
+                                Console.WriteLine("Invalid input.");
+                            }
 
-                            
-                        break;
-                    case LOGOUT_INDEX:
-                        client.Logout();
-                        return;
-                    default:
-                            break;             
+
+                            break;
+                        case LOGOUT_INDEX:
+                            client.Logout();
+                            return;
+                        default:
+                            break;
+                    }
                 }
-            }
-            else
-            {
-                Console.WriteLine("Invalid choice.");
-            }
-
-                Console.WriteLine();
-
+                else
+                {
+                    Console.WriteLine("Invalid choice.");
+                }
             }
     }
 

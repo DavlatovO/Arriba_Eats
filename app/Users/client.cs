@@ -18,27 +18,29 @@ namespace Arriba_Eats
 
         public override void SignUp()
         {
-            Console.WriteLine("=== Client (Restaurant Owner) Sign Up ===");
+           
 
-            Console.Write("Enter your name: ");
+            Console.Write("Please enter your name: ");
             Name = Console.ReadLine();
 
-            Console.Write("Enter your age: ");
+            Console.Write("Please enter your age(18-100): ");
             Age = int.Parse(Console.ReadLine());
 
-            Console.Write("Enter your email: ");
+            Console.Write("Please enter your email: ");
             Email = Console.ReadLine();
 
-            Console.Write("Enter your mobile number: ");
+            Console.Write("Please enter your mobile number: ");
             Mobile_Number = Console.ReadLine();
 
-            Console.Write("Enter your password: ");
+            Console.Write("Please enter your password: ");
+
+            Console.WriteLine("Your password must:\r\n- be at least 8 characters long\r\n- contain a number\r\n- contain a lowercase letter\r\n- contain an uppercase letter\r\nPlease enter a password:");
             Password = Console.ReadLine();
 
-            Console.Write("Enter your restaurant name: ");
+            Console.Write("Please enter your restaurant name: ");
             string restaurant_name = Console.ReadLine();
 
-            Console.WriteLine("Select your cuisine style:");
+            Console.WriteLine("Please select your cuisine style:");
             foreach (var style in Enum.GetValues(typeof(CuisineType)))
             {
                 Console.WriteLine($"{(int)style} - {style}");
@@ -47,7 +49,7 @@ namespace Arriba_Eats
             int styleChoice = int.Parse(Console.ReadLine());
             CuisineType cuisineStyle = (CuisineType)styleChoice;
 
-            Console.Write("Enter restaurant location (X,Y): ");
+            Console.Write("Please enter restaurant location (X,Y): ");
             string input = Console.ReadLine().Trim('(', ')').Replace(" ", "");
             string[] parts = input.Split(',');
 

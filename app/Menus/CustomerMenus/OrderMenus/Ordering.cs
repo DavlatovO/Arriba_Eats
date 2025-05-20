@@ -60,6 +60,15 @@ namespace Arriba_Eats
                                     Console.WriteLine("Cannot complete an empty order.");
                                     continue;
                                 }
+                                else
+                                {
+                                    Order newOrder = new Order(customer, restaurant, orderItems);
+                                    Console.WriteLine($"Your order has been placed. Your order number is {newOrder.Number}");
+                                    newOrder.SetOrderStatus(OrderStatus.Ordered);
+                                    Order_List.Register(newOrder);
+                                    orderItems.Clear(); 
+                                    totalPrice = 0;
+                                }
                             }
                             else if (selection == cancelIndex)
                             {
@@ -85,13 +94,8 @@ namespace Arriba_Eats
                                 orderItems.Add(new OrderItem(selectedItem, quantity));
                                 totalPrice += (decimal)selectedItem.Price * quantity;
                                 Console.WriteLine($"Added {quantity} x {selectedItem.Name} to order.");
-                                Order newOrder = new Order(customer, restaurant, orderItems);
-                                Console.WriteLine($"Your order has been placed. Your order number is {newOrder.Number}");
-                                newOrder.SetOrderStatus(OrderStatus.Ordered);
-                                return;
                             }
                         }
-
                     case REVIEWS_INDEX:
                         var allRatings = Rating_List.GetRealRatings();
                         if (allRatings.Count == 0)

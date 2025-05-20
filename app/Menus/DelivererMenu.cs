@@ -32,7 +32,7 @@ namespace Arriba_Eats
                     Console.WriteLine("Invalid choice.");
                     continue;
                 }
-                if ((choice > 0) && (choice <= NUMBER_OPTIONS))
+                if ((choice >= DISPLAY_INDEX) && (choice <= NUMBER_OPTIONS))
                 {
                     switch (choice)
                     {
@@ -58,9 +58,7 @@ namespace Arriba_Eats
 
                             deliverer.location = new Location(x, y);
 
-                            var deliveryOrders = Order_Register.GetRealOrders()
-                                .Where(order => (order.Status == OrderStatus.Cooking || order.Status == OrderStatus.Cooked) && order.Driver == null)
-                                .ToList();
+                            var deliveryOrders = Order_List.GetRealOrders().Where(order => (order.Status == OrderStatus.Cooking || order.Status == OrderStatus.Cooked) && order.Driver == null).ToList();
 
                             if (!deliveryOrders.Any())
                             {
@@ -83,7 +81,7 @@ namespace Arriba_Eats
                             }
 
                             Console.WriteLine($"{deliveryOrders.Count + 1}: Return to the previous menu");
-                            Console.Write($"Please enter a choice between 1 and {deliveryOrders.Count + 1}): ");
+                            Console.Write($"Please enter a choice between 1 and {deliveryOrders.Count + 1}: ");
 
                             if (!int.TryParse(Console.ReadLine(), out int selection) || selection < 1 || selection > deliveryOrders.Count + 1)
                             {

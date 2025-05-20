@@ -26,25 +26,27 @@ namespace Arriba_Eats
 
         public override void SignUp()
         {
-            Console.WriteLine("=== Customer Sign Up ===");
+           
 
-            Console.Write("Enter your name: ");
+            Console.Write("Please enter your name: ");
             Name = Console.ReadLine();
 
-            Console.Write("Enter your age: ");
+            Console.Write("Please enter your age: ");
             Age = int.Parse(Console.ReadLine());
 
-            Console.Write("Enter your email: ");
+            Console.Write("Please enter your email: ");
             Email = Console.ReadLine();
             
 
-            Console.Write("Enter your mobile number: ");
+            Console.Write("Please enter your mobile number: ");
             Mobile_Number = Console.ReadLine();
 
-            Console.Write("Enter your password: ");
+            Console.Write("Please enter your password: ");
+
+            Console.WriteLine("Your password must:\r\n- be at least 8 characters long\r\n- contain a number\r\n- contain a lowercase letter\r\n- contain an uppercase letter\r\nPlease enter a password:");
             Password = Console.ReadLine();
 
-            Console.Write("Enter restaurant location (X,Y): ");
+            Console.Write("Please enter your location (X,Y): ");
             string input = Console.ReadLine().Trim('(', ')').Replace(" ", "");
             string[] parts = input.Split(',');
 
