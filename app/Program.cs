@@ -15,13 +15,13 @@ namespace Arriba_Eats
             const int EXIT_INDEX = 3;
             const int LOGOUT_INDEX = 4;
 
-            
 
 
+
+
+            Console.WriteLine("Welcome to Arriba Eats!");
             while (true)
             {
-                Console.WriteLine();
-                Console.WriteLine("Welcome to Arriba Eats!");
                 Console.WriteLine("Please make a choice from the menu below:");
                 Console.WriteLine("1: Login as a registered user");
                 Console.WriteLine("2: Register as a new user");
@@ -32,14 +32,14 @@ namespace Arriba_Eats
                 int choice;
                 if (!int.TryParse(Console.ReadLine(), out choice))
                 {
-                    Console.WriteLine("Please enter a valid number.");
+                    Console.WriteLine("Invalid choice.");
                     continue;
                 }
 
                 switch (choice)
                 {
                     case SIGNUP_INDEX:
-                        SignUpHandler.SignUp();
+                        SignUpMenu.SignUp();
                         break; 
 
                     case LOGIN_INDEX:

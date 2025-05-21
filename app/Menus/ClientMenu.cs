@@ -105,7 +105,7 @@ namespace Arriba_Eats
                                     {
                                         var selectedOrder = allorders[input - 1];
                                         selectedOrder.SetOrderStatus(OrderStatus.Cooking);
-                                        Console.WriteLine($"Order #{selectedOrder.Number} is now marked as cooking.Please prepare the order, then mark it as finished cooking:");
+                                        Console.WriteLine($"Order #{selectedOrder.Number} is now marked as cooking.Please prepare the order, then mark it as finished cooking.");
                                         foreach (var items in selectedOrder.Items)
                                         {
                                             Console.WriteLine($"{items.Quantity} x {items.Item.Name}");

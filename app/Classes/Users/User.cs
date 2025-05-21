@@ -12,14 +12,13 @@ namespace Arriba_Eats
         private string password;
         private bool isloggedin;
 
-        public User(string name, int age, string email, int mobile_number, string password, bool isloggedin)
+        public User(string name, int age, string email, int mobile_number, string password)
         {
             this.name = name;
             this.age = age;
             this.email = email;
             this.mobile_number = mobile_number;
             this.password = password;
-            this.isloggedin = isloggedin;
         }
 
         public int Mobile_Number

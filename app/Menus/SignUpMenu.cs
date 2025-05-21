@@ -1,68 +1,61 @@
 ﻿using Arriba_Eats;
 
-public static class SignUpHandler
+public static class SignUpMenu
 {
     public static void SignUp()
     {
+
         Console.WriteLine("Which type of user would you like to register as?");
         Console.WriteLine("1: Customer");
         Console.WriteLine("2: Deliverer");
         Console.WriteLine("3: Client");
-        Console.WriteLine("4: Cancel");
+        Console.WriteLine("4: Return to the previous menu");
+        Console.WriteLine("Please enter a choice between 1 and 4:");
 
-        int roleChoice = int.Parse(Console.ReadLine());
+        int roleChoice;
+        while (!int.TryParse(Console.ReadLine(), out roleChoice) || roleChoice < 1 || roleChoice > 4)
+        {
+            Console.WriteLine("Invalid choice.");    
+            Console.WriteLine("Please enter a choice between 1 and 4:");
+        }
 
         // Common user details
-        Console.Write("Enter your name: ");
+        Console.Write("Please enter your name:");
         string name = Console.ReadLine();
 
-        Console.Write("Enter your age: ");
+        Console.Write("Please enter your age (18-100):");
         int age = int.Parse(Console.ReadLine());
 
-        Console.Write("Enter your email: ");
+        Console.Write("Please enter your email address:");
         string email = Console.ReadLine();
 
-        Console.Write("Enter your mobile number: ");
+        Console.Write("Please enter your mobile phone number:");
         int mobileNumber = Int32.Parse(Console.ReadLine());
 
-        Console.Write("Enter your password: ");
+        Console.Write("Please enter your password: ");
+        Console.WriteLine("Your password must:\r\n- be at least 8 characters long\r\n- contain a number\r\n- contain a lowercase letter\r\n- contain an uppercase letter\r\nPlease enter a password:");    
         string password = Console.ReadLine();
+        Console.Write("Please confirm your password: ");
+        string password2 = Console.ReadLine();
+        if (password != password2)
+        {
+            Console.WriteLine("Passwords do not match.");
+        }
 
-        User user = null;
+       User user = null;
 
         switch (roleChoice)
         {
             case 1: // Customer
-                user = new Customer
-                {
-                    Name = name,
-                    Age = age,
-                    Email = email,
-                    Mobile_Number = mobileNumber,
-                    Password = password
-                };
+                user = new Customer(name, age, email, mobileNumber, password);
                 break;
 
             case 2: // Deliverer
-                user = new Deliverer
-                {
-                    Name = name,
-                    Age = age,
-                    Email = email,
-                    Mobile_Number = mobileNumber,
-                    Password = password
-                };
+                user = new Deliverer(name, age, email, mobileNumber, password);
                 break;
 
             case 3: // Client
-                user = new Client
-                {
-                    Name = name,
-                    Age = age,
-                    Email = email,
-                    Mobile_Number = mobileNumber,
-                    Password = password
-                };
+                user = new Client(name, age, email, mobileNumber, password);
                 break;
 
             case 4: // Cancel
@@ -77,7 +70,5 @@ public static class SignUpHandler
         // Now call the SignUp method for the specific user type to gather any additional info
         user.SignUp();
 
-        // Optionally, add the user to a database or in-memory collection
-        Console.WriteLine("User successfully registered!");
     }
 }
