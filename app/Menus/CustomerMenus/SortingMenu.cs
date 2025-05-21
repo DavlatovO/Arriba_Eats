@@ -81,7 +81,7 @@ namespace Arriba_Eats
                             {
                                 b++;
                                 double distance = restaurant.Restaurant_Location.DistanceTo(customer.AddressCoordinates);
-                                Console.WriteLine($"{i,2}: {restaurant.Restaurant_Name,-20} ({restaurant.Restaurant_Location.X,2},{restaurant.Restaurant_Location.Y,2})  {distance,6:F2}  {restaurant.CuisineStyle,-10} {restaurant.Restaurant_Rating(),6:F1}");
+                                Console.WriteLine($"{b,2}: {restaurant.Restaurant_Name,-20} ({restaurant.Restaurant_Location.X,2},{restaurant.Restaurant_Location.Y,2})  {distance,6:F2}  {restaurant.CuisineStyle,-10} {restaurant.Restaurant_Rating(),6:F1}");
                                 Console.WriteLine();
                             }
                             Console.WriteLine($"{ALLRESTAURANTSPLUS_INDEX}: Return to the previous menu");
@@ -111,7 +111,7 @@ namespace Arriba_Eats
                             {
                                 a++;
                                 double distance = restaurant.Restaurant_Location.DistanceTo(customer.AddressCoordinates);
-                                Console.WriteLine($"{i,2}: {restaurant.Restaurant_Name,-20} ({restaurant.Restaurant_Location.X,2},{restaurant.Restaurant_Location.Y,2})  {distance,6:F2}  {restaurant.CuisineStyle,-10} {restaurant.Restaurant_Rating(),6:F1}");
+                                Console.WriteLine($"{a,2}: {restaurant.Restaurant_Name,-20} ({restaurant.Restaurant_Location.X,2},{restaurant.Restaurant_Location.Y,2})  {distance,6:F2}  {restaurant.CuisineStyle,-10} {restaurant.Restaurant_Rating(),6:F1}");
                                 Console.WriteLine();
                             }
                             Console.WriteLine($"{ALLRESTAURANTSPLUS_INDEX}: Return to the previous menu");
@@ -140,7 +140,7 @@ namespace Arriba_Eats
                             {
                                 c++;
                                 double distance = restaurant.Restaurant_Location.DistanceTo(customer.AddressCoordinates);
-                                Console.WriteLine($"{i,2}: {restaurant.Restaurant_Name,-20} ({restaurant.Restaurant_Location.X,2},{restaurant.Restaurant_Location.Y,2})  {distance,6:F2}  {restaurant.CuisineStyle,-10} {restaurant.Restaurant_Rating(),6:F1}");
+                                Console.WriteLine($"{c,2}: {restaurant.Restaurant_Name,-20} ({restaurant.Restaurant_Location.X,2},{restaurant.Restaurant_Location.Y,2})  {distance,6:F2}  {restaurant.CuisineStyle,-10} {restaurant.Restaurant_Rating(),6:F1}");
                                 Console.WriteLine();
                             }
                             Console.WriteLine($"{ALLRESTAURANTSPLUS_INDEX}: Return to the previous menu");

@@ -8,11 +8,11 @@ namespace Arriba_Eats
         private string name;
         private int age;
         private string email;
-        private string mobile_number;
+        private int mobile_number;
         private string password;
         private bool isloggedin;
 
-        public User(string name, int age, string email, string mobile_number, string password, bool isloggedin)
+        public User(string name, int age, string email, int mobile_number, string password, bool isloggedin)
         {
             this.name = name;
             this.age = age;
@@ -22,7 +22,7 @@ namespace Arriba_Eats
             this.isloggedin = isloggedin;
         }
 
-        public string Mobile_Number
+        public int Mobile_Number
         {
             get { return this.mobile_number; }
             set { this.mobile_number = value; }

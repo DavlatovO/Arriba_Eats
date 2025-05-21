@@ -5,7 +5,7 @@ namespace Arriba_Eats
 {
     public class Client : User
     {
-        public Client() : base("", 0, "", "", "", false)
+        public Client(string name, int age, string email, int mobile_number, string password, bool isloggedin) : base(name, age, email, mobile_number, password, isloggedin)
         {
         }
 

@@ -7,7 +7,7 @@ namespace Arriba_Eats
         public Location AddressCoordinates {get; set;}
         private Order currentOrder { get; set; }
 
-        public Customer(): base("", 0, "", "", "", false)
+        public Customer(string name, int age, string email, int mobile_number, string password, bool isloggedin) : base(name, age, email, mobile_number, password, isloggedin)
         {
             AddressCoordinates = new Location(0, 0);
             currentOrder = null;

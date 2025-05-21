@@ -12,10 +12,11 @@ namespace Arriba_Eats
 
 
 
-        public Deliverer() : base("", 0, "", "", "", false)
+        public Deliverer(string name, int age, string email, int mobile_number, string password, bool isloggedin, string licenceplate, string addresscoordinates) : base(name, age, email, mobile_number, password, isloggedin)
         {
-            AddressCoordinates = new Location(0, 0);
-            licence_plate = "";
+
+            AddressCoordinates = new Location(0,0);
+            licence_plate = licenceplate;
             order = null;
             status = DelivererStatus.Free;
         }
@@ -48,27 +49,28 @@ namespace Arriba_Eats
         {
 
             Console.Write("Please enter your licence plate: ");
-            licence_plate = Console.ReadLine();
+            string licence_plate = Console.ReadLine();
 
             Console.Write("Please enter your name: ");
-            Name = Console.ReadLine();
+            string Name = Console.ReadLine();
 
             Console.Write("Please enter your age: ");
-            Age = int.Parse(Console.ReadLine());
+            int Age = int.Parse(Console.ReadLine());
 
             Console.Write("Please enter your email: ");
-            Email = Console.ReadLine();
+            string Email = Console.ReadLine();
 
 
             Console.Write("Please enter your mobile number: ");
-            Mobile_Number = Console.ReadLine();
+            int Mobile_Number = Int32.Parse(Console.ReadLine());
 
             Console.Write("Please enter your password: ");
             Console.WriteLine("Your password must:\r\n- be at least 8 characters long\r\n- contain a number\r\n- contain a lowercase letter\r\n- contain an uppercase letter\r\nPlease enter a password:");
-            Password = Console.ReadLine();
+            string Password = Console.ReadLine();
 
 
             // Add the user into the list database
+
             Save_User.Register(this);
             IsLoggedin = false;
             Console.WriteLine($"You have been successfully registered as a deliverer, {Name}!");

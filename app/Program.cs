@@ -44,12 +44,8 @@ namespace Arriba_Eats
 
                     case LOGIN_INDEX:
                         var users = Save_User.GetAllUsers();
-                        if (loggedinUser != null && loggedinUser.IsLoggedin)
-                        {
-                            Console.WriteLine($"User '{loggedinUser.Email}' already logged in.");
-                            break;
-                        }
-                            Console.WriteLine("Email:");
+                        
+                        Console.WriteLine("Email:");
                         string email1 = Console.ReadLine();
                         Console.WriteLine("Password:");
                         string password = Console.ReadLine();
@@ -78,7 +74,7 @@ namespace Arriba_Eats
                             Console.WriteLine("Invalid email or password.");
                         }
 
-                    break;
+                        break;
 
                     case LOGOUT_INDEX:
                         if (loggedinUser == null)
