@@ -21,7 +21,7 @@ namespace Arriba_Eats
         private Customer orderedOwner;
         private Restaurant fromRestaurant;
         private Deliverer assignedDriver;
-        private List<OrderItem> items;
+        private List<OrderItem> Items { get; set; } = new List<OrderItem>();
         private OrderStatus status;
         private double totalPrice;
         private int number;
@@ -30,11 +30,10 @@ namespace Arriba_Eats
 
 
 
-        public Order(Customer customer, Restaurant restaurant, List<OrderItem> items)
+        public Order(Customer customer, Restaurant restaurant)
         {
             this.orderedOwner = customer;
             fromRestaurant = restaurant;
-            this.items = items;
             assignedDriver = null;
             totalPrice = CalculateTotalPrice();
             number = nextOrderNumber++;
@@ -46,9 +45,9 @@ namespace Arriba_Eats
         {
             get { return number; }
         }
-         public List<OrderItem> Items
+         public List<OrderItem> items
         {
-            get { return items; }
+            get { return Items; }
         }
 
         public DateTime Date
@@ -99,6 +98,10 @@ namespace Arriba_Eats
         {
                 get { return rating; }
             set { rating = value; }
+        }
+        public void AddItem(MenuItem item, int quantity)
+        {
+            Items.Add(new OrderItem(item, quantity));
         }
 
     }

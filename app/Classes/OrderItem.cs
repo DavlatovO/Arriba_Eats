@@ -15,7 +15,7 @@
 
         public override string ToString()
         {
-            return $"{Quantity} x {Item.Name} - ${Subtotal:F2}";
+            return $"{Quantity} x {Item.Name}";
         }
     }
 }

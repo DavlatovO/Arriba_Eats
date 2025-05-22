@@ -43,11 +43,7 @@ namespace Arriba_Eats
         public string Password 
         {
             get {return password;}
-            set {if (value.Length>=8)
-                    {password = value;}
-                else 
-                 {throw new Exception("Must be at least 8 characters long");}
-            }
+            set { password = value; }
         }
 
         public string Email

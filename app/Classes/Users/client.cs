@@ -1,11 +1,10 @@
 using System;
 
-using System;
 namespace Arriba_Eats
 {
     public class Client : User
     {
-        public Client(string name, int age, string email, string mobile_number, string password) : base(name, age, email, mobile_number, password)
+        public Client(string name, int age, string email, string mobileNumber, string password) : base(name, age, email, mobileNumber, password)
         {
         }
 
@@ -31,9 +30,19 @@ namespace Arriba_Eats
 
         public override void SignUp()
         {
-           
-            Console.WriteLine("Please enter your restaurant's name:");
-            string restaurant_name = Console.ReadLine();
+
+            string restaurant_name;
+            while (true)
+            {
+                Console.WriteLine("Please enter your restaurant's name:");
+                restaurant_name = Console.ReadLine();
+
+                if (!string.IsNullOrWhiteSpace(restaurant_name))
+                    break;
+
+                Console.WriteLine("Invalid restaurant name.");
+            }
+
 
             Console.WriteLine("Please select your restaurant's style:");
             foreach (var style in Enum.GetValues(typeof(CuisineType)))
@@ -42,19 +51,35 @@ namespace Arriba_Eats
             }
             Console.WriteLine("Please enter a choice between 1 and 6:");
 
-            int styleChoice = int.Parse(Console.ReadLine());
-            CuisineType cuisineStyle = (CuisineType)styleChoice-1;
-
-            Console.WriteLine("Please enter your location (in the form of X,Y):");
-            string input = Console.ReadLine().Trim('(', ')').Replace(" ", "");
-            string[] parts = input.Split(',');
-
-            if (parts.Length != 2 ||
-                !int.TryParse(parts[0], out int x) ||
-                !int.TryParse(parts[1], out int y))
+            // Ask until a valid style choice is made
+            int styleChoice;
+            while (true)
             {
+                if (int.TryParse(Console.ReadLine(), out styleChoice) &&
+                    Enum.IsDefined(typeof(CuisineType), styleChoice - 1))
+                {
+                    break;
+                }
+                Console.WriteLine("Invalid choice.");
+            }
+            CuisineType cuisineStyle = (CuisineType)(styleChoice - 1);
+
+            // Ask until a valid location is entered
+            int x, y;
+            while (true)
+            {
+                Console.WriteLine("Please enter your location (in the form of X,Y):");
+                string input = Console.ReadLine().Trim('(', ')').Replace(" ", "");
+                string[] parts = input.Split(',');
+
+                if (parts.Length == 2 &&
+                    int.TryParse(parts[0], out x) &&
+                    int.TryParse(parts[1], out y))
+                {
+                    break;
+                }
+
                 Console.WriteLine("Invalid location.");
-                return;
             }
 
             Location location = new Location(x, y);

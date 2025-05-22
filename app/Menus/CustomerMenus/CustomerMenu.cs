@@ -45,7 +45,7 @@ namespace Arriba_Eats
                             SortMenu.Sort(customer);
                             break;
                         case ORDERSTATUS_INDEX:
-                            OrderStatusMenu.OrderStatus(customer);
+                            OrderStatusMenu.OrdersStatus(customer);
                             break;
                         case RATE_INDEX:
                             RateMenu.Rate(customer);

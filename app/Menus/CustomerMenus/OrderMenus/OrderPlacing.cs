@@ -30,15 +30,18 @@ namespace Arriba_Eats
                 switch (choice)
                 {
                     case MENU_INDEX:
-                        List<OrderItem> orderItems = new List<OrderItem>();
-                        decimal totalPrice = 0;
+                        List<(MenuItem item, int quantity)> tempOrderItems = new List<(MenuItem, int)>();
+                        double totalPrice = 0;
+
                         while (true)
                         {
-                            Console.WriteLine($"Current order total: ${totalPrice:F2}");
+                            Console.WriteLine($"\nCurrent order total: ${totalPrice:F2}");
+
+                            // Display menu
                             for (int i = 0; i < restaurant.Menu.Count; i++)
                             {
                                 var item = restaurant.Menu[i];
-                                Console.WriteLine($"{i + 1}:   ${item.Price}  {item.Name}");
+                                Console.WriteLine($"{i + 1}:   {item.Price,7:C2}  {item.Name}");
                             }
 
                             int completeIndex = restaurant.Menu.Count + 1;
@@ -56,48 +59,70 @@ namespace Arriba_Eats
 
                             if (selection == completeIndex)
                             {
-                                if (orderItems.Count == 0)
+                                if (tempOrderItems.Count == 0)
                                 {
-                                    Console.WriteLine("Cannot complete an empty order.");
+                                    Console.WriteLine("You haven't added any items yet.");
                                     continue;
                                 }
-                                else
+
+                                Order newOrder = new Order(customer, restaurant);
+                                foreach (var (item, qty) in tempOrderItems)
                                 {
-                                    Order newOrder = new Order(customer, restaurant, orderItems);
-                                    Console.WriteLine($"Your order has been placed. Your order number is #{newOrder.Number}.");
-                                    newOrder.SetOrderStatus(OrderStatus.Ordered);
-                                    Order_List.Register(newOrder);
-                                    orderItems.Clear();
-                                    totalPrice = 0;
-                                    break; // Exit the inner while loop after completing the order
+                                    newOrder.AddItem(item, qty); // Use proper method
                                 }
+
+                                newOrder.SetOrderStatus(OrderStatus.Ordered);
+                                Order_List.Register(newOrder);
+
+                                Console.WriteLine($"Your order has been placed. Your order number is #{newOrder.Number}.");
+
+                                break; // Exit to previous menu
                             }
                             else if (selection == cancelIndex)
                             {
-                                orderItems.Clear();
-                                break; // Exit the inner while loop after canceling the order
+                                break;
                             }
                             else
                             {
                                 var selectedItem = restaurant.Menu[selection - 1];
                                 Console.WriteLine($"Adding {selectedItem.Name} to order.");
-                                Console.WriteLine($"Please enter quantity (0 to cancel): ");
-                                if (!int.TryParse(Console.ReadLine(), out int quantity) || quantity < 0)
-                                {
-                                    Console.WriteLine("Invalid quantity.");
-                                    continue;
-                                }
-                                if (quantity == 0)
-                                {
-                                    return;
-                                }
 
-                                orderItems.Add(new OrderItem(selectedItem, quantity));
-                                totalPrice += (decimal)selectedItem.Price * quantity;
-                                Console.WriteLine($"Added {quantity} x {selectedItem.Name} to order.");
+                                while (true)
+                                {
+                                    Console.WriteLine("Please enter quantity (0 to cancel):");
+                                    if (!int.TryParse(Console.ReadLine(), out int quantity) || quantity < 0)
+                                    {
+                                        Console.WriteLine("Invalid quantity.");
+                                        continue;
+                                    }
+
+                                    if (quantity == 0)
+                                    {
+                                        break; // Back to item selection
+                                    }
+
+                                    // Check if item already exists in tempOrderItems
+                                    int existingIndex = tempOrderItems.FindIndex(t => t.item.Name == selectedItem.Name);
+
+                                    if (existingIndex != -1)
+                                    {
+                                        var (existingItem, existingQty) = tempOrderItems[existingIndex];
+                                        tempOrderItems[existingIndex] = (existingItem, existingQty + quantity);
+                                    }
+                                    else
+                                    {
+                                        tempOrderItems.Add((selectedItem, quantity));
+                                    }
+                                    totalPrice += selectedItem.Price * quantity;
+                                    Console.WriteLine($"Added {quantity} x {selectedItem.Name} to order.");
+                                    break; // Return to menu
+                                }
                             }
                         }
-                        break; // Add a break to prevent fall-through to the next case
+                        break;
+
+
+
 
                     case REVIEWS_INDEX:
                         var allRatings = Rating_List.GetRealRatings();

@@ -48,13 +48,27 @@ namespace Arriba_Eats
                             Console.WriteLine($"This is your restaurant's current menu:");
                             foreach (var items in restaurant.Menu)
                             {
-                                Console.WriteLine($"${items.Price}   {items.Name}");
+                                Console.WriteLine($"${items.Price:F2}   {items.Name}");
                             }
                             Console.WriteLine("Please enter the name of the new item (blank to cancel):");
                             string item = Console.ReadLine();
-                            Console.WriteLine("Please enter the price of the new item (without the $):");
-                            double price1 = Double.Parse(Console.ReadLine());
-                            MenuItem item1 = new MenuItem(item, price1);
+                            if (string.IsNullOrWhiteSpace(item))
+                            {
+                                break;
+                            }
+                            
+                            double price;
+                            while (true)
+                            {
+                                Console.WriteLine("Please enter the price of the new item (without the $):");
+                                if (double.TryParse(Console.ReadLine(), out price) &&
+                                    price >= 0.00 && price <= 999.99)
+                                {
+                                    break;
+                                }
+                                Console.WriteLine("Invalid price.");
+                            }
+                            MenuItem item1 = new MenuItem(item, price);
                             if (item1 != null)
                             {
                                 restaurant.Menu.Add(item1);
@@ -70,7 +84,7 @@ namespace Arriba_Eats
                                 {
 
                                     Console.WriteLine($"Order #{order.Number} for {order.GetOwner.Name}: {order.Status}");
-                                    foreach (var items in order.Items)
+                                    foreach (var items in order.items)
                                     {
                                         Console.WriteLine($"{items.Quantity} x {items.Item.Name}");
                                     }
@@ -93,7 +107,7 @@ namespace Arriba_Eats
                                 foreach (var order in allorders)
                                 {
                                     i++;
-                                    Console.WriteLine($"#{order.Number} for {order.GetOwner.Name}: {order.Status}");
+                                    Console.WriteLine($"{i}: Order #{order.Number} for {order.GetOwner.Name}");
                                     Console.WriteLine();
                                 }
                                 Console.WriteLine($"{i + 1}: Return to the previous menu");
@@ -105,8 +119,8 @@ namespace Arriba_Eats
                                     {
                                         var selectedOrder = allorders[input - 1];
                                         selectedOrder.SetOrderStatus(OrderStatus.Cooking);
-                                        Console.WriteLine($"Order #{selectedOrder.Number} is now marked as cooking.Please prepare the order, then mark it as finished cooking.");
-                                        foreach (var items in selectedOrder.Items)
+                                        Console.WriteLine($"Order #{selectedOrder.Number} is now marked as cooking.Please prepare the order, then mark it as finished cooking:");
+                                        foreach (var items in selectedOrder.items)
                                         {
                                             Console.WriteLine($"{items.Quantity} x {items.Item.Name}");
                                         }
@@ -160,11 +174,11 @@ namespace Arriba_Eats
                                         }
                                         else if (selectedOrder.Driver.Status == DelivererStatus.AtRestaurant)
                                         {
-                                            Console.WriteLine($"Please take it to the deliverer with licence plate {selectedOrder.Driver.Licence_plate}, who is waiting to collect it.");
+                                            Console.WriteLine($"Please take it to the deliverer with licence plate {selectedOrder.Driver.LicencePlate}, who is waiting to collect it.");
                                         }
                                         else
                                         {
-                                            Console.WriteLine($"The deliverer with licence plate {selectedOrder.Driver.Licence_plate} will be arriving soon to collect it.");
+                                            Console.WriteLine($"The deliverer with licence plate {selectedOrder.Driver.LicencePlate} will be arriving soon to collect it.");
                                         }
                                     }
                                     else if (input2 == AllOrders.Count + 1)

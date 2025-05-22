@@ -15,21 +15,17 @@ namespace Arriba_Eats
                 var allOrders = Order_List.GetAllOrders();
                 var eligibleOrders = allOrders.Where(o => o.GetOwner == customer && o.Status == OrderStatus.Delivered && o.Ratings == null).ToList();
 
-                if (eligibleOrders.Count == 0)
-                {
-                    return;
-                }
-
+                
                 // Step 2: Show the list
                 for (int i = 0; i < eligibleOrders.Count; i++)
                 {
                     var order = eligibleOrders[i];
                     Console.WriteLine($"{i + 1}: Order #{order.Number} from {order.FromRestaurant.Restaurant_Name}:");
                 }
-                Console.WriteLine($"{eligibleOrders.Count + 1}: Return to previous menu");
+                Console.WriteLine($"{eligibleOrders.Count + 1}: Return to the previous menu");
 
                 // Step 3: Get user choice
-                Console.Write($"Please enter a choice (1 - {eligibleOrders.Count + 1}): ");
+                Console.Write($"Please enter a choice between 1 and {eligibleOrders.Count + 1}: ");
                 if (!int.TryParse(Console.ReadLine(), out int selection) || selection < 1 || selection > eligibleOrders.Count + 1)
                 {
                     Console.WriteLine("Invalid choice.");
@@ -45,7 +41,7 @@ namespace Arriba_Eats
                 // Step 5: Get selected order
                 var selectedOrder = eligibleOrders[selection - 1];
                 Console.WriteLine($"You are rating order #{selectedOrder.Number} from {selectedOrder.FromRestaurant.Restaurant_Name}:");
-                foreach (var items in selectedOrder.Items)
+                foreach (var items in selectedOrder.items)
                 {
                     Console.WriteLine($"{items.Quantity} x {items.Item.Name}");
                 }

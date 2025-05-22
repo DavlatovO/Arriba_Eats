@@ -20,7 +20,7 @@ namespace Arriba_Eats
                 const int NUMBER_OPTIONS = 5;
                 List<Restaurant> allRestaurant = Restaurant_Register.GetAllRestaurants();
                 int ALLRESTAURANTSPLUS_INDEX = allRestaurant.Count +1;
-                var sortedByDistance = allRestaurant.OrderBy(r => r.Restaurant_Location.DistanceTo(customer.AddressCoordinates)).ToList();
+                var sortedByDistance = allRestaurant.OrderBy(r => r.Restaurant_Location.DistanceTo(customer.Location)).ToList();
                 
 
                 Console.WriteLine($"How would you like the list of restaurants ordered?");
@@ -49,7 +49,7 @@ namespace Arriba_Eats
                             foreach (var restaurant in sortedByName)
                             {
                                 i++;
-                                double distance = restaurant.Restaurant_Location.DistanceTo(customer.AddressCoordinates);
+                                double distance = restaurant.Restaurant_Location.DistanceTo(customer.Location);
                                 double rating = restaurant.Restaurant_Rating();
                                 if (rating == 0)
                                 {
@@ -86,7 +86,7 @@ namespace Arriba_Eats
                             foreach (var restaurant in sortedByDistance)
                             {
                                 b++;
-                                double distance = restaurant.Restaurant_Location.DistanceTo(customer.AddressCoordinates);
+                                double distance = restaurant.Restaurant_Location.DistanceTo(customer.Location);   
                                 double rating = restaurant.Restaurant_Rating();
                                 if (rating == 0)
                                 {
@@ -123,7 +123,7 @@ namespace Arriba_Eats
                             foreach (var restaurant in sortedByCuisine)
                             {
                                 a++;
-                                double distance = restaurant.Restaurant_Location.DistanceTo(customer.AddressCoordinates);
+                                double distance = restaurant.Restaurant_Location.DistanceTo(customer.Location);
                                 double rating = restaurant.Restaurant_Rating();
                                 if (rating == 0)
                                 {
@@ -159,7 +159,7 @@ namespace Arriba_Eats
                             foreach (var restaurant in sortedByRating)
                             {
                                 c++;
-                                double distance = restaurant.Restaurant_Location.DistanceTo(customer.AddressCoordinates);
+                                double distance = restaurant.Restaurant_Location.DistanceTo(customer.Location);
                                 double rating = restaurant.Restaurant_Rating();
                                 if (rating == 0)
                                 {

@@ -37,16 +37,16 @@ namespace Arriba_Eats
                     switch (choice)
                     {
                         case DISPLAY_INDEX:
-                            deliverer.Details();
+                            Console.WriteLine(deliverer.Details());
                             break;
                         case ORDERS_INDEX:
-                            if (deliverer.GetOrder != null)
+                            if (deliverer.CurrentOrder != null)
                             {
                                 Console.WriteLine("You have already selected an order for delivery.");
                                 break;
                             }
 
-                            Console.Write("Please enter your location (in the form of X,Y):");
+                            Console.WriteLine("Please enter your location (in the form of X,Y):");
                             string input = Console.ReadLine().Trim('(', ')').Replace(" ", "");
                             string[] parts = input.Split(',');
 
@@ -60,7 +60,7 @@ namespace Arriba_Eats
 
                             Location location = new Location(x, y);
 
-                            var deliveryOrders = Order_List.GetRealOrders().Where(order => (order.Status == OrderStatus.Cooking || order.Status == OrderStatus.Cooked) && order.Driver == null).ToList();
+                            var deliveryOrders = Order_List.GetRealOrders().Where(order => (order.Status == OrderStatus.Ordered || order.Status == OrderStatus.Cooking || order.Status == OrderStatus.Cooked) && order.Driver == null).ToList();
 
                             if (!deliveryOrders.Any())
                             {
@@ -68,22 +68,23 @@ namespace Arriba_Eats
                                 break;
                             }
 
-                            Console.WriteLine("\nAvailable Orders:");
-                            Console.WriteLine("   Order    Restaurant          Loc    Customer Name       Loc    Distance");
+                            Console.WriteLine("The following orders are available for delivery. Select an order to accept it:");
+                            Console.WriteLine("   Order  Restaurant Name       Loc    Customer Name    Loc    Dist");
                             
                             for (int i = 0; i < deliveryOrders.Count; i++)
                             {
                                 var order = deliveryOrders[i];
-                                double distance = order.FromRestaurant.Restaurant_Location.DistanceTo(deliverer.location);
-
-                                Console.WriteLine($"{i + 1,3} | {order.Number,-8} | {order.FromRestaurant.Restaurant_Name,-18} | " +
-                                                $"({order.FromRestaurant.Restaurant_Location.X},{order.FromRestaurant.Restaurant_Location.Y}) | " +
-                                                $"{order.GetOwner.Name,-16} | " +
-                                                $"({order.GetOwner.location.X},{order.GetOwner.location.Y}) | {distance,7:F2}");
+                                double distanceToRestaurant = order.FromRestaurant.Restaurant_Location.DistanceTo(location);
+                                double distanceToCustomer = order.FromRestaurant.Restaurant_Location.DistanceTo(order.GetOwner.Location);
+                                double distance = distanceToCustomer + distanceToRestaurant;
+                                Console.WriteLine($"{i + 1,3}:  {order.Number,-8}  {order.FromRestaurant.Restaurant_Name,-18}  " +
+                                                $"{order.FromRestaurant.Restaurant_Location.X},{order.FromRestaurant.Restaurant_Location.Y}  " +
+                                                $"{order.GetOwner.Name,-16}  " +
+                                                $"{order.GetOwner.Location.X},{order.GetOwner.Location.Y}  {distance,7}");
                             }
 
                             Console.WriteLine($"{deliveryOrders.Count + 1}: Return to the previous menu");
-                            Console.Write($"Please enter a choice between 1 and {deliveryOrders.Count + 1}: ");
+                            Console.WriteLine($"Please enter a choice between 1 and {deliveryOrders.Count + 1}: ");
 
                             if (!int.TryParse(Console.ReadLine(), out int selection) || selection < 1 || selection > deliveryOrders.Count + 1)
                             {
@@ -97,23 +98,21 @@ namespace Arriba_Eats
                             }
 
                             var selectedOrder = deliveryOrders[selection - 1];
-                            deliverer.GetOrder = selectedOrder;
+                            deliverer.CurrentOrder = selectedOrder;
                             selectedOrder.AssignDeliverer(deliverer);
                             deliverer.Status = DelivererStatus.HeadingToRestaurant;
 
-                            Console.WriteLine($"\nThanks for accepting the order.");
-                            Console.WriteLine($"Please head to {selectedOrder.FromRestaurant.Restaurant_Name} " +
-                                            $"at ({selectedOrder.FromRestaurant.Restaurant_Location.X},{selectedOrder.FromRestaurant.Restaurant_Location.Y}) to pick it up.");
+                            Console.WriteLine($"Thanks for accepting the order. Please head to {selectedOrder.FromRestaurant.Restaurant_Name} at {selectedOrder.FromRestaurant.Restaurant_Location.X},{selectedOrder.FromRestaurant.Restaurant_Location.Y} to pick it up.");
                             break;
 
                         case ONTHESPOT_INDEX:
-                            if (deliverer.GetOrder == null)
+                            if (deliverer.CurrentOrder == null)
                             {
                                 Console.WriteLine("You have not yet accepted an order.");
                                 break;
                             }
 
-                            if (deliverer.GetOrder.Status == OrderStatus.BeingDelivered)
+                            if (deliverer.CurrentOrder.Status == OrderStatus.BeingDelivered)
                             {
                                 Console.WriteLine("You have already picked up this order.");
                                 break;
@@ -125,37 +124,35 @@ namespace Arriba_Eats
                                 break;
                             }
 
-                            Console.WriteLine($"Thanks. We have informed {deliverer.GetOrder.FromRestaurant.Restaurant_Name} " +
-                                            $"that you have arrived and are ready to pick up order {deliverer.GetOrder.Number}." +
+                            Console.WriteLine($"Thanks. We have informed {deliverer.CurrentOrder.FromRestaurant.Restaurant_Name} " +
+                                            $"that you have arrived and are ready to pick up order #{deliverer.CurrentOrder.Number}." +
                                             "\nPlease show the staff this screen as confirmation.");
                             deliverer.Status = DelivererStatus.AtRestaurant;
 
-                            var orderStatus = deliverer.GetOrder.Status;
+                            var orderStatus = deliverer.CurrentOrder.Status;
                             if (orderStatus == OrderStatus.Ordered || orderStatus == OrderStatus.Cooking)
                             {
                                 Console.WriteLine("The order is still being prepared, so please wait patiently until it is ready.");
                             }
-                                Console.WriteLine($"When you have the order, please deliver it to {deliverer.GetOrder.GetOwner.Name} at {deliverer.GetOrder.GetOwner.location.X},{deliverer.GetOrder.GetOwner.location.Y}.");
+                                Console.WriteLine($"When you have the order, please deliver it to {deliverer.CurrentOrder.GetOwner.Name} at {deliverer.CurrentOrder.GetOwner.Location.X},{deliverer.CurrentOrder.GetOwner.Location.Y}.");
                             
                             if (orderStatus == OrderStatus.Cooked)
                             {
                                 
                                 deliverer.Status = DelivererStatus.OnTheWay;
 
-                                Console.WriteLine($"You may now deliver the order to {deliverer.GetOrder.GetOwner.Name} at " +
-                                                $"({deliverer.GetOrder.GetOwner.location.X},{deliverer.GetOrder.GetOwner.location.Y}).");
                             }
 
                             break;
                         case COMPLETE_INDEX:
-                            if (deliverer.GetOrder == null)
+                            if (deliverer.CurrentOrder == null)
                             {
                                 Console.WriteLine("You have not yet accepted an order.");
                             }
                             else if (deliverer.Status == DelivererStatus.OnTheWay)
                             {
                                 Console.WriteLine("Thank you for making the delivery.");
-                                deliverer.GetOrder.SetOrderStatus(OrderStatus.Delivered);
+                                deliverer.CurrentOrder.SetOrderStatus(OrderStatus.Delivered);
                             }
                            else if (deliverer.Status == DelivererStatus.AtRestaurant)
                             {
@@ -168,7 +165,7 @@ namespace Arriba_Eats
                             break;
                         case LOGOUT_INDEX:
                             deliverer.Logout();
-                            break;
+                            return;
                         default:
                             Console.WriteLine();
                             break;

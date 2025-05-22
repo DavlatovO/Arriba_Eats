@@ -4,7 +4,7 @@ namespace Arriba_Eats
 {
     public class Customer: User
     {
-        public Location AddressCoordinates {get; set;}
+        private Location AddressCoordinates {get; set;}
         private Order currentOrder { get; set; }
 
         public Customer(string name, int age, string email, string mobile_number, string password) : base(name, age, email, mobile_number, password)
@@ -13,7 +13,7 @@ namespace Arriba_Eats
             currentOrder = null;
         }
 
-        public Location location
+        public Location Location
         {
             get { return AddressCoordinates; }
         }
@@ -33,23 +33,29 @@ namespace Arriba_Eats
                 $"Age: {Age}\n" +
                 $"Email: {Email}\n" +
                 $"Mobile: {Mobile_Number}\n" +
-                $"Location: {location.X},{location.Y}\n" +
+                $"Location: {AddressCoordinates.X},{AddressCoordinates.Y}\n" +
                 $"You've made {orders.Count} order(s) and spent a total of ${totalSpent:F2} here.";
         }
 
         public override void SignUp()
         {
-    
-            Console.WriteLine("Please enter your location (in the form of X,Y): ");
-            string input = Console.ReadLine().Trim('(', ')').Replace(" ", "");
-            string[] parts = input.Split(',');
 
-            if (parts.Length != 2 ||
-                !int.TryParse(parts[0], out int x) ||
-                !int.TryParse(parts[1], out int y))
+            // Ask until a valid location is entered
+            int x, y;
+            while (true)
             {
+                Console.WriteLine("Please enter your location (in the form of X,Y):");
+                string input = Console.ReadLine().Trim('(', ')').Replace(" ", "");
+                string[] parts = input.Split(',');
+
+                if (parts.Length == 2 &&
+                    int.TryParse(parts[0], out x) &&
+                    int.TryParse(parts[1], out y))
+                {
+                    break;
+                }
+
                 Console.WriteLine("Invalid location.");
-                return;
             }
 
             AddressCoordinates = new Location(x, y);
