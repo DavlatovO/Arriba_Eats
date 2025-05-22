@@ -9,8 +9,8 @@ namespace Arriba_Eats
 
         public static void Sort(Customer customer)
         {
-
-            while (true)
+             bool exit = false;
+            while (!exit)
             {
                 const int ALPHABETIC_INDEX = 1;
                 const int DISTANCE_INDEX = 2;
@@ -23,8 +23,6 @@ namespace Arriba_Eats
                 var sortedByDistance = allRestaurant.OrderBy(r => r.Restaurant_Location.DistanceTo(customer.AddressCoordinates)).ToList();
                 
 
-
-                Console.WriteLine();
                 Console.WriteLine($"How would you like the list of restaurants ordered?");
                 Console.WriteLine($"1: Sorted alphabetically by name");
                 Console.WriteLine($"2: Sorted by distance");
@@ -46,12 +44,18 @@ namespace Arriba_Eats
                         case ALPHABETIC_INDEX:
                             var sortedByName = allRestaurant.OrderBy(r => r.Restaurant_Name).ToList();
                             int i = 0;
+                            Console.WriteLine("You can order from the following restaurants:");
                             Console.WriteLine("   Restaurant Name        Loc       Dist   Style       Rating");
                             foreach (var restaurant in sortedByName)
                             {
                                 i++;
                                 double distance = restaurant.Restaurant_Location.DistanceTo(customer.AddressCoordinates);
-                                Console.WriteLine($"{i,2}: {restaurant.Restaurant_Name,-20} ({restaurant.Restaurant_Location.X,1},{restaurant.Restaurant_Location.Y,1})  {distance,6:F2}  {restaurant.CuisineStyle,-10} {restaurant.Restaurant_Rating(),6:F1}");
+                                double rating = restaurant.Restaurant_Rating();
+                                if (rating == 0)
+                                {
+                                    Console.WriteLine($"{i,2}: {restaurant.Restaurant_Name,-20} {restaurant.Restaurant_Location.X,1},{restaurant.Restaurant_Location.Y,1}  {distance,6}  {restaurant.CuisineStyle,-10} {"-",6:F1}");
+                                }
+                                else { Console.WriteLine($"{i,2}: {restaurant.Restaurant_Name,-20} {restaurant.Restaurant_Location.X,1},{restaurant.Restaurant_Location.Y,1}  {distance,6}  {restaurant.CuisineStyle,-10} {rating,6:F1}"); }
                                 Console.WriteLine();
                             }
                             Console.WriteLine($"{ALLRESTAURANTSPLUS_INDEX}: Return to the previous menu");
@@ -65,7 +69,8 @@ namespace Arriba_Eats
                             if ((number > 0) && (number < ALLRESTAURANTSPLUS_INDEX))
                                 {
                                     OrderingMenus.OrderMenu2(customer, sortedByName[number-1]);
-                                }
+                                    exit = true;
+                            }
                             else if (number == ALLRESTAURANTSPLUS_INDEX)
                                 {
                                     break;
@@ -76,12 +81,18 @@ namespace Arriba_Eats
                         case DISTANCE_INDEX:
                            
                             int b = 0;
+                            Console.WriteLine("You can order from the following restaurants:");
                             Console.WriteLine("   Restaurant Name       Loc    Dist  Style       Rating");
                             foreach (var restaurant in sortedByDistance)
                             {
                                 b++;
                                 double distance = restaurant.Restaurant_Location.DistanceTo(customer.AddressCoordinates);
-                                Console.WriteLine($"{b,2}: {restaurant.Restaurant_Name,-20} ({restaurant.Restaurant_Location.X,1},{restaurant.Restaurant_Location.Y,1})  {distance,6:F2}  {restaurant.CuisineStyle,-10} {restaurant.Restaurant_Rating(),6:F1}");
+                                double rating = restaurant.Restaurant_Rating();
+                                if (rating == 0)
+                                {
+                                    Console.WriteLine($"{b,2}: {restaurant.Restaurant_Name,-20} {restaurant.Restaurant_Location.X,1},{restaurant.Restaurant_Location.Y,1}  {distance,6}  {restaurant.CuisineStyle,-10} {"-",6:F1}");
+                                }
+                                else { Console.WriteLine($"{b,2}: {restaurant.Restaurant_Name,-20} {restaurant.Restaurant_Location.X,1},{restaurant.Restaurant_Location.Y,1}  {distance,6}  {restaurant.CuisineStyle,-10} {rating,6:F1}"); }
                                 Console.WriteLine();
                             }
                             Console.WriteLine($"{ALLRESTAURANTSPLUS_INDEX}: Return to the previous menu");
@@ -95,6 +106,7 @@ namespace Arriba_Eats
                             if ((number2 > 0) && (number2 < ALLRESTAURANTSPLUS_INDEX))
                             {
                                 OrderingMenus.OrderMenu2(customer, sortedByDistance[number2 - 1]);
+                                exit = true;
                             }
                             else if (number2 == ALLRESTAURANTSPLUS_INDEX)
                             {
@@ -106,12 +118,18 @@ namespace Arriba_Eats
                         case STYLE_INDEX:
                             var sortedByCuisine = allRestaurant.OrderBy(r => r.CuisineStyle.ToString()).ToList();
                             int a = 0;
+                            Console.WriteLine("You can order from the following restaurants:");
                             Console.WriteLine("   Restaurant Name       Loc    Dist  Style       Rating");
                             foreach (var restaurant in sortedByCuisine)
                             {
                                 a++;
                                 double distance = restaurant.Restaurant_Location.DistanceTo(customer.AddressCoordinates);
-                                Console.WriteLine($"{a,2}: {restaurant.Restaurant_Name,-20} ({restaurant.Restaurant_Location.X,1},{restaurant.Restaurant_Location.Y,1})  {distance,6:F2}  {restaurant.CuisineStyle,-10} {restaurant.Restaurant_Rating(),6:F1}");
+                                double rating = restaurant.Restaurant_Rating();
+                                if (rating == 0)
+                                {
+                                    Console.WriteLine($"{a,2}: {restaurant.Restaurant_Name,-20} {restaurant.Restaurant_Location.X,1},{restaurant.Restaurant_Location.Y,1}  {distance,6}  {restaurant.CuisineStyle,-10} {"-",6:F1}");
+                                }
+                                else { Console.WriteLine($"{a,2}: {restaurant.Restaurant_Name,-20} {restaurant.Restaurant_Location.X,1},{restaurant.Restaurant_Location.Y,1}  {distance,6}  {restaurant.CuisineStyle,-10} {rating,6:F1}"); }
                                 Console.WriteLine();
                             }
                             Console.WriteLine($"{ALLRESTAURANTSPLUS_INDEX}: Return to the previous menu");
@@ -125,6 +143,7 @@ namespace Arriba_Eats
                             if ((number3 > 0) && (number3 < ALLRESTAURANTSPLUS_INDEX))
                             {
                                 OrderingMenus.OrderMenu2(customer, sortedByCuisine[number3 - 1]);
+                                exit = true;
                             }
                             else if (number3 == ALLRESTAURANTSPLUS_INDEX)
                             {
@@ -135,12 +154,18 @@ namespace Arriba_Eats
                         case RATING_INDEX:
                             var sortedByRating = Restaurant_Register.GetAllRestaurants().OrderBy(r => r.Restaurant_Rating()).ToList();
                             int c = 0;
+                            Console.WriteLine("You can order from the following restaurants:");
                             Console.WriteLine("   Restaurant Name       Loc    Dist  Style       Rating");
                             foreach (var restaurant in sortedByRating)
                             {
                                 c++;
                                 double distance = restaurant.Restaurant_Location.DistanceTo(customer.AddressCoordinates);
-                                Console.WriteLine($"{c,2}: {restaurant.Restaurant_Name,-20} ({restaurant.Restaurant_Location.X,1},{restaurant.Restaurant_Location.Y,1})  {distance,6:F2}  {restaurant.CuisineStyle,-10} {restaurant.Restaurant_Rating(),6:F1}");
+                                double rating = restaurant.Restaurant_Rating();
+                                if (rating == 0)
+                                {
+                                    Console.WriteLine($"{c,2}: {restaurant.Restaurant_Name,-20} {restaurant.Restaurant_Location.X,1},{restaurant.Restaurant_Location.Y,1}  {distance,6}  {restaurant.CuisineStyle,-10} {"-",6:F1}");
+                                }
+                                else { Console.WriteLine($"{c,2}: {restaurant.Restaurant_Name,-20} {restaurant.Restaurant_Location.X,1},{restaurant.Restaurant_Location.Y,1}  {distance,6}  {restaurant.CuisineStyle,-10} {rating,6:F1}"); }
                                 Console.WriteLine();
                             }
                             Console.WriteLine($"{ALLRESTAURANTSPLUS_INDEX}: Return to the previous menu");
@@ -154,6 +179,7 @@ namespace Arriba_Eats
                             if ((number4 > 0) && (number4 < ALLRESTAURANTSPLUS_INDEX))
                             {
                                 OrderingMenus.OrderMenu2(customer, sortedByRating[number4 - 1]);
+                                exit = true;
                             }
                             else if (number4 == ALLRESTAURANTSPLUS_INDEX)
                             {
@@ -162,7 +188,8 @@ namespace Arriba_Eats
                             else { Console.WriteLine("Invalid choice."); }
                             break;
                         case BACK_INDEX:
-                            return;
+                            exit = true;
+                            break;
                         default:
                             Console.WriteLine("Invalid choice.");
                             break;

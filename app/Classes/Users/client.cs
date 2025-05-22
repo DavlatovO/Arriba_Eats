@@ -5,7 +5,7 @@ namespace Arriba_Eats
 {
     public class Client : User
     {
-        public Client(string name, int age, string email, int mobile_number, string password) : base(name, age, email, mobile_number, password)
+        public Client(string name, int age, string email, string mobile_number, string password) : base(name, age, email, mobile_number, password)
         {
         }
 
@@ -16,22 +16,36 @@ namespace Arriba_Eats
             get { return OwnedRestaurant; }
         }
 
+        public override string Details()
+        {
+            return "Your user details are as follows:\n" +
+                $"Name: {Name}\n" +
+                $"Age: {Age}\n" +
+                $"Email: {Email}\n" +
+                $"Mobile: {Mobile_Number}\n" +
+                $"Restaurant name: {this.GetRestaurant.Restaurant_Name}\n" +
+                $"Restaurant style: {this.GetRestaurant.CuisineStyle}\n" +
+                $"Restaurant location: {this.GetRestaurant.Restaurant_Location.X},{this.GetRestaurant.Restaurant_Location.Y}";
+        }
+
+
         public override void SignUp()
         {
            
-            Console.Write("Please enter your restaurant's name:");
+            Console.WriteLine("Please enter your restaurant's name:");
             string restaurant_name = Console.ReadLine();
 
-            Console.WriteLine("Please select your cuisine style:");
+            Console.WriteLine("Please select your restaurant's style:");
             foreach (var style in Enum.GetValues(typeof(CuisineType)))
             {
-                Console.WriteLine($"{(int)style+1} - {style}");
+                Console.WriteLine($"{(int)style+1}: {style}");
             }
+            Console.WriteLine("Please enter a choice between 1 and 6:");
 
             int styleChoice = int.Parse(Console.ReadLine());
             CuisineType cuisineStyle = (CuisineType)styleChoice-1;
 
-            Console.Write("Please enter your location (in the form of X,Y):");
+            Console.WriteLine("Please enter your location (in the form of X,Y):");
             string input = Console.ReadLine().Trim('(', ')').Replace(" ", "");
             string[] parts = input.Split(',');
 

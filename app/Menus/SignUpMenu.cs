@@ -20,22 +20,21 @@ public static class SignUpMenu
         }
 
         // Common user details
-        Console.Write("Please enter your name:");
+        Console.WriteLine("Please enter your name:");
         string name = Console.ReadLine();
 
-        Console.Write("Please enter your age (18-100):");
+        Console.WriteLine("Please enter your age (18-100):");
         int age = int.Parse(Console.ReadLine());
 
-        Console.Write("Please enter your email address:");
+        Console.WriteLine("Please enter your email address:");
         string email = Console.ReadLine();
 
-        Console.Write("Please enter your mobile phone number:");
-        int mobileNumber = Int32.Parse(Console.ReadLine());
+        Console.WriteLine("Please enter your mobile phone number:");
+        string mobileNumber = Console.ReadLine();
 
-        Console.Write("Please enter your password: ");
         Console.WriteLine("Your password must:\r\n- be at least 8 characters long\r\n- contain a number\r\n- contain a lowercase letter\r\n- contain an uppercase letter\r\nPlease enter a password:");    
         string password = Console.ReadLine();
-        Console.Write("Please confirm your password: ");
+        Console.WriteLine("Please confirm your password: ");
         string password2 = Console.ReadLine();
         if (password != password2)
         {

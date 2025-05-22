@@ -6,6 +6,7 @@ namespace Arriba_Eats
     {
         public static void DelivererMenu(Deliverer deliverer)
         {
+            
             while (true)
             {
 
@@ -17,8 +18,7 @@ namespace Arriba_Eats
                 const int LOGOUT_INDEX = 5;
                 const int NUMBER_OPTIONS = 7;
 
-
-                Console.WriteLine();
+                Console.WriteLine("Please make a choice from the menu below:");
                 Console.WriteLine($"1: Display your user information");
                 Console.WriteLine($"2: List orders available to deliver");
                 Console.WriteLine($"3: Arrived at restaurant to pick up order");
@@ -46,17 +46,19 @@ namespace Arriba_Eats
                                 break;
                             }
 
-                            Console.WriteLine("Please enter your location (in the form of X,Y):");
+                            Console.Write("Please enter your location (in the form of X,Y):");
                             string input = Console.ReadLine().Trim('(', ')').Replace(" ", "");
                             string[] parts = input.Split(',');
 
-                            if (parts.Length != 2 || !int.TryParse(parts[0], out int x) || !int.TryParse(parts[1], out int y))
+                            if (parts.Length != 2 ||
+                                !int.TryParse(parts[0], out int x) ||
+                                !int.TryParse(parts[1], out int y))
                             {
                                 Console.WriteLine("Invalid location.");
-                                break;
+                                return;
                             }
 
-                            deliverer.location = new Location(x, y);
+                            Location location = new Location(x, y);
 
                             var deliveryOrders = Order_List.GetRealOrders().Where(order => (order.Status == OrderStatus.Cooking || order.Status == OrderStatus.Cooked) && order.Driver == null).ToList();
 

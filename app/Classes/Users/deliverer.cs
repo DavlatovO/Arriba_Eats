@@ -12,7 +12,7 @@ namespace Arriba_Eats
 
 
 
-        public Deliverer(string name, int age, string email, int mobile_number, string password) : base(name, age, email, mobile_number, password)
+        public Deliverer(string name, int age, string email, string mobile_number, string password) : base(name, age, email, mobile_number, password)
         {
             AddressCoordinates = new Location(0,0);
             order = null;
@@ -22,7 +22,7 @@ namespace Arriba_Eats
         public Location location
         {
             get { return AddressCoordinates; }
-            set { location = value; }
+            set { AddressCoordinates = value; }
         }
         public string Licence_plate
         {
@@ -42,15 +42,26 @@ namespace Arriba_Eats
             set { status = value; }
         }
 
+        public override string Details()
+        {
+            return $"Your user details are as follows:\n" +
+                $"Name: {Name}\n" +
+                $"Age: {Age}\n" +
+                $"Email: {Email}\n" +
+                $"Mobile: {Mobile_Number}\n" +
+                $"Licence plate: {licence_plate}";
+        }
 
         public override void SignUp()
         {
 
-            Console.Write("Please enter your licence plate:");
+            Console.WriteLine("Please enter your licence plate:");
             licence_plate = Console.ReadLine();
 
-            // Add the user into the list database
 
+
+
+            // Add the user into the list database
             Save_User.Register(this);
             this.IsLoggedin = false;
             Console.WriteLine($"You have been successfully registered as a deliverer, {Name}!");

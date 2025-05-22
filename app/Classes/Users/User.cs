@@ -8,11 +8,11 @@ namespace Arriba_Eats
         private string name;
         private int age;
         private string email;
-        private int mobile_number;
+        private string mobile_number;
         private string password;
         private bool isloggedin;
 
-        public User(string name, int age, string email, int mobile_number, string password)
+        public User(string name, int age, string email, string mobile_number, string password)
         {
             this.name = name;
             this.age = age;
@@ -21,10 +21,10 @@ namespace Arriba_Eats
             this.password = password;
         }
 
-        public int Mobile_Number
+        public string Mobile_Number
         {
-            get { return this.mobile_number; }
-            set { this.mobile_number = value; }
+            get { return mobile_number; }
+            set { mobile_number = value; }
         }
 
 
@@ -71,7 +71,6 @@ namespace Arriba_Eats
             } 
             else
             {
-                Console.WriteLine("Login failed.");
                 return false;
             }
         }
@@ -81,7 +80,7 @@ namespace Arriba_Eats
             if (isloggedin)
             {
                 isloggedin = false;
-                Console.WriteLine($"{email} logged out.");
+                Console.WriteLine($"You are now logged out.");
                 
             }
             else 
@@ -91,15 +90,9 @@ namespace Arriba_Eats
             }
         }
 
-        public virtual string Details()
-        {
-            return $"Name: {Name}\n" +
-                $"Age: {Age}\n" +
-                $"Email: {Email}\n" +
-                $"Mobil: {Mobile_Number}";
-        }
-
+  
         public abstract void SignUp();
+        public abstract string Details();
 
     }
 

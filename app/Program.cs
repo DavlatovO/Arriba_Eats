@@ -13,11 +13,7 @@ namespace Arriba_Eats
             const int LOGIN_INDEX = 1;
             const int SIGNUP_INDEX = 2;
             const int EXIT_INDEX = 3;
-            const int LOGOUT_INDEX = 4;
-
-
-
-
+            
 
             Console.WriteLine("Welcome to Arriba Eats!");
             while (true)
@@ -54,17 +50,20 @@ namespace Arriba_Eats
                         if (foundUser != null && foundUser.Login(email1, password))
                         {
                             loggedinUser = foundUser;
-                            Console.WriteLine($"Login Successfull as {email1}");
+
                             if (loggedinUser is Client client)
                             {
+                                Console.WriteLine($"Welcome back, {client.Name}!");
                                 ClientMenus.ClientMenu(client);
                             }
                             else if (loggedinUser is Customer customer)
                             {
+                                Console.WriteLine($"Welcome back, {customer.Name}!");
                                 CustomerMenus.CustomerMenu(customer);
                             }
                             else if (loggedinUser is Deliverer deliverer)
                             {
+                                Console.WriteLine($"Welcome back, {deliverer.Name}!");
                                 DelivererMenus.DelivererMenu(deliverer);
                             }
 
@@ -74,19 +73,6 @@ namespace Arriba_Eats
                             Console.WriteLine("Invalid email or password.");
                         }
 
-                        break;
-
-                    case LOGOUT_INDEX:
-                        if (loggedinUser == null)
-                        {
-                            Console.WriteLine("No user is currently logged in.");
-                        }
-                        else
-                        {
-                            loggedinUser.Logout();
-                            Console.WriteLine("You are now logged out");
-                            loggedinUser = null;
-                        }
                         break;
 
                     case EXIT_INDEX:

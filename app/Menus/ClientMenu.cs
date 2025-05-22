@@ -7,6 +7,7 @@ namespace Arriba_Eats
     public static void ClientMenu(Client client)
     {
         Restaurant restaurant = client.GetRestaurant;
+       
         while (true)
         {
         
@@ -20,10 +21,9 @@ namespace Arriba_Eats
             const int LOGOUT_INDEX = 7;
             const int NUMBER_OPTIONS = 7;
 
-
-            Console.WriteLine();
+            Console.WriteLine("Please make a choice from the menu below:");
             Console.WriteLine($"1: Display your user information");
-            Console.WriteLine($"2: Add items to restaurant menu");
+            Console.WriteLine($"2: Add item to restaurant menu");
             Console.WriteLine($"3: See current orders");
             Console.WriteLine($"4: Start cooking order");
             Console.WriteLine($"5: Finish cooking order");
@@ -57,9 +57,9 @@ namespace Arriba_Eats
                             MenuItem item1 = new MenuItem(item, price1);
                             if (item1 != null)
                             {
-                                Console.WriteLine($"Successfully added {item1.Name} ({item1.Price}) to menu.");
                                 restaurant.Menu.Add(item1);
                             }
+                            Console.WriteLine($"Successfully added {item1.Name} (${item1.Price:F2}) to menu.");
                             break;
                         case CURRENTORDER_INDEX:
                             var Allorders = Order_List.GetRealOrders();

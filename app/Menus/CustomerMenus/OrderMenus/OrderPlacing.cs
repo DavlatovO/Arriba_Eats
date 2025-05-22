@@ -7,18 +7,19 @@ namespace Arriba_Eats
     {
         public static void OrderMenu2(Customer customer, Restaurant restaurant)
         {
-            while (true)
+            Console.WriteLine($"Placing order from {restaurant.Restaurant_Name}.");
+            bool back = false;
+            while (!back)
             {
                 const int MENU_INDEX = 1;
                 const int REVIEWS_INDEX = 2;
                 const int BACK_INDEX = 3;
 
                 Console.WriteLine();
-                Console.WriteLine($"Placing order from {restaurant.Restaurant_Name}");
                 Console.WriteLine("1: See this restaurant's menu and place an order");
                 Console.WriteLine("2: See reviews for this restaurant");
                 Console.WriteLine("3: Return to main menu");
-                Console.Write("Please enter a choice: ");
+                Console.WriteLine("Please enter a choice between 1 and 3: ");
 
                 if (!int.TryParse(Console.ReadLine(), out int choice))
                 {
@@ -33,19 +34,19 @@ namespace Arriba_Eats
                         decimal totalPrice = 0;
                         while (true)
                         {
-                            Console.WriteLine($"Current order total: ${totalPrice}");
+                            Console.WriteLine($"Current order total: ${totalPrice:F2}");
                             for (int i = 0; i < restaurant.Menu.Count; i++)
                             {
                                 var item = restaurant.Menu[i];
-                                Console.WriteLine($"{i + 1}: {item.Name}  ${item.Price}");
+                                Console.WriteLine($"{i + 1}:   ${item.Price}  {item.Name}");
                             }
 
                             int completeIndex = restaurant.Menu.Count + 1;
                             int cancelIndex = restaurant.Menu.Count + 2;
 
-                            Console.WriteLine($"{completeIndex}: Complete Order");
-                            Console.WriteLine($"{cancelIndex}: Cancel Order");
-                            Console.Write("Choose an item number (or complete/cancel): ");
+                            Console.WriteLine($"{completeIndex}: Complete order");
+                            Console.WriteLine($"{cancelIndex}: Cancel order");
+                            Console.WriteLine($"Please enter a choice between 1 and {cancelIndex}:");
 
                             if (!int.TryParse(Console.ReadLine(), out int selection) || selection < 1 || selection > cancelIndex)
                             {
@@ -63,23 +64,24 @@ namespace Arriba_Eats
                                 else
                                 {
                                     Order newOrder = new Order(customer, restaurant, orderItems);
-                                    Console.WriteLine($"Your order has been placed. Your order number is {newOrder.Number}");
+                                    Console.WriteLine($"Your order has been placed. Your order number is #{newOrder.Number}.");
                                     newOrder.SetOrderStatus(OrderStatus.Ordered);
                                     Order_List.Register(newOrder);
-                                    orderItems.Clear(); 
+                                    orderItems.Clear();
                                     totalPrice = 0;
+                                    break; // Exit the inner while loop after completing the order
                                 }
                             }
                             else if (selection == cancelIndex)
                             {
-                                Console.WriteLine("Order cancelled.");
                                 orderItems.Clear();
-                                return;
+                                break; // Exit the inner while loop after canceling the order
                             }
                             else
                             {
                                 var selectedItem = restaurant.Menu[selection - 1];
-                                Console.Write($"Please enter quantity (0 to cancel): ");
+                                Console.WriteLine($"Adding {selectedItem.Name} to order.");
+                                Console.WriteLine($"Please enter quantity (0 to cancel): ");
                                 if (!int.TryParse(Console.ReadLine(), out int quantity) || quantity < 0)
                                 {
                                     Console.WriteLine("Invalid quantity.");
@@ -90,12 +92,13 @@ namespace Arriba_Eats
                                     return;
                                 }
 
-
                                 orderItems.Add(new OrderItem(selectedItem, quantity));
                                 totalPrice += (decimal)selectedItem.Price * quantity;
                                 Console.WriteLine($"Added {quantity} x {selectedItem.Name} to order.");
                             }
                         }
+                        break; // Add a break to prevent fall-through to the next case
+
                     case REVIEWS_INDEX:
                         var allRatings = Rating_List.GetRealRatings();
                         if (allRatings.Count == 0)
@@ -103,7 +106,7 @@ namespace Arriba_Eats
                             Console.WriteLine("No reviews have been left for this restaurant.");
                             break;
                         }
-                        foreach(var rating in allRatings)
+                        foreach (var rating in allRatings)
                         {
                             Console.WriteLine($"Reviewer: {rating.Customer}");
                             Console.WriteLine($"Rating: {rating.Score}");
@@ -112,7 +115,10 @@ namespace Arriba_Eats
                         break;
 
                     case BACK_INDEX:
-                        return;
+                        back = true; // Set back to true to exit the loop
+ 
+                        break;
+                        // Exit the method after returning to the customer menu
 
                     default:
                         Console.WriteLine("Invalid choice.");

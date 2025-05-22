@@ -7,7 +7,8 @@ namespace Arriba_Eats
         public static void CustomerMenu(Customer customer)
         {
             
-            while (true)
+            bool back = false;
+            while (!back)
             {
 
 
@@ -18,9 +19,8 @@ namespace Arriba_Eats
                 const int LOGOUT_INDEX = 5;
                 const int NUMBER_OPTIONS = 5;
 
-                Console.WriteLine();
-
-                Console.WriteLine($"Welcome back, {customer.Name}!");
+              
+                Console.WriteLine($"Please make a choice from the menu below:");
                 Console.WriteLine($"1: Display your user information");
                 Console.WriteLine($"2: Select a list of restaurants to order from");
                 Console.WriteLine($"3: See the status of your orders");
@@ -51,8 +51,9 @@ namespace Arriba_Eats
                             RateMenu.Rate(customer);
                             break;
                         case LOGOUT_INDEX:
+                            back = true;
                             customer.Logout();
-                            return;
+                            break;
                         default:
                             Console.WriteLine("Invalid choice.");
                             break;
