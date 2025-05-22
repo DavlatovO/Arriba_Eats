@@ -20,12 +20,12 @@ namespace Arriba_Eats
                 for (int i = 0; i < eligibleOrders.Count; i++)
                 {
                     var order = eligibleOrders[i];
-                    Console.WriteLine($"{i + 1}: Order #{order.Number} from {order.FromRestaurant.Restaurant_Name}:");
+                    Console.WriteLine($"{i + 1}: Order #{order.Number} from {order.FromRestaurant.Restaurant_Name}");
                 }
                 Console.WriteLine($"{eligibleOrders.Count + 1}: Return to the previous menu");
 
                 // Step 3: Get user choice
-                Console.Write($"Please enter a choice between 1 and {eligibleOrders.Count + 1}: ");
+                Console.WriteLine($"Please enter a choice between 1 and {eligibleOrders.Count + 1}:");
                 if (!int.TryParse(Console.ReadLine(), out int selection) || selection < 1 || selection > eligibleOrders.Count + 1)
                 {
                     Console.WriteLine("Invalid choice.");
@@ -46,7 +46,7 @@ namespace Arriba_Eats
                     Console.WriteLine($"{items.Quantity} x {items.Item.Name}");
                 }
                 // Step 6: Prompt for rating
-                Console.Write("Please enter a rating for this restaurant (1-5, 0 to cancel): ");
+                Console.WriteLine("Please enter a rating for this restaurant (1-5, 0 to cancel): ");
                 if (!int.TryParse(Console.ReadLine(), out int ratingValue) || ratingValue < 0 || ratingValue > 5)
                 {
                     Console.WriteLine("Invalid rating.");
@@ -66,6 +66,7 @@ namespace Arriba_Eats
 
                 Console.WriteLine($"Thank you for rating {selectedOrder.FromRestaurant.Restaurant_Name}.");
                 Rating_List.Register(rating);
+                return;
             }
         }
 

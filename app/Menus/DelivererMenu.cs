@@ -100,7 +100,7 @@ namespace Arriba_Eats
                             var selectedOrder = deliveryOrders[selection - 1];
                             deliverer.CurrentOrder = selectedOrder;
                             selectedOrder.AssignDeliverer(deliverer);
-                            deliverer.Status = DelivererStatus.HeadingToRestaurant;
+                            
 
                             Console.WriteLine($"Thanks for accepting the order. Please head to {selectedOrder.FromRestaurant.Restaurant_Name} at {selectedOrder.FromRestaurant.Restaurant_Location.X},{selectedOrder.FromRestaurant.Restaurant_Location.Y} to pick it up.");
                             break;
@@ -135,34 +135,26 @@ namespace Arriba_Eats
                                 Console.WriteLine("The order is still being prepared, so please wait patiently until it is ready.");
                             }
                                 Console.WriteLine($"When you have the order, please deliver it to {deliverer.CurrentOrder.GetOwner.Name} at {deliverer.CurrentOrder.GetOwner.Location.X},{deliverer.CurrentOrder.GetOwner.Location.Y}.");
-                            
-                            if (orderStatus == OrderStatus.Cooked)
-                            {
-                                
-                                deliverer.Status = DelivererStatus.OnTheWay;
-
-                            }
-
                             break;
                         case COMPLETE_INDEX:
                             if (deliverer.CurrentOrder == null)
                             {
                                 Console.WriteLine("You have not yet accepted an order.");
+                                break;
                             }
-                            else if (deliverer.Status == DelivererStatus.OnTheWay)
+                            else if (deliverer.Status != DelivererStatus.HeadingToCustomer)
                             {
-                                Console.WriteLine("Thank you for making the delivery.");
-                                deliverer.CurrentOrder.SetOrderStatus(OrderStatus.Delivered);
-                            }
-                           else if (deliverer.Status == DelivererStatus.AtRestaurant)
-                            {
-                                Console.WriteLine("You have not yet picked up the order from the restaurant.");
+                                Console.WriteLine("You have not yet picked up the order.");
+                                break;
                             }
                             else
                             {
-                                Console.WriteLine("Order cannot be marked as complete in the current state.");
+                                Console.WriteLine($"Thank you for making the delivery.");
+                                deliverer.CurrentOrder.SetOrderStatus(OrderStatus.Delivered); 
+                                deliverer.CurrentOrder = null;
+                                deliverer.Status = DelivererStatus.Free;
                             }
-                            break;
+                                break;
                         case LOGOUT_INDEX:
                             deliverer.Logout();
                             return;

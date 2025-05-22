@@ -102,8 +102,7 @@ namespace Arriba_Eats
     public enum DelivererStatus
     {
         Free,
-        HeadingToRestaurant,
         AtRestaurant,
-        OnTheWay,
+        HeadingToCustomer,
     }
 }

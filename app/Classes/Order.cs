@@ -23,7 +23,6 @@ namespace Arriba_Eats
         private Deliverer assignedDriver;
         private List<OrderItem> Items { get; set; } = new List<OrderItem>();
         private OrderStatus status;
-        private double totalPrice;
         private int number;
         private Rating rating;
         private DateTime date;
@@ -35,12 +34,12 @@ namespace Arriba_Eats
             this.orderedOwner = customer;
             fromRestaurant = restaurant;
             assignedDriver = null;
-            totalPrice = CalculateTotalPrice();
             number = nextOrderNumber++;
             date = DateTime.Now;
             rating = null;
         }
 
+        public double TotalPrice => items.Sum(item => item.Subtotal);
         public int Number
         {
             get { return number; }
@@ -70,11 +69,7 @@ namespace Arriba_Eats
             status = Status;
         }
 
-        public double TotalPrice
-        {
-            get { return totalPrice; }
-        }
-
+        
         public OrderStatus Status
         {
             get { return status; }

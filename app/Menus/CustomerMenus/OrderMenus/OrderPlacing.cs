@@ -133,8 +133,13 @@ namespace Arriba_Eats
                         }
                         foreach (var rating in allRatings)
                         {
-                            Console.WriteLine($"Reviewer: {rating.Customer}");
-                            Console.WriteLine($"Rating: {rating.Score}");
+                            Console.WriteLine($"Reviewer: {rating.Customer.Name}");
+                            // Convert double score to int (round down or cast)
+                            int scoreInt = (int)rating.Score;
+
+                            // Create stars string
+                            string stars = new string('*', scoreInt);
+                            Console.WriteLine($"Rating: {stars}");
                             Console.WriteLine($"Comment: {rating.Comment}");
                         }
                         break;

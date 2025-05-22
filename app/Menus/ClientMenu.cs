@@ -1,4 +1,5 @@
 using System;
+using System.Net;
 
 namespace Arriba_Eats
 {
@@ -112,12 +113,13 @@ namespace Arriba_Eats
                                 }
                                 Console.WriteLine($"{i + 1}: Return to the previous menu");
                                 Console.WriteLine($"Please enter a choice between 1 and {i + 1}:");
-                                int input;
-                                if (int.TryParse(Console.ReadLine(), out input))
+
+                                int Input;
+                                if (int.TryParse(Console.ReadLine(), out Input))
                                 {
-                                    if (input >= 1 && input <= allorders.Count)
+                                    if (Input >= 1 && Input <= allorders.Count)
                                     {
-                                        var selectedOrder = allorders[input - 1];
+                                        var selectedOrder = allorders[Input - 1];
                                         selectedOrder.SetOrderStatus(OrderStatus.Cooking);
                                         Console.WriteLine($"Order #{selectedOrder.Number} is now marked as cooking.Please prepare the order, then mark it as finished cooking:");
                                         foreach (var items in selectedOrder.items)
@@ -125,7 +127,7 @@ namespace Arriba_Eats
                                             Console.WriteLine($"{items.Quantity} x {items.Item.Name}");
                                         }
                                     }
-                                    else if (input == allorders.Count + 1)
+                                    else if (Input == allorders.Count + 1)
                                     {
                                         break;
                                     }
@@ -171,8 +173,9 @@ namespace Arriba_Eats
                                         if (selectedOrder.Driver == null)
                                         {
                                             Console.WriteLine($"No deliverer has been assigned yet.");
+                                            break;
                                         }
-                                        else if (selectedOrder.Driver.Status == DelivererStatus.AtRestaurant)
+                                        if (selectedOrder.Driver.Status == DelivererStatus.AtRestaurant)
                                         {
                                             Console.WriteLine($"Please take it to the deliverer with licence plate {selectedOrder.Driver.LicencePlate}, who is waiting to collect it.");
                                         }
@@ -205,8 +208,8 @@ namespace Arriba_Eats
                             var orders = Order_List.GetAllOrders();
                             orders = orders.Where(order => order.FromRestaurant.Owner == client &&
                                                     (order.Status == OrderStatus.Cooked ||
-                                                    order.Status == OrderStatus.Cooking) &&
-                                                    order.Driver != null &&
+                                                    order.Status == OrderStatus.Cooking ||
+                                                    order.Status == OrderStatus.Ordered) &&
                                                     order.Driver.Status == DelivererStatus.AtRestaurant).ToList();
                             Console.WriteLine("These deliverers have arrived and are waiting to collect orders.");
                             Console.WriteLine("Select an order to indicate that the deliverer has collected it:");
@@ -214,29 +217,29 @@ namespace Arriba_Eats
                             foreach (var order in orders)
                             {
                                 c++;
-                                Console.WriteLine($"{c}: Order #{order.Number} for {order.GetOwner.Name} (Deliverer licence plate: {order.Driver.Name}) (Order status: {order.Status})");
+                                Console.WriteLine($"{c}: Order #{order.Number} for {order.GetOwner.Name} (Deliverer licence plate: {order.Driver.LicencePlate}) (Order status: {order.Status})");
                             }
                             Console.WriteLine($"{c + 1}: Return to the previous menu");
                             Console.WriteLine($"Please enter a choice between 1 and {c + 1}:");
-                            int input3;
-                            if (int.TryParse(Console.ReadLine(), out input3))
+                            
+                            if (int.TryParse(Console.ReadLine(), out int input))
                             {
-                                if (input3 >= 1 && input3 <= orders.Count)
+                                if (input >= 1 && input <= orders.Count)
                                 {
-                                    var SelectedOrder = orders[input3 - 1];
-                                    if (SelectedOrder.Status != OrderStatus.Cooked)
+                                    var selectedOrder = orders[input - 1];
+                                    if (selectedOrder.Status != OrderStatus.Cooked)
                                     {
                                         Console.WriteLine("This order has not yet been cooked.");
+                                        break;
                                     }
-                                    else
-                                    {
-                                        SelectedOrder.SetOrderStatus(OrderStatus.BeingDelivered);
-                                        Console.WriteLine($"Order {SelectedOrder.Number} is now marked as being delivered.");
-                                    }
-
+                                   
+                                    selectedOrder.SetOrderStatus(OrderStatus.BeingDelivered);
+                                    selectedOrder.Driver.Status = DelivererStatus.HeadingToCustomer;
+                                    Console.WriteLine($"Order #{selectedOrder.Number} is now marked as being delivered.");
                                 }
-                                else if (input3 == orders.Count + 1)
+                                else if (input == orders.Count + 1)
                                 {
+                                    // Return to previous menu (exit this case)
                                     break;
                                 }
                                 else
@@ -248,8 +251,6 @@ namespace Arriba_Eats
                             {
                                 Console.WriteLine("Invalid input.");
                             }
-
-
                             break;
                         case LOGOUT_INDEX:
                             client.Logout();

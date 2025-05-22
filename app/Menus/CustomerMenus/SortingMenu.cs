@@ -56,7 +56,6 @@ namespace Arriba_Eats
                                     Console.WriteLine($"{i,2}: {restaurant.Restaurant_Name,-20} {restaurant.Restaurant_Location.X,1},{restaurant.Restaurant_Location.Y,1}  {distance,6}  {restaurant.CuisineStyle,-10} {"-",6:F1}");
                                 }
                                 else { Console.WriteLine($"{i,2}: {restaurant.Restaurant_Name,-20} {restaurant.Restaurant_Location.X,1},{restaurant.Restaurant_Location.Y,1}  {distance,6}  {restaurant.CuisineStyle,-10} {rating,6:F1}"); }
-                                Console.WriteLine();
                             }
                             Console.WriteLine($"{ALLRESTAURANTSPLUS_INDEX}: Return to the previous menu");
                             Console.WriteLine($"Please enter a choice between 1 and {ALLRESTAURANTSPLUS_INDEX}:");
@@ -73,10 +72,11 @@ namespace Arriba_Eats
                             }
                             else if (number == ALLRESTAURANTSPLUS_INDEX)
                                 {
+                                    exit = true;
                                     break;
                                 }
                             else { Console.WriteLine("Invalid choice."); }
-                                break;
+                            break;
                         
                         case DISTANCE_INDEX:
                            
@@ -93,7 +93,7 @@ namespace Arriba_Eats
                                     Console.WriteLine($"{b,2}: {restaurant.Restaurant_Name,-20} {restaurant.Restaurant_Location.X,1},{restaurant.Restaurant_Location.Y,1}  {distance,6}  {restaurant.CuisineStyle,-10} {"-",6:F1}");
                                 }
                                 else { Console.WriteLine($"{b,2}: {restaurant.Restaurant_Name,-20} {restaurant.Restaurant_Location.X,1},{restaurant.Restaurant_Location.Y,1}  {distance,6}  {restaurant.CuisineStyle,-10} {rating,6:F1}"); }
-                                Console.WriteLine();
+                               
                             }
                             Console.WriteLine($"{ALLRESTAURANTSPLUS_INDEX}: Return to the previous menu");
                             Console.WriteLine($"Please enter a choice between 1 and {ALLRESTAURANTSPLUS_INDEX}:");
@@ -110,6 +110,7 @@ namespace Arriba_Eats
                             }
                             else if (number2 == ALLRESTAURANTSPLUS_INDEX)
                             {
+                                exit = true;
                                 break;
                             }
                             else { Console.WriteLine("Invalid choice."); }
@@ -130,7 +131,7 @@ namespace Arriba_Eats
                                     Console.WriteLine($"{a,2}: {restaurant.Restaurant_Name,-20} {restaurant.Restaurant_Location.X,1},{restaurant.Restaurant_Location.Y,1}  {distance,6}  {restaurant.CuisineStyle,-10} {"-",6:F1}");
                                 }
                                 else { Console.WriteLine($"{a,2}: {restaurant.Restaurant_Name,-20} {restaurant.Restaurant_Location.X,1},{restaurant.Restaurant_Location.Y,1}  {distance,6}  {restaurant.CuisineStyle,-10} {rating,6:F1}"); }
-                                Console.WriteLine();
+                                
                             }
                             Console.WriteLine($"{ALLRESTAURANTSPLUS_INDEX}: Return to the previous menu");
                             Console.WriteLine($"Please enter a choice between 1 and {ALLRESTAURANTSPLUS_INDEX}:");
@@ -147,6 +148,7 @@ namespace Arriba_Eats
                             }
                             else if (number3 == ALLRESTAURANTSPLUS_INDEX)
                             {
+                                exit = true;
                                 break;
                             }
                             else { Console.WriteLine("Invalid choice."); }
@@ -166,7 +168,7 @@ namespace Arriba_Eats
                                     Console.WriteLine($"{c,2}: {restaurant.Restaurant_Name,-20} {restaurant.Restaurant_Location.X,1},{restaurant.Restaurant_Location.Y,1}  {distance,6}  {restaurant.CuisineStyle,-10} {"-",6:F1}");
                                 }
                                 else { Console.WriteLine($"{c,2}: {restaurant.Restaurant_Name,-20} {restaurant.Restaurant_Location.X,1},{restaurant.Restaurant_Location.Y,1}  {distance,6}  {restaurant.CuisineStyle,-10} {rating,6:F1}"); }
-                                Console.WriteLine();
+                                
                             }
                             Console.WriteLine($"{ALLRESTAURANTSPLUS_INDEX}: Return to the previous menu");
                             Console.WriteLine($"Please enter a choice between 1 and {ALLRESTAURANTSPLUS_INDEX}:");
@@ -183,6 +185,7 @@ namespace Arriba_Eats
                             }
                             else if (number4 == ALLRESTAURANTSPLUS_INDEX)
                             {
+                                exit = true;
                                 break;
                             }
                             else { Console.WriteLine("Invalid choice."); }
