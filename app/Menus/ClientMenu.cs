@@ -205,52 +205,66 @@ namespace Arriba_Eats
 
                             break;
                         case HANDLEDELIVERERS_INDEX:
-                            var orders = Order_List.GetAllOrders();
-                            orders = orders.Where(order => order.FromRestaurant.Owner == client &&
-                                                    (order.Status == OrderStatus.Cooked ||
-                                                    order.Status == OrderStatus.Cooking ||
-                                                    order.Status == OrderStatus.Ordered) &&
-                                                    order.Driver.Status == DelivererStatus.AtRestaurant).ToList();
-                            Console.WriteLine("These deliverers have arrived and are waiting to collect orders.");
-                            Console.WriteLine("Select an order to indicate that the deliverer has collected it:");
-                            int c = 0;
-                            foreach (var order in orders)
+                            try
                             {
-                                c++;
-                                Console.WriteLine($"{c}: Order #{order.Number} for {order.GetOwner.Name} (Deliverer licence plate: {order.Driver.LicencePlate}) (Order status: {order.Status})");
-                            }
-                            Console.WriteLine($"{c + 1}: Return to the previous menu");
-                            Console.WriteLine($"Please enter a choice between 1 and {c + 1}:");
-                            
-                            if (int.TryParse(Console.ReadLine(), out int input))
-                            {
-                                if (input >= 1 && input <= orders.Count)
+                                var orders = Order_List.GetAllOrders();
+                                orders = orders.Where(order => order.FromRestaurant?.Owner == client &&
+                                                                (order.Status == OrderStatus.Cooked ||
+                                                                 order.Status == OrderStatus.Cooking ||
+                                                                 order.Status == OrderStatus.Ordered) &&
+                                                                order.Driver?.Status == DelivererStatus.AtRestaurant).ToList();
+                                Console.WriteLine("These deliverers have arrived and are waiting to collect orders.");
+                                Console.WriteLine("Select an order to indicate that the deliverer has collected it:");
+
+                               
+
+                                int c = 0;
+                                foreach (var order in orders)
                                 {
-                                    var selectedOrder = orders[input - 1];
-                                    if (selectedOrder.Status != OrderStatus.Cooked)
+                                    c++;
+                                    string ownerName = order.GetOwner?.Name ?? "Unknown";
+                                    string licencePlate = order.Driver?.LicencePlate ?? "N/A";
+                                    Console.WriteLine($"{c}: Order #{order.Number} for {ownerName} (Deliverer licence plate: {licencePlate}) (Order status: {order.Status})");
+                                }
+
+                                Console.WriteLine($"{c + 1}: Return to the previous menu");
+                                Console.WriteLine($"Please enter a choice between 1 and {c + 1}:");
+
+                                if (int.TryParse(Console.ReadLine(), out int input))
+                                {
+                                    if (input >= 1 && input <= orders.Count)
                                     {
-                                        Console.WriteLine("This order has not yet been cooked.");
+                                        var selectedOrder = orders[input - 1];
+                                        if (selectedOrder.Status != OrderStatus.Cooked)
+                                        {
+                                            Console.WriteLine("This order has not yet been cooked.");
+                                            break;
+                                        }
+
+                                        selectedOrder.SetOrderStatus(OrderStatus.BeingDelivered);
+                                        selectedOrder.Driver.Status = DelivererStatus.HeadingToCustomer;
+                                        Console.WriteLine($"Order #{selectedOrder.Number} is now marked as being delivered.");
+                                    }
+                                    else if (input == orders.Count + 1)
+                                    {
+                                        // Return to previous menu (exit this case)
                                         break;
                                     }
-                                   
-                                    selectedOrder.SetOrderStatus(OrderStatus.BeingDelivered);
-                                    selectedOrder.Driver.Status = DelivererStatus.HeadingToCustomer;
-                                    Console.WriteLine($"Order #{selectedOrder.Number} is now marked as being delivered.");
-                                }
-                                else if (input == orders.Count + 1)
-                                {
-                                    // Return to previous menu (exit this case)
-                                    break;
+                                    else
+                                    {
+                                        Console.WriteLine("Invalid choice.");
+                                    }
                                 }
                                 else
                                 {
-                                    Console.WriteLine("Invalid choice.");
+                                    Console.WriteLine("Invalid input.");
                                 }
                             }
-                            else
+                            catch (Exception ex)
                             {
-                                Console.WriteLine("Invalid input.");
+                                Console.WriteLine($"An error occurred: {ex.Message}");
                             }
+
                             break;
                         case LOGOUT_INDEX:
                             client.Logout();

@@ -20,7 +20,7 @@ namespace Arriba_Eats
                 const int NUMBER_OPTIONS = 5;
                 List<Restaurant> allRestaurant = Restaurant_Register.GetAllRestaurants();
                 int ALLRESTAURANTSPLUS_INDEX = allRestaurant.Count +1;
-                var sortedByDistance = allRestaurant.OrderBy(r => r.Restaurant_Location.DistanceTo(customer.Location)).ToList();
+                var sortedByDistance = allRestaurant.OrderBy(r => r.Restaurant_Location.DistanceTo(customer.Location)).ThenBy(r =>r.Restaurant_Name).ToList();
                 
 
                 Console.WriteLine($"How would you like the list of restaurants ordered?");
@@ -79,7 +79,7 @@ namespace Arriba_Eats
                             break;
                         
                         case DISTANCE_INDEX:
-                           
+                            
                             int b = 0;
                             Console.WriteLine("You can order from the following restaurants:");
                             Console.WriteLine("   Restaurant Name       Loc    Dist  Style       Rating");
@@ -117,7 +117,7 @@ namespace Arriba_Eats
                             break;
                             
                         case STYLE_INDEX:
-                            var sortedByCuisine = allRestaurant.OrderBy(r => r.CuisineStyle.ToString()).ToList();
+                            var sortedByCuisine = allRestaurant.OrderBy(r => r.CuisineStyle).ThenBy(r => r.Restaurant_Name).ToList();
                             int a = 0;
                             Console.WriteLine("You can order from the following restaurants:");
                             Console.WriteLine("   Restaurant Name       Loc    Dist  Style       Rating");
@@ -154,7 +154,7 @@ namespace Arriba_Eats
                             else { Console.WriteLine("Invalid choice."); }
                             break;
                         case RATING_INDEX:
-                            var sortedByRating = Restaurant_Register.GetAllRestaurants().OrderBy(r => r.Restaurant_Rating()).ToList();
+                            var sortedByRating = Restaurant_Register.GetAllRestaurants().OrderByDescending(r => r.Restaurant_Rating()).ThenBy(r =>r.Restaurant_Name).ToList();
                             int c = 0;
                             Console.WriteLine("You can order from the following restaurants:");
                             Console.WriteLine("   Restaurant Name       Loc    Dist  Style       Rating");
