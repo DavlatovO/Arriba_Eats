@@ -2,6 +2,9 @@
 
 namespace Arriba_Eats
 {
+    /// <summary>
+    ///  Created rating menu for customers to rate restaurants.
+    /// </summary>
     class RateMenu
     {
         public static void Rate(Customer customer)
