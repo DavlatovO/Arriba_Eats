@@ -2,30 +2,38 @@
 using System.Collections.Generic;
 
 namespace Arriba_Eats
-
 {
+    /// <summary>
+    /// Entry point for the Arriba Eats application.
+    /// Handles user login, registration, and main menu navigation.
+    /// </summary>
     class Program
     {
-        static void Main (string[] args)
+        /// <summary>
+        /// Main method. Displays the menu and processes user input.
+        /// </summary>
+        /// <param name="args">Command-line arguments (not used).</param>
+        static void Main(string[] args)
         {
             User? loggedinUser = null;
 
+            // Menu option constants
             const int LOGIN_INDEX = 1;
             const int SIGNUP_INDEX = 2;
             const int EXIT_INDEX = 3;
-            
 
             Console.WriteLine("Welcome to Arriba Eats!");
             while (true)
             {
+                // Display main menu options
                 Console.WriteLine("Please make a choice from the menu below:");
                 Console.WriteLine("1: Login as a registered user");
                 Console.WriteLine("2: Register as a new user");
                 Console.WriteLine("3: Exit");
                 Console.WriteLine("Please enter a choice between 1 and 3:");
-                
 
                 int choice;
+                // Validate user input
                 if (!int.TryParse(Console.ReadLine(), out choice))
                 {
                     Console.WriteLine("Invalid choice.");
@@ -35,75 +43,70 @@ namespace Arriba_Eats
                 switch (choice)
                 {
                     case SIGNUP_INDEX:
+                                    
+                        // Handle user registration
                         SignUpMenu.SignUp();
-                        break; 
+                        break;
 
                     case LOGIN_INDEX:
-                        var users = Save_User.GetAllUsers();
-                        
-                        Console.WriteLine("Email:");
-                        string email1 = Console.ReadLine();
-                        Console.WriteLine("Password:");
-                        string password = Console.ReadLine();
-
-                        User foundUser = users.Find(u => u.Email == email1);
-                        if (foundUser != null && foundUser.Login(email1, password))
+                        // Handle user login
+                        try
                         {
-                            loggedinUser = foundUser;
+                            // Handle user login
+                            var users = Save_User.GetAllUsers();
+                            Console.WriteLine("Email:");
+                            string email1 = Console.ReadLine();
+                            Console.WriteLine("Password:");
+                            string password = Console.ReadLine();
 
-                            if (loggedinUser is Client client)
+                            // Find user by email
+                            User foundUser = users.Find(u => u.Email == email1);
+                            if (foundUser != null && foundUser.Login(email1, password))
                             {
-                                Console.WriteLine($"Welcome back, {client.Name}!");
-                                ClientMenus.ClientMenu(client);
+                                loggedinUser = foundUser;
+
+                                // Check user type and direct them to the appropriate menu to reduce the complexity of the code.
+                                if (loggedinUser is Client client)
+                                {
+                                    Console.WriteLine($"Welcome back, {client.Name}!");
+                                    ClientMenus.ClientMenu(client);
+                                }
+                                else if (loggedinUser is Customer customer)
+                                {
+                                    Console.WriteLine($"Welcome back, {customer.Name}!");
+                                    CustomerMenus.CustomerMenu(customer);
+                                }
+                                else if (loggedinUser is Deliverer deliverer)
+                                {
+                                    Console.WriteLine($"Welcome back, {deliverer.Name}!");
+                                    DelivererMenus.DelivererMenu(deliverer);
+                                }
+
                             }
-                            else if (loggedinUser is Customer customer)
+                            else
                             {
-                                Console.WriteLine($"Welcome back, {customer.Name}!");
-                                CustomerMenus.CustomerMenu(customer);
+                                Console.WriteLine("Invalid email or password.");
                             }
-                            else if (loggedinUser is Deliverer deliverer)
-                            {
-                                Console.WriteLine($"Welcome back, {deliverer.Name}!");
-                                DelivererMenus.DelivererMenu(deliverer);
-                            }
+
 
                         }
-                        else
+                        catch (Exception ex)
                         {
-                            Console.WriteLine("Invalid email or password.");
+                            Console.WriteLine($"An error occurred: {ex.Message}");
                         }
-
                         break;
 
                     case EXIT_INDEX:
+                        // Exit the application
                         Console.WriteLine("Thank you for using Arriba Eats!");
                         return;
 
-
-
-
                     default:
+                        // Handle invalid menu choice
                         Console.WriteLine("Invalid choice.");
                         break;
                 }
-
-                
-               
             }
-
-
-
-
-
-
-
-
-
         }
-
-
-
     }
-
-
 }

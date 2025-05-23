@@ -1,286 +1,337 @@
 using System;
-using System.Net;
 
 namespace Arriba_Eats
 {
+    /// <summary>
+    /// The Menu for restaurant owners to manage their restaurant operations.
+    /// </summary>
     public static class ClientMenus
     {
-    public static void ClientMenu(Client client)
-    {
-        Restaurant restaurant = client.GetRestaurant;
-       
-        while (true)
+        /// <summary>
+        /// Displays the client menu and handles all restaurant management operations for the logged-in client.
+        /// </summary>
+        /// <param name="client">The currently logged-in client user.</param>
+        public static void ClientMenu(Client client)
         {
-        
+            // Error handling for the client menu
+            try
+            {
+                // Get the restaurant owned by the client
+                Restaurant restaurant = client.GetRestaurant;
+                // Keeps the menu running until the user logs out
+                while (true)
+                {
+                    // Menu option constants
+                    const int DISPLAY_INDEX = 1;
+                    const int ADDITEM_INDEX = 2;
+                    const int CURRENTORDER_INDEX = 3;
+                    const int STARTCOOKING_INDEX = 4;
+                    const int FINISHCOOKING_INDEX = 5;
+                    const int HANDLEDELIVERERS_INDEX = 6;
+                    const int LOGOUT_INDEX = 7;
+                    const int NUMBER_OPTIONS = 7;
 
-            const int DISPLAY_INDEX = 1;
-            const int ADDITEM_INDEX = 2;
-            const int CURRENTORDER_INDEX = 3;
-            const int STARTCOOKING_INDEX = 4;
-            const int FINISHCOOKING_INDEX = 5;
-            const int HANDLEDELIVERERS_INDEX = 6;
-            const int LOGOUT_INDEX = 7;
-            const int NUMBER_OPTIONS = 7;
+                    // Display menu options
+                    Console.WriteLine("Please make a choice from the menu below:");
+                    Console.WriteLine($"1: Display your user information");
+                    Console.WriteLine($"2: Add item to restaurant menu");
+                    Console.WriteLine($"3: See current orders");
+                    Console.WriteLine($"4: Start cooking order");
+                    Console.WriteLine($"5: Finish cooking order");
+                    Console.WriteLine($"6: Handle deliverers who have arrived");
+                    Console.WriteLine($"7: Log out");
+                    Console.WriteLine($"Please enter a choice between 1 and 7:");
 
-            Console.WriteLine("Please make a choice from the menu below:");
-            Console.WriteLine($"1: Display your user information");
-            Console.WriteLine($"2: Add item to restaurant menu");
-            Console.WriteLine($"3: See current orders");
-            Console.WriteLine($"4: Start cooking order");
-            Console.WriteLine($"5: Finish cooking order");
-            Console.WriteLine($"6: Handle deliverers who have arrived");
-            Console.WriteLine($"7: Log out");
-            Console.WriteLine($"Please enter a choice between 1 and 7:");
-
-            int choice;
+                    // Validate user input
+                    int choice;
                     if (!int.TryParse(Console.ReadLine(), out choice))
                     {
                         Console.WriteLine("Invalid choice.");
                         continue;
                     }
-                if ((choice > 0) && (choice <= NUMBER_OPTIONS))
-                {
-                    switch (choice)
+                    if ((choice > 0) && (choice <= NUMBER_OPTIONS))
                     {
-                        case DISPLAY_INDEX:
-                            Console.WriteLine(client.Details());
-                            break;
-                        case ADDITEM_INDEX:
-                            Console.WriteLine($"This is your restaurant's current menu:");
-                            foreach (var items in restaurant.Menu)
-                            {
-                                Console.WriteLine($"${items.Price:F2}   {items.Name}");
-                            }
-                            Console.WriteLine("Please enter the name of the new item (blank to cancel):");
-                            string item = Console.ReadLine();
-                            if (string.IsNullOrWhiteSpace(item))
-                            {
+                        switch (choice)
+                        {
+                            // Display user information
+                            case DISPLAY_INDEX:
+                                Console.WriteLine(client.Details());
                                 break;
-                            }
-                            
-                            double price;
-                            while (true)
-                            {
-                                Console.WriteLine("Please enter the price of the new item (without the $):");
-                                if (double.TryParse(Console.ReadLine(), out price) &&
-                                    price >= 0.00 && price <= 999.99)
+                            // Add item to restaurant menu
+                            case ADDITEM_INDEX:
+                                try
                                 {
-                                    break;
-                                }
-                                Console.WriteLine("Invalid price.");
-                            }
-                            MenuItem item1 = new MenuItem(item, price);
-                            if (item1 != null)
-                            {
-                                restaurant.Menu.Add(item1);
-                            }
-                            Console.WriteLine($"Successfully added {item1.Name} (${item1.Price:F2}) to menu.");
-                            break;
-                        case CURRENTORDER_INDEX:
-                            var Allorders = Order_List.GetRealOrders();
-                            Allorders = Allorders.Where(order => order.FromRestaurant.Owner == client && order.Status == OrderStatus.Ordered).ToList();
-                            if (Allorders.Count != 0)
-                            {
-                                foreach (var order in Allorders)
-                                {
-
-                                    Console.WriteLine($"Order #{order.Number} for {order.GetOwner.Name}: {order.Status}");
-                                    foreach (var items in order.items)
+                                    // Show current menu items
+                                    Console.WriteLine($"This is your restaurant's current menu:");
+                                    foreach (var items in restaurant.Menu)
                                     {
-                                        Console.WriteLine($"{items.Quantity} x {items.Item.Name}");
+                                        Console.WriteLine($"${items.Price:F2}   {items.Name}");
                                     }
-                                    Console.WriteLine();
-                                }
-                            }
-                            else
-                            {
-                                Console.WriteLine("Your restaurant has no current orders.");
-                            }
-                            
-                            break;
-                        case STARTCOOKING_INDEX:
-                            var allorders = Order_List.GetAllOrders();
-                            allorders = allorders.Where(order => order.FromRestaurant.Owner == client && order.Status == OrderStatus.Ordered).ToList();
-                            if (allorders.Count > 0)
-                            {
-                                Console.WriteLine($"Select an order once you are ready to start cooking:");
-                                int i = 0;
-                                foreach (var order in allorders)
-                                {
-                                    i++;
-                                    Console.WriteLine($"{i}: Order #{order.Number} for {order.GetOwner.Name}");
-                                    Console.WriteLine();
-                                }
-                                Console.WriteLine($"{i + 1}: Return to the previous menu");
-                                Console.WriteLine($"Please enter a choice between 1 and {i + 1}:");
-
-                                int Input;
-                                if (int.TryParse(Console.ReadLine(), out Input))
-                                {
-                                    if (Input >= 1 && Input <= allorders.Count)
-                                    {
-                                        var selectedOrder = allorders[Input - 1];
-                                        selectedOrder.SetOrderStatus(OrderStatus.Cooking);
-                                        Console.WriteLine($"Order #{selectedOrder.Number} is now marked as cooking.Please prepare the order, then mark it as finished cooking:");
-                                        foreach (var items in selectedOrder.items)
-                                        {
-                                            Console.WriteLine($"{items.Quantity} x {items.Item.Name}");
-                                        }
-                                    }
-                                    else if (Input == allorders.Count + 1)
+                                    // Prompt for new item name
+                                    Console.WriteLine("Please enter the name of the new item (blank to cancel):");
+                                    string item = Console.ReadLine();
+                                    if (string.IsNullOrWhiteSpace(item))
                                     {
                                         break;
                                     }
-                                    else
+                                    // Prompt for new item price
+                                    double price;
+                                    while (true)
                                     {
-                                        Console.WriteLine("Invalid choice.");
-                                    }
-                                }
-                                else
-                                {
-                                    Console.WriteLine("Invalid input.");
-                                }
-                            }
-                            else
-                            {
-                                Console.WriteLine("Your restaurant has no current orders.");
-                            }
-
-                            break;
-                        case FINISHCOOKING_INDEX:
-                            var AllOrders = Order_List.GetAllOrders();
-                            AllOrders = AllOrders.Where(order => order.FromRestaurant.Owner == client && order.Status == OrderStatus.Cooking).ToList();
-                            if (AllOrders.Count > 0)
-                            {
-                                Console.WriteLine("Select an order once you have finished preparing it:");
-                                int i = 0;
-                                foreach (var order in AllOrders)
-                                {
-                                    i++;
-                                    Console.WriteLine($"{i}: Order #{order.Number} for {order.GetOwner.Name}");
-                                }
-                                Console.WriteLine($"{i + 1}: Return to the previous menu");
-                                Console.WriteLine($"Please enter a choice between 1 and {i + 1}:");
-
-                                int input2;
-                                if (int.TryParse(Console.ReadLine(), out input2))
-                                {
-                                    if (input2 >= 1 && input2 <= AllOrders.Count)
-                                    {
-                                        var selectedOrder = AllOrders[input2 - 1];
-                                        selectedOrder.SetOrderStatus(OrderStatus.Cooked);
-                                        Console.WriteLine($"Order #{selectedOrder.Number} is now ready for collection.");
-                                        if (selectedOrder.Driver == null)
+                                        Console.WriteLine("Please enter the price of the new item (without the $):");
+                                        if (double.TryParse(Console.ReadLine(), out price) &&
+                                            price >= 0.00 && price <= 999.99)
                                         {
-                                            Console.WriteLine($"No deliverer has been assigned yet.");
                                             break;
                                         }
-                                        if (selectedOrder.Driver.Status == DelivererStatus.AtRestaurant)
+                                        Console.WriteLine("Invalid price.");
+                                    }
+                                    // Add new item to menu
+                                    MenuItem item1 = new MenuItem(item, price);
+                                    if (item1 != null)
+                                    {
+                                        restaurant.Menu.Add(item1);
+                                    }
+                                    Console.WriteLine($"Successfully added {item1.Name} (${item1.Price:F2}) to menu.");
+                                }
+                                catch (Exception ex)
+                                {
+                                    Console.WriteLine($"An error occurred: {ex.Message}");
+                                }
+                                break;
+                            // See current orders
+                            case CURRENTORDER_INDEX:
+                                try
+                                {
+                                    // Get all orders for this restaurant with status Ordered
+                                    var Allorders = Order_List.GetRealOrders();
+                                    Allorders = Allorders.Where(order => order.FromRestaurant.Owner == client && order.Status == OrderStatus.Ordered).ToList();
+                                    if (Allorders.Count != 0)
+                                    {
+                                        foreach (var order in Allorders)
                                         {
-                                            Console.WriteLine($"Please take it to the deliverer with licence plate {selectedOrder.Driver.LicencePlate}, who is waiting to collect it.");
+                                            Console.WriteLine($"Order #{order.Number} for {order.GetOwner.Name}: {order.Status}");
+                                            foreach (var items in order.items)
+                                            {
+                                                Console.WriteLine($"{items.Quantity} x {items.Item.Name}");
+                                            }
+                                            Console.WriteLine();
+                                        }
+                                    }
+                                    else
+                                    {
+                                        Console.WriteLine("Your restaurant has no current orders.");
+                                    }
+                                }
+                                catch (Exception ex)
+                                {
+                                    Console.WriteLine($"An error occurred: {ex.Message}");
+                                }
+                                break;
+                            // Start cooking order
+                            case STARTCOOKING_INDEX:
+                                try
+                                {
+                                    // Get all orders for this restaurant with status Ordered
+                                    var allorders = Order_List.GetAllOrders();
+                                    allorders = allorders.Where(order => order.FromRestaurant.Owner == client && order.Status == OrderStatus.Ordered).ToList();
+                                    if (allorders.Count > 0)
+                                    {
+                                        Console.WriteLine($"Select an order once you are ready to start cooking:");
+                                        int i = 0;
+                                        foreach (var order in allorders)
+                                        {
+                                            i++;
+                                            Console.WriteLine($"{i}: Order #{order.Number} for {order.GetOwner.Name}");
+                                            Console.WriteLine();
+                                        }
+                                        Console.WriteLine($"{i + 1}: Return to the previous menu");
+                                        Console.WriteLine($"Please enter a choice between 1 and {i + 1}:");
+
+                                        int Input;
+                                        if (int.TryParse(Console.ReadLine(), out Input))
+                                        {
+                                            if (Input >= 1 && Input <= allorders.Count)
+                                            {
+                                                var selectedOrder = allorders[Input - 1];
+                                                selectedOrder.SetOrderStatus(OrderStatus.Cooking);
+                                                Console.WriteLine($"Order #{selectedOrder.Number} is now marked as cooking.Please prepare the order, then mark it as finished cooking:");
+                                                foreach (var items in selectedOrder.items)
+                                                {
+                                                    Console.WriteLine($"{items.Quantity} x {items.Item.Name}");
+                                                }
+                                            }
+                                            else if (Input == allorders.Count + 1)
+                                            {
+                                                break;
+                                            }
+                                            else
+                                            {
+                                                Console.WriteLine("Invalid choice.");
+                                            }
                                         }
                                         else
                                         {
-                                            Console.WriteLine($"The deliverer with licence plate {selectedOrder.Driver.LicencePlate} will be arriving soon to collect it.");
+                                            Console.WriteLine("Invalid input.");
                                         }
-                                    }
-                                    else if (input2 == AllOrders.Count + 1)
-                                    {
-                                        break;
                                     }
                                     else
                                     {
-                                        Console.WriteLine("Invalid choice.");
+                                        Console.WriteLine("Your restaurant has no current orders.");
                                     }
                                 }
-                                else
+                                catch (Exception ex)
                                 {
-                                    Console.WriteLine("Invalid choice.");
+                                    Console.WriteLine($"An error occurred: {ex.Message}");
                                 }
-                            }
-                            else
-                            {
-                                Console.WriteLine("Your restaurant has no current orders.");
-                            }
-
-                            break;
-                        case HANDLEDELIVERERS_INDEX:
-                            try
-                            {
-                                var orders = Order_List.GetAllOrders();
-                                orders = orders.Where(order => order.FromRestaurant?.Owner == client &&
-                                                                (order.Status == OrderStatus.Cooked ||
-                                                                 order.Status == OrderStatus.Cooking ||
-                                                                 order.Status == OrderStatus.Ordered) &&
-                                                                order.Driver?.Status == DelivererStatus.AtRestaurant).ToList();
-                                Console.WriteLine("These deliverers have arrived and are waiting to collect orders.");
-                                Console.WriteLine("Select an order to indicate that the deliverer has collected it:");
-
-                               
-
-                                int c = 0;
-                                foreach (var order in orders)
+                                break;
+                            // Finish cooking order
+                            case FINISHCOOKING_INDEX:
+                                try
                                 {
-                                    c++;
-                                    string ownerName = order.GetOwner?.Name ?? "Unknown";
-                                    string licencePlate = order.Driver?.LicencePlate ?? "N/A";
-                                    Console.WriteLine($"{c}: Order #{order.Number} for {ownerName} (Deliverer licence plate: {licencePlate}) (Order status: {order.Status})");
-                                }
-
-                                Console.WriteLine($"{c + 1}: Return to the previous menu");
-                                Console.WriteLine($"Please enter a choice between 1 and {c + 1}:");
-
-                                if (int.TryParse(Console.ReadLine(), out int input))
-                                {
-                                    if (input >= 1 && input <= orders.Count)
+                                    // Get all orders for this restaurant with status Cooking
+                                    var AllOrders = Order_List.GetAllOrders();
+                                    AllOrders = AllOrders.Where(order => order.FromRestaurant.Owner == client && order.Status == OrderStatus.Cooking).ToList();
+                                    if (AllOrders.Count > 0)
                                     {
-                                        var selectedOrder = orders[input - 1];
-                                        if (selectedOrder.Status != OrderStatus.Cooked)
+                                        Console.WriteLine("Select an order once you have finished preparing it:");
+                                        int i = 0;
+                                        foreach (var order in AllOrders)
                                         {
-                                            Console.WriteLine("This order has not yet been cooked.");
+                                            i++;
+                                            Console.WriteLine($"{i}: Order #{order.Number} for {order.GetOwner.Name}");
+                                        }
+                                        Console.WriteLine($"{i + 1}: Return to the previous menu");
+                                        Console.WriteLine($"Please enter a choice between 1 and {i + 1}:");
+
+                                        int input2;
+                                        if (int.TryParse(Console.ReadLine(), out input2))
+                                        {
+                                            if (input2 >= 1 && input2 <= AllOrders.Count)
+                                            {
+                                                var selectedOrder = AllOrders[input2 - 1];
+                                                selectedOrder.SetOrderStatus(OrderStatus.Cooked);
+                                                Console.WriteLine($"Order #{selectedOrder.Number} is now ready for collection.");
+                                                if (selectedOrder.Driver == null)
+                                                {
+                                                    Console.WriteLine($"No deliverer has been assigned yet.");
+                                                    break;
+                                                }
+                                                if (selectedOrder.Driver.Status == DelivererStatus.AtRestaurant)
+                                                {
+                                                    Console.WriteLine($"Please take it to the deliverer with licence plate {selectedOrder.Driver.LicencePlate}, who is waiting to collect it.");
+                                                }
+                                                else
+                                                {
+                                                    Console.WriteLine($"The deliverer with licence plate {selectedOrder.Driver.LicencePlate} will be arriving soon to collect it.");
+                                                }
+                                            }
+                                            else if (input2 == AllOrders.Count + 1)
+                                            {
+                                                break;
+                                            }
+                                            else
+                                            {
+                                                Console.WriteLine("Invalid choice.");
+                                            }
+                                        }
+                                        else
+                                        {
+                                            Console.WriteLine("Invalid choice.");
+                                        }
+                                    }
+                                    else
+                                    {
+                                        Console.WriteLine("Your restaurant has no current orders.");
+                                    }
+                                }
+                                catch (Exception ex)
+                                {
+                                    Console.WriteLine($"An error occurred: {ex.Message}");
+                                }
+                                break;
+                            // Handle deliverers who have arrived
+                            case HANDLEDELIVERERS_INDEX:
+                                try
+                                {
+                                    // Get all orders for this restaurant where the deliverer has arrived
+                                    var orders = Order_List.GetAllOrders();
+                                    orders = orders.Where(order => order.FromRestaurant?.Owner == client &&         
+                                                                    (order.Status == OrderStatus.Cooked ||
+                                                                     order.Status == OrderStatus.Cooking ||
+                                                                     order.Status == OrderStatus.Ordered) &&
+                                                                    order.Driver?.Status == DelivererStatus.AtRestaurant).ToList();
+                                    Console.WriteLine("These deliverers have arrived and are waiting to collect orders.");
+                                    Console.WriteLine("Select an order to indicate that the deliverer has collected it:");
+
+                                    int c = 0;
+                                    foreach (var order in orders)
+                                    {
+                                        c++;
+                                        string ownerName = order.GetOwner?.Name ?? "Unknown";
+                                        string licencePlate = order.Driver?.LicencePlate ?? "N/A";
+                                        Console.WriteLine($"{c}: Order #{order.Number} for {ownerName} (Deliverer licence plate: {licencePlate}) (Order status: {order.Status})");
+                                    }
+
+                                    Console.WriteLine($"{c + 1}: Return to the previous menu");
+                                    Console.WriteLine($"Please enter a choice between 1 and {c + 1}:");
+
+                                    if (int.TryParse(Console.ReadLine(), out int input))
+                                    {
+                                        if (input >= 1 && input <= orders.Count)
+                                        {
+                                            var selectedOrder = orders[input - 1];
+                                            if (selectedOrder.Status != OrderStatus.Cooked)
+                                            {
+                                                Console.WriteLine("This order has not yet been cooked.");
+                                                break;
+                                            }
+
+                                            selectedOrder.SetOrderStatus(OrderStatus.BeingDelivered);
+                                            selectedOrder.Driver.Status = DelivererStatus.HeadingToCustomer;
+                                            Console.WriteLine($"Order #{selectedOrder.Number} is now marked as being delivered.");
+                                        }
+                                        else if (input == orders.Count + 1)
+                                        {
+                                            // Return to previous menu (exit this case)
                                             break;
                                         }
-
-                                        selectedOrder.SetOrderStatus(OrderStatus.BeingDelivered);
-                                        selectedOrder.Driver.Status = DelivererStatus.HeadingToCustomer;
-                                        Console.WriteLine($"Order #{selectedOrder.Number} is now marked as being delivered.");
-                                    }
-                                    else if (input == orders.Count + 1)
-                                    {
-                                        // Return to previous menu (exit this case)
-                                        break;
+                                        else
+                                        {
+                                            Console.WriteLine("Invalid choice.");
+                                        }
                                     }
                                     else
                                     {
-                                        Console.WriteLine("Invalid choice.");
+                                        Console.WriteLine("Invalid input.");
                                     }
                                 }
-                                else
+                                catch (Exception ex)
                                 {
-                                    Console.WriteLine("Invalid input.");
+                                    Console.WriteLine($"An error occurred: {ex.Message}");
                                 }
-                            }
-                            catch (Exception ex)
-                            {
-                                Console.WriteLine($"An error occurred: {ex.Message}");
-                            }
 
-                            break;
-                        case LOGOUT_INDEX:
-                            client.Logout();
-                            return;
-                        default:
-                            break;
+                                break;
+                            // Log out the client
+                            case LOGOUT_INDEX:
+                                client.Logout();
+                                return;
+                            default:
+                                break;
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("Invalid choice.");
                     }
                 }
-                else
-                {
-                    Console.WriteLine("Invalid choice.");
-                }
             }
-    }
+            catch (Exception ex)
+            {
+                // Handle any unexpected errors in the client menu
+                Console.WriteLine($"An error occurred: {ex.Message}");
 
+            }
+        }
     }
-    
-
 }

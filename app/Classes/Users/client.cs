@@ -2,35 +2,54 @@ using System;
 
 namespace Arriba_Eats
 {
+    /// <summary>
+    /// Represents a restaurant-owning user (client) in the Arriba Eats system.
+    /// Inherits from the abstract User class.
+    /// </summary>
     public class Client : User
     {
-        public Client(string name, int age, string email, string mobileNumber, string password) : base(name, age, email, mobileNumber, password)
+        /// <summary>
+        /// Initializes a new instance of the Client class.
+        /// </summary>
+        public Client(string name, int age, string email, string mobileNumber, string password)
+            : base(name, age, email, mobileNumber, password)
         {
         }
 
+        /// <summary>
+        /// Gets the restaurant owned by this client.
+        /// </summary>
         private Restaurant OwnedRestaurant;
 
+        /// <summary>
+        /// Public accessor for the client's owned restaurant.
+        /// </summary>
         public Restaurant GetRestaurant
         {
             get { return OwnedRestaurant; }
         }
 
+        /// <summary>
+        /// Provides detailed information about the client and their restaurant.
+        /// </summary>
         public override string Details()
         {
             return "Your user details are as follows:\n" +
-                $"Name: {Name}\n" +
-                $"Age: {Age}\n" +
-                $"Email: {Email}\n" +
-                $"Mobile: {Mobile_Number}\n" +
-                $"Restaurant name: {this.GetRestaurant.Restaurant_Name}\n" +
-                $"Restaurant style: {this.GetRestaurant.CuisineStyle}\n" +
-                $"Restaurant location: {this.GetRestaurant.Restaurant_Location.X},{this.GetRestaurant.Restaurant_Location.Y}";
+                   $"Name: {Name}\n" +
+                   $"Age: {Age}\n" +
+                   $"Email: {Email}\n" +
+                   $"Mobile: {Mobile_Number}\n" +
+                   $"Restaurant name: {this.GetRestaurant.Restaurant_Name}\n" +
+                   $"Restaurant style: {this.GetRestaurant.CuisineStyle}\n" +
+                   $"Restaurant location: {this.GetRestaurant.Restaurant_Location.X},{this.GetRestaurant.Restaurant_Location.Y}";
         }
 
-
+        /// <summary>
+        /// Interactively collects client and restaurant details, registers the restaurant, and saves the client.
+        /// </summary>
         public override void SignUp()
         {
-
+            // Get restaurant name
             string restaurant_name;
             while (true)
             {
@@ -43,15 +62,15 @@ namespace Arriba_Eats
                 Console.WriteLine("Invalid restaurant name.");
             }
 
-
+            // Choose cuisine style
             Console.WriteLine("Please select your restaurant's style:");
             foreach (var style in Enum.GetValues(typeof(CuisineType)))
             {
-                Console.WriteLine($"{(int)style+1}: {style}");
+                Console.WriteLine($"{(int)style + 1}: {style}");
             }
+
             Console.WriteLine("Please enter a choice between 1 and 6:");
 
-            // Ask until a valid style choice is made
             int styleChoice;
             while (true)
             {
@@ -60,11 +79,13 @@ namespace Arriba_Eats
                 {
                     break;
                 }
+
                 Console.WriteLine("Invalid choice.");
             }
+
             CuisineType cuisineStyle = (CuisineType)(styleChoice - 1);
 
-            // Ask until a valid location is entered
+            // Get location
             int x, y;
             while (true)
             {
@@ -84,15 +105,13 @@ namespace Arriba_Eats
 
             Location location = new Location(x, y);
 
-            // Create the restaurant
+            // Create and register the restaurant
             OwnedRestaurant = new Restaurant(restaurant_name, location, cuisineStyle, this);
-            // Add the restaurant into the list database
             Restaurant_Register.Register(OwnedRestaurant);
-            // Add the user into the list database
+
+            // Register client
             Save_User.Register(this);
-
             IsLoggedin = false;
-
 
             Console.WriteLine($"You have been successfully registered as a client, {Name}!");
         }
