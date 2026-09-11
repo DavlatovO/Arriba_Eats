@@ -1,8 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "q3QYHRjx++k=",
+  "dgSpecHash": "Rrco8PIunlU=",
   "success": true,
-  "projectFilePath": "D:\\QUT\\QUTCAB201\\Assignment\\Arriba_Eats\\app\\app.csproj",
-  "expectedPackageFiles": [],
+  "projectFilePath": "/Users/oybek/Documents/Project/arrriba/Arriba_Eats/app/app.csproj",
+  "expectedPackageFiles": [
+    "/Users/oybek/.nuget/packages/microsoft.netcore.app.ref/8.0.24/microsoft.netcore.app.ref.8.0.24.nupkg.sha512",
+    "/Users/oybek/.nuget/packages/microsoft.aspnetcore.app.ref/8.0.24/microsoft.aspnetcore.app.ref.8.0.24.nupkg.sha512",
+    "/Users/oybek/.nuget/packages/microsoft.netcore.app.host.osx-arm64/8.0.24/microsoft.netcore.app.host.osx-arm64.8.0.24.nupkg.sha512"
+  ],
   "logs": []
 }
