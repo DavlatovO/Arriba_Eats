@@ -15,7 +15,7 @@ dotnet run
 
 > **Note on .NET version.** The project targets `net8.0`. If only a newer runtime
 > is installed (this machine has .NET 10), `<RollForward>LatestMajor</RollForward>`
-> in [`app.csproj`](app.csproj) lets it run on the newest installed major runtime
+> in [`app.csproj`](app/app.csproj) lets it run on the newest installed major runtime
 > without changing the target framework.
 
 ## Project layout
@@ -31,45 +31,45 @@ dotnet run
 
 ## Classes
 
-### `User` (abstract) — [Classes/Users/User.cs](Classes/Users/User.cs)
+### `User` (abstract) — [Classes/Users/User.cs](app/Classes/Users/User.cs)
 Base class for every account. Holds `Name`, `Age`, `Email`, `Mobile_Number`,
 `Password`, and `IsLoggedin`, plus shared `Login`/`Logout` logic (a plain
 email+password match). `SignUp()` and `Details()` are `abstract` — every
 subclass must provide its own registration flow and detail summary.
 
-- **`Customer`** — [Classes/Users/customer.cs](Classes/Users/customer.cs)
+- **`Customer`** — [Classes/Users/customer.cs](app/Classes/Users/customer.cs)
   Places orders. Adds a `Location` (`AddressCoordinates`, defaults to `(0,0)`)
   and a `CurrentOrder`. `SignUp()` asks for `X,Y` coordinates before
   registering.
-- **`Client`** — [Classes/Users/client.cs](Classes/Users/client.cs)
+- **`Client`** — [Classes/Users/client.cs](app/Classes/Users/client.cs)
   Owns exactly one `Restaurant` (`GetRestaurant`). `SignUp()` collects the
   restaurant's name, `CuisineType`, and `Location`, constructs the
   `Restaurant`, and registers both the restaurant and the client.
-- **`Deliverer`** — [Classes/Users/deliverer.cs](Classes/Users/deliverer.cs)
+- **`Deliverer`** — [Classes/Users/deliverer.cs](app/Classes/Users/deliverer.cs)
   Delivers orders. Adds a `Location` (also defaults to `(0,0)`, and — unlike
   `Customer`'s — is settable, since a deliverer's position updates as they
   move), a `LicencePlate`, a `DelivererStatus` (`Free` / `AtRestaurant` /
   `HeadingToCustomer`), and the `Order` currently being carried.
 
-### `Restaurant` — [Classes/Restaurant/Restaurant.cs](Classes/Restaurant/Restaurant.cs)
+### `Restaurant` — [Classes/Restaurant/Restaurant.cs](app/Classes/Restaurant/Restaurant.cs)
 Owned by one `Client`; has a `Restaurant_Location`, a `CuisineType`, a `Menu`
 (`List<MenuItem>`), and `Restaurant_Rating()`, which averages every `Rating`
 left on its past orders (`0.0` if it has none).
 
-### `MenuItem` — [Classes/Restaurant/MenuItem.cs](Classes/Restaurant/MenuItem.cs)
+### `MenuItem` — [Classes/Restaurant/MenuItem.cs](app/Classes/Restaurant/MenuItem.cs)
 A `Name` + `Price` pair a client adds to their restaurant's menu.
 
-### `Order` / `OrderItem` — [Classes/Order.cs](Classes/Order.cs), [Classes/OrderItem.cs](Classes/OrderItem.cs)
+### `Order` / `OrderItem` — [Classes/Order.cs](app/Classes/Order.cs), [Classes/OrderItem.cs](app/Classes/OrderItem.cs)
 An `Order` links a `Customer`, a `Restaurant`, an optional `Deliverer`, and a
 list of `OrderItem`s (`MenuItem` + quantity), and tracks an `OrderStatus`
 (`Ordered → Cooking → Cooked → BeingDelivered → Delivered`). `TotalPrice`
 sums each item's `Subtotal` (`Price * Quantity`).
 
-### `Rating` — [Classes/Ratings.cs](Classes/Ratings.cs)
+### `Rating` — [Classes/Ratings.cs](app/Classes/Ratings.cs)
 A score (+ optional comment) a `Customer` leaves on a `Restaurant` after an
 order, used by `Restaurant.Restaurant_Rating()`.
 
-### `Location` — [Classes/Location.cs](Classes/Location.cs)
+### `Location` — [Classes/Location.cs](app/Classes/Location.cs)
 A simple `(X, Y)` coordinate pair with one behaviour, `DistanceTo(other)`,
 which returns the **Manhattan distance** (`|dx| + dy|`, not straight-line):
 
@@ -87,10 +87,10 @@ Every party in the system carries a `Location`:
 | `Restaurant` | `Restaurant_Location` | set once by the owning `Client` during sign-up |
 
 It's used in three places:
-1. **Sorting restaurants for a customer** — [Menus/CustomerMenus/SortingMenu.cs](Menus/CustomerMenus/SortingMenu.cs)
+1. **Sorting restaurants for a customer** — [Menus/CustomerMenus/SortingMenu.cs](app/Menus/CustomerMenus/SortingMenu.cs)
    sorts the restaurant list by `restaurant.Restaurant_Location.DistanceTo(customer.Location)`
    when the customer chooses "sorted by distance".
-2. **Matching a deliverer to jobs** — [Menus/DelivererMenu.cs](Menus/DelivererMenu.cs)
+2. **Matching a deliverer to jobs** — [Menus/DelivererMenu.cs](app/Menus/DelivererMenu.cs)
    asks the deliverer for their current `X,Y`, builds a `Location` from it, and
    computes `restaurant.Restaurant_Location.DistanceTo(delivererLocation)` for
    every unclaimed order so it can list pickup distance (and separately shows
