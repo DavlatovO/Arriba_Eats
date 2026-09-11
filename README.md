@@ -103,25 +103,25 @@ It's used in three places:
 ## Screenshots
 
 ### Main menu
-![Main menu](assets/mainMenu.png)
+![Main menu](app/assets/mainMenu.png)
 
 ### Registering a new user
-![Registration entry](assets/register.png)
+![Registration entry](app/assets/register.png)
 
 ### Full registration flow (client + restaurant)
-![Registration process](assets/registrationProcess.png)
+![Registration process](app/assets/registrationProcess.png)
 
 ### Client menu (restaurant owner)
-![Client menu](assets/clientMenu.png)
+![Client menu](app/assets/clientMenu.png)
 
 ### Customer menu
-![Customer menu](assets/customerMenu.png)
+![Customer menu](app/assets/customerMenu.png)
 
 ### Selecting a restaurant
-![Restaurant selection](assets/restaurantSelection.png)
+![Restaurant selection](app/assets/restaurantSelection.png)
 
 ### Restaurant list as seen by a customer
-![Restaurant selection by customer](assets/restaurantSelectionbByCustomer.png)
+![Restaurant selection by customer](app/assets/restaurantSelectionbByCustomer.png)
 
 ## Sample session
 
